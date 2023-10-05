@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
 
     newOrders: { 
         flexDirection: 'row', 
-        marginTop: 10, 
+        marginTop: 20, 
         justifyContent: 'space-between', 
         alignItems: 'center',
         marginBottom:10

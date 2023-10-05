@@ -3,8 +3,8 @@ import React from 'react'
 
 const CustomerNameLocation = ({customerName,customerLocation}) => {
     return (
-        <View style={{ paddingHorizontal: 5, marginTop: 2 }}>
-            <View style={{ flexDirection: 'row' }}>
+        <View style={{ paddingHorizontal: 10, marginTop: 10, marginBottom: 3 }}>
+            <View style={{ flexDirection: 'row', marginBottom: 3 }}>
                 <Text style={styles.regularText}>{'Customer Name : '}</Text>
                 <Text style={styles.semiBoldText}>{customerName}</Text>
             </View>

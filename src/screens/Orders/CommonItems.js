@@ -3,7 +3,7 @@ import React, { memo } from 'react'
 
 const CommonItems = memo(({item}) => {
     return (
-        <View style={{ flexDirection: 'row', padding: 5 }}>
+        <View style={{ flexDirection: 'row', paddingTop: 5, paddingBottom: 5, paddingLeft: 10,}}>
             <View style={{ flex: 0.68 }}>
                 <Text style={styles.mediumText}>{item?.name}</Text>
             </View>

@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 15, 
         backgroundColor: '#F8F8F8', 
         paddingHorizontal: 10, 
-        paddingVertical: 5, 
+        paddingVertical: 10, 
         justifyContent: 'space-between', 
         alignItems: 'center' 
     },
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         marginHorizontal:10,     
         borderTopWidth:1, 
         borderColor:'#F3F3F3', 
-        paddingVertical:5
+        paddingVertical:10
     }
     
 })

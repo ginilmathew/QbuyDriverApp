@@ -16,6 +16,7 @@ import CommonPicker from '../../../Components/CommonPicker';
 import CommonSelectDropdown from '../../../Components/CommonSelectDropdown';
 import SelectTab from '../../../Components/SelectTab';
 
+const phoneRegExp = /^(0|[1-9]\d*)(\.\d+)?$/
 
 const Register = ({ navigation }) => {
 
@@ -28,11 +29,17 @@ const Register = ({ navigation }) => {
         { label: 'Kannur', value: '3' },
     ];
 
+	const genderData = [
+        { label: 'Male', value: '1' },
+        { label: 'Female', value: '2' },
+    ];
+
 
 	const schema = yup.object({
 		name: yup.string().required('Name is required'),
-		mobile: yup.string().required('Mobile number is required'),
-		gender: yup.string().required('Mobile number is required'),
+		mobile: yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(10, 'Mobile Number should be atleast 10 digits.').max(10, 'Mobile Number should not excced 10 digits.').required('Mobile Number is required !'),
+		emergency: yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(10, 'Mobile Number should be atleast 10 digits.').max(10, 'Mobile Number should not excced 10 digits.'),
+		//gender: yup.string().required('Gender is required'),
 		// aadhaar: yup.string().required('Aadhaar number is required'),
 	}).required();
 
@@ -120,6 +127,7 @@ const Register = ({ navigation }) => {
 							inputMode={'numeric'}
 							mt={20}
 							icon={<Fontisto name='mobile' color='#58D36E' size={25} />}
+							length={10}
 						/>
 						<CommonInput
 							leftElement
@@ -128,10 +136,11 @@ const Register = ({ navigation }) => {
 							fieldName="emergency"
 							placeholder='Emergency Contact'
 							inputMode={'numeric'}
+							length={10}
 							mt={20}
 							icon={<Fontisto name='mobile' color='#58D36E' size={25} />}
 						/>
-						<CommonInput
+						{/* <CommonInput
 							leftElement
 							control={control}
 							error={errors.gender}
@@ -140,13 +149,22 @@ const Register = ({ navigation }) => {
 							inputMode={'numeric'}
 							mt={20}
 							icon={<Fontisto name='intersex' color='#58D36E' size={25} marginLeft={3}/>}
+						/> */}
+						<CommonSelectDropdown
+							data={genderData}
+							value={values}
+							setValue={setValues}
+							placeholder='Gender'
+							leftIcon={<Fontisto name='intersex' color='#58D36E' size={25} marginLeft={14} marginRight={10}/>}
+							mt={7}
+							height={60}
 						/>
 						<CommonPicker 
 							// onPress={()=>setOpenCalendar(true)}
 							label={'Upload Photo'}
 							icon={<Ionicons name={'cloud-upload'} size={20} color={"#5E59FF"} />}
 							mt={5}
-							leftIcon={<Entypo name='camera' color='#58D36E' size={15} marginLeft={1}/>}
+							leftIcon={<Entypo name='camera' color='#58D36E' size={23} marginLeft={5}/>}
 						/>
 						<CustomButton
 							onPress={handleSubmit(bankDetails)}
@@ -166,7 +184,7 @@ const Register = ({ navigation }) => {
 							placeholder='Adhaar Number'
 							inputMode={'numeric'}
 							mt={20}
-							icon={<Entypo name='v-card' color='#58D36E' size={18} marginTop={1.5}/>}
+							icon={<Entypo name='v-card' color='#58D36E' size={25} marginTop={1.5}/>}
 						/>
 						<CommonInput
 							leftElement
@@ -176,7 +194,7 @@ const Register = ({ navigation }) => {
 							placeholder='PAN Card Number'
 							inputMode={'numeric'}
 							mt={20}
-							icon={<Entypo name='v-card' color='#58D36E' size={18} marginTop={1.5}/>}
+							icon={<Entypo name='v-card' color='#58D36E' size={25} marginTop={1.5}/>}
 						/>
 						<CommonInput
 							leftElement
@@ -186,7 +204,7 @@ const Register = ({ navigation }) => {
 							placeholder='Driving License'
 							inputMode={'numeric'}
 							mt={20}
-							icon={<Entypo name='v-card' color='#58D36E' size={18} marginTop={1.5}/>}
+							icon={<Entypo name='v-card' color='#58D36E' size={25} marginTop={1.5}/>}
 						/>
 						<CommonInput
 							leftElement
@@ -196,7 +214,7 @@ const Register = ({ navigation }) => {
 							placeholder='RC Book Number'
 							inputMode={'numeric'}
 							mt={20}
-							icon={<Entypo name='v-card' color='#58D36E' size={18} marginTop={1.5}/>}
+							icon={<Entypo name='v-card' color='#58D36E' size={25} marginTop={1.5}/>}
 						/>
 
 						<CustomButton
@@ -215,8 +233,9 @@ const Register = ({ navigation }) => {
 							value={values}
 							setValue={setValues}
 							placeholder='Bank Name'
-							leftIcon={<FontAwesome name='bank' color='#58D36E' size={15} marginRight={11}/>}
+							leftIcon={<FontAwesome name='bank' color='#58D36E' size={22} marginLeft={10} marginRight={10}/>}
 							mt={7}
+							height={60}
 						/>
 						<CommonInput
 							leftElement
@@ -226,7 +245,7 @@ const Register = ({ navigation }) => {
 							placeholder='IFSC Code'
 							inputMode={'numeric'}
 							mt={20}
-							icon={<Entypo name='v-card' color='#58D36E' size={18} marginTop={1.5}/>}
+							icon={<Entypo name='v-card' color='#58D36E' size={25} marginTop={1.5}/>}
 						/>
 						<CommonInput
 							leftElement
@@ -236,7 +255,7 @@ const Register = ({ navigation }) => {
 							placeholder='Account Number'
 							inputMode={'numeric'}
 							mt={20}
-							icon={<Entypo name='v-card' color='#58D36E' size={18} marginTop={1.5}/>}
+							icon={<Entypo name='v-card' color='#58D36E' size={25} marginTop={1.5}/>}
 						/>
 						<CommonInput
 							leftElement
@@ -246,7 +265,7 @@ const Register = ({ navigation }) => {
 							placeholder='Account Name'
 							inputMode={'numeric'}
 							mt={20}
-							icon={<Entypo name='v-card' color='#58D36E' size={18} marginTop={1.5}/>}
+							icon={<Entypo name='v-card' color='#58D36E' size={25} marginTop={1.5}/>}
 						/>
 
 						<CustomButton

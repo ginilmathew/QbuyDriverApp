@@ -69,9 +69,9 @@ const Filter = ({ item, closeFilter, filterAction, selectedDatas }) => {
                         <>
                             <CommonPicker
                                 onPress={calendarAction}
-                                bg='#F2F2F2'
+                                //bg='#F2F2F2'
                                 icon={<Ionicons name='calendar' color='#5261E0' size={30} />}
-                                mt={-10}
+                                mt={5}
                             >
                                 {startDate ? 
                                 <View style={{ flexDirection: 'row', paddingLeft: 10 }} justifyContent='space-between' >
@@ -117,7 +117,7 @@ const Filter = ({ item, closeFilter, filterAction, selectedDatas }) => {
             <CustomButton
                 onPress={onSubmit}
                 label={'Apply'} bg='#58D36E'
-                width={width / 3.5}
+                width={170}
                 alignSelf='center'
                 my={10}
             />
@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         position: 'absolute',
         zIndex: 1,
-        top: 70
+        top: 70,
+        gap: 8
     },
 })

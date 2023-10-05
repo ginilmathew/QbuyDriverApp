@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import { Controller } from 'react-hook-form'
 
 
-const CommonInput = ({ placeholder, control, fieldName, error, inputMode, mt, icon, backgroundColor, topLabel, mb, placeholderTextColor, width, fontFamily, top, height }) => {
+const CommonInput = ({ placeholder, control, fieldName, error, inputMode, mt, icon, backgroundColor, topLabel, mb, placeholderTextColor, width, fontFamily, top, height, length }) => {
 
 
     return (
@@ -21,19 +21,23 @@ const CommonInput = ({ placeholder, control, fieldName, error, inputMode, mt, ic
                 style={{
                     backgroundColor: backgroundColor ? backgroundColor : '#fff',
                     borderRadius: 7,
+                    borderColor: "#fff",
+                    borderWidth: 10,
                     marginTop: mt ? mt : 3,
                     // maxHeight: maxHeight ? maxHeight : 45,
-                    shadowOpacity: 0.1,
+                    shadowColor: "#f2f2f2",
+                    shadowOpacity: 1,
                     shadowRadius: 5,
                     elevation: 2,
-                    shadowOffset: { width: 1, height: 5 },
+                    shadowOffset: { width: 1, height: 10 },
                     flexDirection: 'row',
                     alignItems: 'center',
                     margin: 1,
-                    marginBottom: mb
+                    marginBottom: mb,
+                    height: 60
                 }}
             >
-                {icon && <View style={{width:30, alignItems:'center'}}>
+                {icon && <View style={{width: 30, alignItems:'center', marginLeft: 5}}>
                     {icon}
                 </View>}
                 <Controller
@@ -56,7 +60,7 @@ const CommonInput = ({ placeholder, control, fieldName, error, inputMode, mt, ic
                             color='#23233C'
                             width={ width ? width :'100%'}
                             marginTop={Platform.OS === 'android' ? 5 : 1}
-
+                            maxLength={length}
                         />
                     )}
                     name={fieldName}
@@ -81,6 +85,7 @@ const styles = StyleSheet.create({
     errorText: {
         fontFamily: 'Poppins-Regular',
         color: 'red',
-        fontSize: 11, 
+        fontSize: 12, 
+        marginTop: 15
     }
 })

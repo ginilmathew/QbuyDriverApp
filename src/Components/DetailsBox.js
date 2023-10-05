@@ -9,7 +9,7 @@ const DetailsBox = ({ count, label, bg, bgBox, wid, ht, unit, status, leftElemen
             style={{ flexDirection: 'row', backgroundColor: bg ? bg : '#d7fae4', borderRadius: 10, justifyContent: 'space-between', marginTop: 10 }}
         >
             <View style={{ alignSelf: 'center', marginLeft: 10, flex: 1 }}>
-                <View style={{ flexDirection: 'row', }}>
+                <View style={{ flexDirection: 'row' }}>
                     {leftElement && <View
                         style={{ width: 20, height: 20, borderRadius: 20, backgroundColor: bgBox, marginRight: 7, alignItems: 'center', justifyContent: 'center' }}
                     >
@@ -34,7 +34,7 @@ const DetailsBox = ({ count, label, bg, bgBox, wid, ht, unit, status, leftElemen
             >
                 <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
                     <Text style={{ fontFamily: 'Poppins-SemiBold', color: '#fff', fontSize: 20, }}>{count}</Text>
-                    <Text style={{ fontFamily: 'Poppins-SemiBold', color: '#fff', fontSize: 10, marginBottom: 5 }}>{unit ? unit : 'days'}</Text>
+                    <Text style={{ fontFamily: 'Poppins-SemiBold', color: '#fff', fontSize: 10, marginBottom: 5, marginLeft: 5 }}>{unit ? unit : 'days'}</Text>
                 </View>
             </View>
         </View>

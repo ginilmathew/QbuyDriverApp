@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "android": "adb reverse tcp:9090 tcp:9090 && npx react-native run-android",
-    "ios": "react-native run-ios",
+    "ios":"npx react-native run-ios --simulator=iPhone 14 Pro",
     "start": "react-native start",
     "apk": "cd android && ./gradlew assembleRelease",
     "test": "jest",

@@ -42,11 +42,6 @@ const ImageUploadScreen = ({ navigation }) => {
 		}
 	};
 
-
-
-
-
-
 	const openCamera = useCallback(() => {
 		let options = {
 			title: "Select Images",
@@ -91,7 +86,7 @@ const ImageUploadScreen = ({ navigation }) => {
 
 	return (
 		<CommonAuthBg>
-			<ScrollView style={{ flex: 1, paddingHorizontal: 30, }}>
+			<ScrollView style={{ flex: 1, paddingHorizontal: 30, marginTop: 30 }}>
 				<CommonAuthHeading
 					label={'Submit Image'}
 					mt={100}
@@ -136,7 +131,7 @@ const ImageUploadScreen = ({ navigation }) => {
 					onPress={onSubmit}
 					bg={filePath ? '#58D36E' : '#CBCBCB'}
 					label={'Submit Image'}
-					mt={50}
+					mt={30}
 					mb={10}
 				/>
 				<Text
@@ -166,7 +161,7 @@ const styles = StyleSheet.create({
 		borderColor: '#70707059',
 		borderStyle: 'dashed',
 		marginTop: 20,
-		width: '92%',
+		width: '100%',
 		height: 300,
 		alignSelf: 'center'
 	},

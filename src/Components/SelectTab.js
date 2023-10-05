@@ -10,7 +10,7 @@ const SelectTab = ({ label, onPress, selected, wid, fontSize }) => {
             <View 
                 style={{ 
                     borderBottomColor: selected ? '#008117' : '#F3F3F3', 
-                    paddingBottom: 2, 
+                    paddingBottom: 8, 
                     borderBottomWidth: selected ? 2 : 0, 
                     width: wid ? wid :  width / 3.9, 
                     alignItems: 'center' 

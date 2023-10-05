@@ -14,6 +14,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto'
 import AuthContext from '../../../contexts/Auth';
 import LoaderContext from '../../../contexts/Loader';
 
+const phoneRegExp = /^(0|[1-9]\d*)(\.\d+)?$/
 
 const Login = ({ navigation }) => {
 
@@ -28,7 +29,7 @@ const Login = ({ navigation }) => {
 
 
 	const schema = yup.object({
-		mobile: yup.string().required('Phone number is required'),
+		mobile: yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(10, 'Mobile Number should be atleast 10 digits.').max(10, 'Mobile Number should not excced 10 digits.').required('Mobile Number is required !'),
 	}).required();
 
 	const { control, handleSubmit, formState: { errors }, setValue } = useForm({
@@ -77,6 +78,7 @@ const Login = ({ navigation }) => {
 					inputMode={'numeric'}
 					mt={20}
 					icon={<Fontisto name='mobile' color='#58D36E' size={25} />}
+					length={10}
 				/>
 
 				<TermsAndPrivacyText />
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
 	textRegister: {
 		fontFamily: 'Poppins-Bold',
 		color: '#FF4646',
-		fontSize: 15,
+		fontSize: 18,
 		textAlign: 'center',
 	},
 

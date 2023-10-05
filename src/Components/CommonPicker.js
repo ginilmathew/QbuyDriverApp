@@ -27,18 +27,20 @@ const CommonPicker = ({onPress, label, fontFamily, topLabel, icon, w, mt, bg, le
                 alignItems:'center',
                 backgroundColor: bg ? bg : '#fff', 
                 borderRadius:7,  
-                shadowOpacity: 0.1,
+                shadowColor: "#f2f2f2",
+                shadowOpacity: 1,
                 shadowRadius: 5,
                 elevation: 2,
-                shadowOffset: { width: 1, height: 5 },
+                shadowOffset: { width: 1, height: 10 },
                 marginBottom: 1,
+                height: 60
             }}
         >
-            {leftIcon && <View style={{width:35, alignItems:'center'}}>
+            {leftIcon && <View style={{width:35, alignItems:'center', marginLeft: 10}}>
                 {leftIcon}
             </View>}
             {children}
-            <Text style={{fontFamily: fontFamily ? fontFamily : 'Poppins-SemiBold', color:'#23233C', fontSize:11, flex:0.95, paddingLeft:10}} >{label}</Text>
+            <Text style={{fontFamily: fontFamily ? fontFamily : 'Poppins-Regular', color:'#23233C', fontSize:11, flex:0.95, paddingLeft:10}} >{label}</Text>
             {icon}
         </TouchableOpacity>
     </View>

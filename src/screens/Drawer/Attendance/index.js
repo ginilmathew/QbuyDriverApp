@@ -56,8 +56,8 @@ const Attendance = ({ navigation }) => {
     return (
         <>
             <HeaderWithTitle title={'Attendance'} drawerOpen={() => navigation.openDrawer()} />
-            <ScrollView style={{ backgroundColor: '#F3F3F3', }}>
-                <View style={{ paddingHorizontal: 15, }}>
+            <ScrollView style={{ backgroundColor: '#fff' }}>
+                <View style={{ paddingHorizontal: 15 }}>
                     <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'space-between' }}>
                         <CommonSelectDropdown
                             topLabel={'Month'}

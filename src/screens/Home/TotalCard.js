@@ -6,8 +6,9 @@ const TotalCard = ({label, count, bgImg}) => {
     return (
         <ImageBackground 
             source={bgImg}
-            style={{ height: 90, marginTop: 13, paddingHorizontal: 20, justifyContent:'center',}}
-            resizeMode='stretch'
+            style={{ height: 90, marginTop: 13, paddingHorizontal: 20, justifyContent:'center'}}
+            borderRadius={8}
+            
         >
             <View style={{flexDirection:'row'}}>
                 <Text style={styles.regularText}>{"Total "}</Text>

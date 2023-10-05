@@ -14,9 +14,11 @@ const CustomButton = ({ onPress, label, mt, ml, bg, width, alignSelf, disabled, 
                 borderRadius: 13,
                 alignItems: 'center',
                 justifyContent: 'center',
-                minHeight: 40,
-                shadowOpacity: 0.1,
+                minHeight: 50,
+                shadowColor: "#f2f2f2",
+                shadowOpacity: 1,
                 shadowRadius: 2,
+                shadowOffset: { width: 1, height: 5 },
                 elevation: 5,
                 width: width,
                 alignSelf: alignSelf,
@@ -28,7 +30,7 @@ const CustomButton = ({ onPress, label, mt, ml, bg, width, alignSelf, disabled, 
             disabled={disabled}
         >
             {leftIcon}
-            {!loading ? <Text style={{ color: '#fff', fontFamily: 'Poppins-Bold', fontSize: 15, marginTop: Platform.OS === 'android' ? 4 : 1 }}>{label}</Text> :  <ActivityIndicator color={'#fff'}/>}
+            {!loading ? <Text style={{ color: '#fff', fontFamily: 'Poppins-Bold', fontSize: 18, marginTop: Platform.OS === 'android' ? 4 : 1 }}>{label}</Text> :  <ActivityIndicator color={'#fff'}/>}
             {rightIconName&&<Ionicons name={rightIconName} color='#fff' size={25} position='absolute' right={15}/>}
         </TouchableOpacity>
     )

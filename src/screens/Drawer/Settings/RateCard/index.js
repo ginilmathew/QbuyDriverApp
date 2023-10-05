@@ -40,8 +40,8 @@ const RateCard = ({navigation}) => {
     return (
         <>
             <HeaderWithTitle title={'Rate Card'} backAction />
-            <View style={{ flex: 1, backgroundColor: '#F3F3F3', }}>
-                <ScrollView style={{ backgroundColor: '#F3F3F3', marginBottom: 80 }} showsVerticalScrollIndicator={false}>
+            <View style={{ flex: 1, backgroundColor: '#fff', }}>
+                <ScrollView style={{ backgroundColor: '#fff', marginBottom: 80 }} showsVerticalScrollIndicator={false}>
                     <View style={{ paddingHorizontal: 15, }}>
                         <CommonDatePicker
                             onPress={calendarOpen}
@@ -104,6 +104,6 @@ const styles = StyleSheet.create({
     border: {  
         height: 4,
         backgroundColor: '#0D4E810D', 
-        marginVertical:10 
+        marginVertical:20,
     }
 })

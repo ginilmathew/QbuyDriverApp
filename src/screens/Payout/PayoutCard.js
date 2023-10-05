@@ -15,7 +15,7 @@ const PayoutCard = memo(({item}) => {
                 <CommonStatusCard
                     bg={item?.status === 'Completed' ? '#BCFFC8' : '#FFF297'}
                     label={item?.status}
-                    labelColor={item?.status === 'Completed' ?  '#07AF25' :'#B7A000'}
+                    labelColor={item?.status === 'Completed' ? '#07AF25' :'#B7A000'}
                 />
             </View>
 
@@ -36,7 +36,7 @@ const PayoutCard = memo(({item}) => {
 
             <View style={styles.payouBreak}>
                 <Text style={styles.payouBreakText}>{'Payout Breakdown'}</Text>
-                <TouchableOpacity onPress={() => setShowItems(!showItems)}>
+                <TouchableOpacity onPress={() => setShowItems(!showItems)} style={{marginTop: 5}}>
                     <Ionicons name={showItems ? 'chevron-up-circle' : 'chevron-down-circle'} size={22} color={'#58D36E'} />
                 </TouchableOpacity>
             </View>
@@ -65,13 +65,16 @@ export default PayoutCard
 const styles = StyleSheet.create({
     container: { 
         borderRadius: 15, 
-        backgroundColor: '#fff', 
-        shadowOpacity: 0.2, 
-        shadowOffset: { height: 1, width: 1 }, 
+        backgroundColor: '#fff',
+        shadowColor: "#f2f2f2",
+        shadowRadius: 5, 
+        shadowOpacity: 1, 
+        shadowOffset: { height: 10, width: 1 }, 
         marginBottom: 10, 
         elevation: 1, 
         marginHorizontal: 2, 
-        paddingBottom: 5 
+    paddingBottom: 10,
+        marginTop: 8 
     },
     header: { 
         flexDirection: 'row', 
@@ -79,7 +82,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 15, 
         backgroundColor: '#F8F8F8', 
         paddingHorizontal: 10, 
-        paddingVertical: 5, 
+        paddingVertical: 8, 
         justifyContent: 'space-between', 
         alignItems: 'center' 
     },
@@ -116,13 +119,15 @@ const styles = StyleSheet.create({
     payouBreakText: { 
         fontFamily: 'Poppins-Bold',
         color: '#23233C',
-        fontSize: 11
+        fontSize: 11,
+        paddingTop: 8
     },
     dropdownBox: { 
         backgroundColor: '#F8F8F8', 
         paddingHorizontal: 10, 
         marginBottom: 5,
-        paddingTop:3
+        paddingVertical:10,
+        gap: 5
     },
     mediumText: { 
         fontFamily: 'Poppins-Medium', 

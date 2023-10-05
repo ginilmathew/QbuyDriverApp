@@ -55,7 +55,7 @@ const Otp = ({ navigation }) => {
 
 	return (
 		<CommonAuthBg>
-			<ScrollView style={{ flex: 1, paddingHorizontal: 40, }}>
+			<ScrollView style={{ flex: 1, paddingHorizontal: 40, marginTop: 30 }}>
 				<CommonTitle goBack={backAction} mt={ Platform.OS === 'android' ? 80 : 100 }/>
 				<CommonTexts
 					label={'Enter the 4 - digit code we sent to your registered mobile number'}
@@ -73,16 +73,17 @@ const Otp = ({ navigation }) => {
 				/>
 				<CommonTexts
 					label={'Resend OTP'}
-					mt={10}
+					mt={12}
 					textAlign='right'
 					color={'#5871D3'}
+					fontSize={15}
 				/>
 				<CustomButton
 					onPress={handleSubmit(onSubmit)}
 					bg='#58D36E'
 					label={'Confirm'}
 					my={20}
-					width={100}
+					width={150}
 					alignSelf='center'
 					loading={loader}
 				/>
