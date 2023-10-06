@@ -6,8 +6,6 @@ import Calendar from "react-native-calendar-range-picker";
 import moment from 'moment';
 import CustomButton from '../../Components/CustomButton';
 import CommonTexts from '../../Components/CommonTexts';
-import customAxios from '../../CustomeAxios';
-import { homeulr } from '../../config/constants';
 
 const Filter = ({ item, closeFilter, filterAction, selectedDatas }) => {
 
@@ -33,8 +31,6 @@ const Filter = ({ item, closeFilter, filterAction, selectedDatas }) => {
     }, [])
 
     function getDates(startDate, stopDate) {
-
-
         var dateArray = [];
         var currentDate = moment(startDate);
         var stopDate = moment(stopDate);

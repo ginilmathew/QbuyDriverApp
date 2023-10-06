@@ -13,6 +13,9 @@ import CommonTexts from '../../../Components/CommonTexts';
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import AuthContext from '../../../contexts/Auth';
 import LoaderContext from '../../../contexts/Loader';
+import customAxios from '../../../CustomeAxios';
+import reactotron from 'reactotron-react-native';
+import { useToast } from 'native-base';
 
 const phoneRegExp = /^(0|[1-9]\d*)(\.\d+)?$/
 
@@ -23,28 +26,48 @@ const Login = ({ navigation }) => {
 
 	let loader = loadingg?.loading
 
+	const toast = useToast()
+
+	const successID = "Success Token"
+	const errorID = "Error Token"
+
 	let user = loginUser?.login
-	console.log({user})
-
-
+	console.log({ user })
 
 	const schema = yup.object({
-		mobile: yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(10, 'Mobile Number should be atleast 10 digits.').max(10, 'Mobile Number should not excced 10 digits.').required('Mobile Number is required !'),
+		mobile: yup.string().matches(phoneRegExp, 'Mobile number must be numeric').min(10, 'Mobile Number should be atleast 10 digits.').max(10, 'Mobile Number should not excced 10 digits.').required('Mobile Number is required !'),
 	}).required();
 
 	const { control, handleSubmit, formState: { errors }, setValue } = useForm({
 		resolver: yupResolver(schema)
 	});
 
-	const onSubmit = useCallback((data) => {
-        navigation.navigate('Otp')
-		// loadingg.setLoading(true)
-		loginUser.setLogin(data)
-    }, [])
+	// const onSubmit = useCallback((data) => {
+	//     navigation.navigate('Otp')
+	// 	// loadingg.setLoading(true)
+	// 	loginUser.setLogin(data)
+	// }, [])
+
+	const onSubmit = async(data) => {
+		try {
+			const res = await customAxios.post('auth/riderloginotp', data);
+			reactotron.log(res, "RES")
+			if (res?.data?.status === 200) {
+			navigation.navigate('Otp', { id: res?.data?.id });
+			}
+		} catch (error) {
+				toast.show({
+					title: error,
+					backgroundColor: "error.400",
+					duration: 1500
+				})
+		} 
+	}
+
 
 	const register = useCallback(() => {
-        navigation.navigate('Register')
-    }, [])
+		navigation.navigate('Register')
+	}, [])
 
 
 	return (

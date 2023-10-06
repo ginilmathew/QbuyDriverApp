@@ -46,7 +46,7 @@ const CommonSelectDropdown = ({ topLabel, mb, placeholder, data, value, setValue
                 onFocus={() => setIsFocus(true)}
                 onBlur={() => setIsFocus(false)}
                 onChange={item => {
-                    setValue(item.label);
+                    setValue('gender',item.label);
                     setIsFocus(false);
                 }}
                 renderRightIcon={() => (

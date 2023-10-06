@@ -5,16 +5,19 @@ import { Provider } from 'react-redux'
 import store from './Redux/store'
 import LoadProvider from './contexts/Loader/loaderContext'
 import AuthProvider from './contexts/Auth/AuthContext'
+import { NativeBaseProvider } from 'native-base'
 
 
 const App = () => {
     return (
         <Provider store={store}>
-            <LoadProvider>
-                <AuthProvider>
-                    <Navigation />
-                </AuthProvider>
-            </LoadProvider>
+            <NativeBaseProvider>
+                <LoadProvider>
+                    <AuthProvider>
+                        <Navigation />
+                    </AuthProvider>
+                </LoadProvider>
+            </NativeBaseProvider>
         </Provider>
 
     )
