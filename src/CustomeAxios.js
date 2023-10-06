@@ -9,7 +9,7 @@ import { BASE_URL } from './config/constants';
 // The timeout is set to 10s. If the request takes longer than
 // that then the request will be aborted.
 const customAxios = axios.create({
-    // baseURL: BASE_URL,
+    baseURL: BASE_URL,
     timeout: 10000
 });
 

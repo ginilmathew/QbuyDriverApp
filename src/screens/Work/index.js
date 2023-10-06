@@ -28,11 +28,11 @@ const Work = ({ navigation }) => {
     //     if(dates){
     //         let datefiltered = works?.filter((da)=>(da?.date === dates))
     //         console.log({datefiltered})
-    
+
     //     }
-     
+
     // }, [dates])
-    
+
 
 
     let works = [
@@ -118,26 +118,38 @@ const Work = ({ navigation }) => {
     return (
         <>
             <HeaderWithTitle title={'Work'} drawerOpen={openDrawer} />
-            <View style={{ flex: 1, backgroundColor: '#F3F3F3', paddingHorizontal:15}}>
-                
+            <View style={{ flex: 1, backgroundColor: '#F3F3F3', paddingHorizontal: 15 }}>
+
                 <CustomButton
                     onPress={openFilter}
                     label={'Filter'} bg='#5261E0' mt={15}
-                    rightIconName='filter' 
+                    rightIconName='filter'
                 />
 
-                {showFilter && 
+                {showFilter &&
                     <Filter
                         item={datas}
-                        closeFilter={()=>setShowFilter(false)}
+                        closeFilter={() => setShowFilter(false)}
                         filterAction={applyFilter}
                     />
                 }
                 <ScrollView
-                    style={{ backgroundColor: '#F3F3F3', marginBottom: 80, paddingTop:15 }}
+                    style={{ backgroundColor: '#F3F3F3', marginBottom: 80, paddingTop: 15 }}
                     showsVerticalScrollIndicator={false}
                 >
-                    {filterType === 'Weekly Report' && <WeeklyBox/>}
+
+                    {/* DATABOX IS HERE */}
+
+                    {/* <View style={styles.dataBox}>
+                        <View style={styles.rowStyle}>
+                            <View style={styles.verticalStyle}>
+                                <Text style={styles.headingStyle}>Total Orders</Text>
+                                <Text style={styles.numberStyle}>5000</Text>
+                            </View>
+                        </View>
+                    </View> */}
+
+                    {filterType === 'Weekly Report' && <WeeklyBox />}
 
                     {works?.map((item) => (
                         <WorkCard item={item} key={item?.id} />
@@ -178,5 +190,28 @@ const styles = StyleSheet.create({
         zIndex: 1,
         top: 70
     },
-    
+    // dataBox: {
+    //     backgroundColor: "#fff",
+    //     padding: 50,
+    //     borderRadius: 11,
+    //     marginBottom: 25
+    // },
+    // rowStyle: {
+    //     flexDirection: "row"
+    // },
+    // verticalStyle: {
+    //     gap: 8,
+    //     alignItems: "center",
+    //     borderRightColor: "#F5F5F5",
+    //     borderRightWidth: 2
+    // },
+    // headingStyle: {
+    //     fontSize: 15,
+    //     fontFamily: "Poppins-Regular"
+    // },
+    // numberStyle: {
+    //     fontSize: 20,
+    //     fontFamily: "Poppins-Bold"
+    // },
+
 })
