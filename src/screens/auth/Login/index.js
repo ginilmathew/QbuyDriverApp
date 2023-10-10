@@ -52,8 +52,13 @@ const Login = ({ navigation }) => {
 		try {
 			const res = await customAxios.post('auth/riderloginotp', data);
 			reactotron.log(res, "RES")
-			if (res?.data?.status === 200) {
-			navigation.navigate('Otp', { id: res?.data?.id });
+			if (res?.data?.status === 201 || 200) {
+				toast.show({
+                    description: 'A OTP has been sent to your registered mobile number',
+                    backgroundColor: 'success.500',
+                    duration: 1700
+                })
+			navigation.navigate('Otp');
 			}
 		} catch (error) {
 				toast.show({

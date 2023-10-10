@@ -2,8 +2,9 @@ import { Image, StyleSheet, Text, View, ScrollView } from 'react-native'
 import React, { useContext, useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Dropdown } from 'react-native-element-dropdown';
+import { Controller } from 'react-hook-form';
 
-const CommonSelectDropdown = ({ topLabel, mb, placeholder, data, value, setValue, search, height, mt, width, leftIcon }) => {
+const CommonSelectDropdown = ({ topLabel, mb, placeholder, error, data, fieldName, control, onchange, search, height, mt, width, leftIcon }) => {
 
     const [isFocus, setIsFocus] = useState(false);
 
@@ -18,42 +19,49 @@ const CommonSelectDropdown = ({ topLabel, mb, placeholder, data, value, setValue
                     marginLeft: 5
                 }}
             >{topLabel}</Text>
-            <Dropdown
-                renderLeftIcon={() => (leftIcon)}
-                style={{
-                    height: height ? height : 45,
-                    borderRadius: 8,
-                    paddingHorizontal: 8,
-                    backgroundColor: '#fff',
-                    shadowColor: "#f2f2f2",
-                    shadowOpacity: 1,
-                    shadowRadius: 5,
-                    elevation: 2,
-                    shadowOffset: { width: 1, height: 10 },
-                }}
-                placeholderStyle={styles.placeholderStyle}
-                selectedTextStyle={styles.selectedTextStyle}
-                inputSearchStyle={styles.inputSearchStyle}
-                iconStyle={styles.iconStyle}
-                data={data}
-                search={search ? search : null}
-                maxHeight={300}
-                labelField="label"
-                valueField="label"
-                placeholder={!isFocus ? placeholder ? placeholder : '' : '...'}
-                searchPlaceholder="Search..."
-                value={value}
-                onFocus={() => setIsFocus(true)}
-                onBlur={() => setIsFocus(false)}
-                onChange={item => {
-                    setValue('gender',item.label);
-                    setIsFocus(false);
-                }}
-                renderRightIcon={() => (
-                    <Ionicons name={isFocus ? 'chevron-up-circle' : 'chevron-down-circle'} size={25} color={"#58D36E"} />
+            <Controller
+                control={control}
+                render={({ field: { value } }) => (
+                    <Dropdown
+                        renderLeftIcon={() => (leftIcon)}
+                        style={{
+                            height: height ? height : 45,
+                            borderRadius: 8,
+                            paddingHorizontal: 8,
+                            backgroundColor: '#fff',
+                            shadowColor: "#f2f2f2",
+                            shadowOpacity: 1,
+                            shadowRadius: 5,
+                            elevation: 2,
+                            shadowOffset: { width: 1, height: 10 },
+                        }}
+                        placeholderStyle={styles.placeholderStyle}
+                        selectedTextStyle={styles.selectedTextStyle}
+                        inputSearchStyle={styles.inputSearchStyle}
+                        iconStyle={styles.iconStyle}
+                        data={data}
+                        search={search ? search : null}
+                        maxHeight={300}
+                        labelField="label"
+                        valueField="label"
+                        placeholder={!isFocus ? placeholder ? placeholder : '' : '...'}
+                        searchPlaceholder="Search..."
+                        value={value}
+                        onFocus={() => setIsFocus(true)}
+                        onBlur={() => setIsFocus(false)}
+                        onChange={item => {
+                            onchange(item.label);
+                            setIsFocus(false);
+                        }}
+                        renderRightIcon={() => (
+                            <Ionicons name={isFocus ? 'chevron-up-circle' : 'chevron-down-circle'} size={25} color={"#58D36E"} />
+                        )}
+                        itemTextStyle={styles.dropdownText}
+                    />
                 )}
-                itemTextStyle={styles.dropdownText}
+                name={fieldName}
             />
+            {error?.message && <Text style={styles.errorText}>{error?.message}</Text>}
         </View>
     )
 }
@@ -93,4 +101,10 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         color: '#23233C',
     },
+    errorText: {
+        fontFamily: 'Poppins-Regular',
+        color: 'red',
+        fontSize: 12,
+        marginTop: 15
+    }
 })

@@ -18,7 +18,7 @@ const customAxios = axios.create({
 const requestHandler =async request => {
     let token = await AsyncStorage.getItem("token");
 
-    // reactotron.log({token})
+    reactotron.log({token})
     // Token will be dynamic so we can use any app-specific way to always   
     // fetch the new token before making the call
     if(token){
