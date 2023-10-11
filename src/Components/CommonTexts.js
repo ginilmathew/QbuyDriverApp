@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 
 const CommonTexts = ({label, mt, textAlign, color, fontSize, my, ml, mb}) => {
     return (
@@ -18,6 +18,6 @@ const CommonTexts = ({label, mt, textAlign, color, fontSize, my, ml, mb}) => {
     )
 }
 
-export default CommonTexts
+export default memo(CommonTexts) 
 
 const styles = StyleSheet.create({})

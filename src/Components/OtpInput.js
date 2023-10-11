@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 import OTPTextInput from 'react-native-otp-textinput'
 
 const OtpInput = ({ onchange }) => {
@@ -12,7 +12,7 @@ const OtpInput = ({ onchange }) => {
         />
     )
 }
-export default OtpInput
+export default memo(OtpInput) 
 const styles = StyleSheet.create({
     container: {
         height: 60,

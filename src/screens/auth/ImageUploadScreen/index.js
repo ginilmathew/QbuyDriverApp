@@ -1,9 +1,7 @@
 import { StyleSheet, Text, View, Image, ScrollView, Platform, PermissionsAndroid, TouchableOpacity, } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
-
 import CommonAuthBg from '../CommonAuthBg';
 import CustomButton from '../../../Components/CustomButton';
-
 import CommonTexts from '../../../Components/CommonTexts';
 import CommonAuthHeading from '../CommonAuthHeading';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
@@ -12,13 +10,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const ImageUploadScreen = ({ navigation }) => {
 
-
 	const [filePath, setFilePath] = useState(null);
 
 	useEffect(() => {
 		requestCameraPermission()
 	}, [])
-
 
 	const requestCameraPermission = async () => {
 		try {

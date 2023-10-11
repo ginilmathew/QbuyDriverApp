@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import Context from "./index";
 
 const AuthProvider = (props) => {
-    const [login, setLogin] = useState([]);
-    const [otp, setOtp] = useState('');
+    const [user, setUser] = useState(null);
     return (
         <Context.Provider
             value={{
                 ...props,
-                login,
-                otp, 
-                setOtp,
-                setLogin,
+                user,
+                setUser,
             }}
         >
             {props.children}

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Platform, } from 'react-native'
-import React, { useCallback, useContext } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -22,14 +22,12 @@ const phoneRegExp = /^(0|[1-9]\d*)(\.\d+)?$/
 const Login = ({ navigation }) => {
 
 	const loginUser = useContext(AuthContext)
-	const loadingg = useContext(LoaderContext)
-
-	let loader = loadingg?.loading
+	const [loading, setLoading] = useState(false)
 
 	const toast = useToast()
 
-	const successID = "Success Token"
-	const errorID = "Error Token"
+	//const successID = "Success Token"
+	//const errorID = "Error Token"
 
 	let user = loginUser?.login
 	console.log({ user })
@@ -49,6 +47,9 @@ const Login = ({ navigation }) => {
 	// }, [])
 
 	const onSubmit = async(data) => {
+
+		setLoading(true);
+
 		try {
 			const res = await customAxios.post('auth/riderloginotp', data);
 			reactotron.log(res, "RES")
@@ -58,7 +59,7 @@ const Login = ({ navigation }) => {
                     backgroundColor: 'success.500',
                     duration: 1700
                 })
-			navigation.navigate('Otp');
+			navigation.navigate('Otp', data);
 			}
 		} catch (error) {
 				toast.show({
@@ -66,7 +67,9 @@ const Login = ({ navigation }) => {
 					backgroundColor: "error.400",
 					duration: 1500
 				})
-		} 
+		} finally {
+            setLoading(false);
+        }
 	}
 
 
@@ -116,7 +119,8 @@ const Login = ({ navigation }) => {
 					bg='#58D36E'
 					label={'Sign In'}
 					mt={20}
-					loading={loader}
+					loading={loading}
+					disabled={loading ? true : false}
 				/>
 
 				<Text style={styles.textLight}>{"Need Support to Login?"}</Text>
