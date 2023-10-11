@@ -1,52 +1,96 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Controller } from "react-hook-form";
-import { Box, Text, Select } from 'native-base';
+import { Image, StyleSheet, Text, View, ScrollView } from 'react-native'
+import React, { useContext, useState } from 'react'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import { Dropdown } from 'react-native-element-dropdown';
 
-const CommonDropdown = ({ control, name, label, placeholder, error, children, onChangeValue, selectValue, required }) => {
-    return (
-        <Box w="90%" mb="4">
-            <Controller
-                control={control}
-                render={({ field: { onChange, value } }) => (
-                    <Box >
-                        <Text color="#000" fontSize="12" fontFamily="Poppins-Regular" mb="2" textAlign="left">{label}<Text color="#FF0000">{required}</Text></Text>
-                        <Select
-                            placeholder={placeholder}
-                            selectedValue={value}
-                            defaultValue={selectValue}
-                            onValueChange={(value) => {
-                                onChange(value)
-                                if (onChangeValue) {
-                                    onChangeValue(value)
-                                }
+const CommonSelectDropdown = ({topLabel, mb, placeholder, data, value, setValue, search, height, mt, width, leftIcon}) => {
 
-                            }}
-                            rounded="11"
-                            bg="#F6F8FF"
-                            borderColor="#ABACAF"
-                            placeholderTextColor="#b2b2b2"
-                            fontFamily="Poppins-Regular"
-                            fontSize="12"
-                            _actionSheetBody={{ maxToRenderPerBatch: 5, initialNumToRender: 5, removeClippedSubviews: true }}
-                        >
-                            {children}
-                        </Select>
-                    </Box>
-                )}
-                name={name} />
-            {error && <Text
-                color="#FF0000"
-                fontSize="12"
-                fontFamily="Poppins-Medium"
-                alignSelf="flex-start"
-                mt="1">
-                {error?.message}
-            </Text>}
-        </Box>
-    )
+    const [isFocus, setIsFocus] = useState(false);
+
+  return (
+    <View style={{marginBottom: mb, marginHorizontal:1, marginTop: mt, width:width}}>
+        {/* {renderLabel()} */}
+        <Text
+            style={{
+                fontFamily: 'Poppins-Regular',
+                color: '#000',
+                fontSize: 11,
+                marginLeft:5
+            }}
+        >{topLabel}</Text>
+        <Dropdown
+            renderLeftIcon={()=> (leftIcon)}
+            style={{
+                height: height ? height : 45,
+                borderRadius: 8,
+                paddingHorizontal: 8,
+                backgroundColor: '#fff',
+                shadowColor: Platform.OS === 'android' ? "#A2A2A2" : "#f2f2f2",
+                shadowOpacity: 1,
+                shadowRadius: 5,
+                elevation: 8,
+                shadowOffset: { width: 1, height: 10 },
+            }}
+            placeholderStyle={styles.placeholderStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            inputSearchStyle={styles.inputSearchStyle}
+            iconStyle={styles.iconStyle}
+            data={data}
+            search = {search ? search : null} 
+            maxHeight={300}
+            labelField="label"
+            valueField="label"
+            placeholder={!isFocus ? placeholder ? placeholder : '' : '...'}
+            searchPlaceholder="Search..."
+            value={value}
+            onFocus={() => setIsFocus(true)}
+            onBlur={() => setIsFocus(false)}
+            onChange={item => {
+                setValue(item.label);
+                setIsFocus(false);
+            }}
+            renderRightIcon={() => (
+                <Ionicons name={ isFocus ? 'chevron-up-circle' : 'chevron-down-circle'} size={25} color={"#58D36E"} />
+            )}
+            itemTextStyle={styles.dropdownText}
+        />    
+    </View>
+  )
 }
 
-export default CommonDropdown
+export default CommonSelectDropdown
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+
+    label: {
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: 22,
+        top: 8,
+        zIndex: 999,
+        paddingHorizontal: 8,
+        fontSize: 13,
+        color:'#23233C'
+    },
+    placeholderStyle: {
+        fontSize: 12,
+        color:'#9F9F9F',
+        fontFamily:'Poppins-MediumItalic'
+    },
+    selectedTextStyle: {
+        fontSize: 12,
+        fontFamily:'Poppins-Regular',
+        color:'#23233C',
+    },
+ 
+    inputSearchStyle: {
+        height: 40,
+        fontSize: 13,
+        color:'#23233C'
+    },
+    dropdownText: {
+        fontSize: 13,
+        fontFamily:'Poppins-Regular',
+        color:'#23233C',
+    },
+})

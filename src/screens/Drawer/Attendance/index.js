@@ -1,13 +1,15 @@
 import { StyleSheet, Text, Image, ScrollView, View, useWindowDimensions } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import HeaderWithTitle from '../../../Components/HeaderWithTitle'
-import CommonSelectDropdown from '../../../Components/CommonSelectDropdown'
 
 import TableHeading from './TableHeading'
 import HistoryList from './HistoryList'
 import DetailsBox from '../../../Components/DetailsBox'
+import CommonDropdown from '../../../Components/CommonDropdown'
+import customAxios from '../../../CustomeAxios'
+import reactotron from 'reactotron-react-native'
 
 
 const Attendance = ({ navigation }) => {
@@ -17,9 +19,17 @@ const Attendance = ({ navigation }) => {
     const [selectedMonth, SetSelectedMonth] = useState(null);
     const [selectedYear, SetSelectedYear] = useState(null);
 
+    const [newData, setNewData] = useState(null)
+
+    reactotron.log(newData, "NEW")
+
+    const [loading, setLoading] = useState(false)
 
     // console.log({ selectedMonth, selectedYear })
 
+    useEffect(() => {
+        getAttendance()
+    }, [])
 
     const months = [
         { label: 'January', value: '1' },
@@ -43,15 +53,38 @@ const Attendance = ({ navigation }) => {
         { label: '2023', value: '4' },
     ];
 
-    const attendanceList = [
-        { date: '20/05/2022', id: '1' },
-        { date: '21/05/2022', id: '2' },
-        { date: '22/05/2022', id: '3' },
-        { date: '23/05/2022', id: '4' },
-        { date: '24/05/2022', id: '5' },
-        { date: '25/05/2022', id: '6' },
-        { date: '26/05/2022', id: '7' },
-    ];
+    const getAttendance = async () => {
+        try {
+            //setLoading(true);
+            const attData = await customAxios.get(`rider/attendance`)
+            if (attData?.data?.message === "Success") {
+                reactotron.log(attData, "ATTTTT")
+                setNewData(attData?.data?.data)
+            } else {
+                throw "Internal server error"
+            }
+            //setLoading(false);
+
+        } catch (error) {
+            //setIsLoading(false);
+            if (error?.response) {
+                // toast.show({
+                //     description: error?.response?.data?.message,
+                //     backgroundColor: 'error.400'
+                // })
+            }
+            else {
+                // toast.show({
+                //     description: error,
+                //     backgroundColor: 'error.400'
+                // })
+            }
+        }
+    }
+
+
+
+
 
     return (
         <>
@@ -59,32 +92,34 @@ const Attendance = ({ navigation }) => {
             <ScrollView style={{ backgroundColor: '#fff' }}>
                 <View style={{ paddingHorizontal: 15 }}>
                     <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'space-between' }}>
-                        <CommonSelectDropdown
+                        <CommonDropdown
                             topLabel={'Month'}
                             mb={20}
                             data={months}
                             value={selectedMonth}
                             setValue={SetSelectedMonth}
                             width={width / 2.25}
+                            placeholder="Eg:- January"
                         />
-                        <CommonSelectDropdown
+                        <CommonDropdown
                             topLabel={'Year'}
                             mb={20}
                             data={year}
                             value={selectedYear}
                             setValue={SetSelectedYear}
                             width={width / 2.25}
+                            placeholder="Eg:- 2023"
                         />
                     </View>
                     <DetailsBox
-                        count={125}
+                        count={newData?.total_attendance}
                         label='Total Attendance'
                         alignSelf={'center'}
                     />
                     <DetailsBox
                         bg={'#fae1e1'}
                         bgBox={'#FF6565'}
-                        count={55}
+                        count={newData?.total_absent}
                         label='Total Days Absent'
                         alignSelf={'center'}
                     />
@@ -94,7 +129,7 @@ const Attendance = ({ navigation }) => {
 
                 <TableHeading/>
 
-                {attendanceList?.map((item, index)=>(<HistoryList item={item} key={index}/>))}
+                {newData?.attendance_list?.map((item, index)=>(<HistoryList item={item} key={index}/>))}
 
                 
 

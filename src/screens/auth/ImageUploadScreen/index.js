@@ -10,25 +10,33 @@ import reactotron from 'reactotron-react-native';
 import { useToast } from 'native-base';
 import customAxios from '../../../CustomeAxios';
 import dayjs from 'dayjs';
+import Geolocation from '@react-native-community/geolocation';
 
 
 const ImageUploadScreen = ({ navigation }) => {
 
 	const [filePath, setFilePath] = useState(null);
 	const [loading, setLoading] = useState(false)
+	const [location, setLocation] = useState(null)
+
+	reactotron.log(location, "LOCATION")
 
 	const toast = useToast()
 
 	const currentDate = dayjs().format('DD/MM/YYYY')
 	const currentTime = dayjs().format('hh:mm a')
+	const currentLocation = [
+		{
+			'longitude': location?.coords?.longitude,
+			'latitude': location?.coords?.latitude
+		}
+	]
 
-	reactotron.log(currentDate, "DATE")
-	reactotron.log(currentTime, "Time")
-
-	reactotron.log(filePath, "PHOTO")
+	reactotron.log(currentLocation, "BDGigbso")
 
 	useEffect(() => {
 		requestCameraPermission()
+		requestLocationPermission()
 	}, [])
 
 	const requestCameraPermission = async () => {
@@ -44,6 +52,7 @@ const ImageUploadScreen = ({ navigation }) => {
 				}
 			);
 			if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+				getOneTimeLocation()
 				console.log("Camera permission given");
 			} else {
 				console.log("Camera permission denied");
@@ -52,6 +61,42 @@ const ImageUploadScreen = ({ navigation }) => {
 			console.warn(err);
 		}
 	};
+
+	const getOneTimeLocation = () => {
+		Geolocation.getCurrentPosition(
+			position => {
+				setLocation(position);
+			},
+			error => {
+				console.log(error.code, error.message);
+				setLocation(false);
+			},
+		);
+	};
+
+
+	const requestLocationPermission = async () => {
+		try {
+			const granted = await PermissionsAndroid.request(
+				PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+				{
+					title: 'Location Permission Needed',
+					message: 'Location permission is needed inorder to proceed',
+					buttonNegative: "Deny",
+					buttonPositive: "Grant Access"
+				}
+			)
+			if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+				console.log("Location access given")
+				//alert("Location access given");
+			} else {
+				console.log("location permission denied")
+				//alert("Location permission denied");
+			}
+		} catch (err) {
+			console.warn(err)
+		}
+	}
 
 	const openCamera = useCallback(() => {
 		let options = {
@@ -98,6 +143,7 @@ const ImageUploadScreen = ({ navigation }) => {
 			}
 			formData.append('attendance_date', currentDate);
 			formData.append('attendance_time', currentTime);
+			formData.append('location', currentLocation);
 
 			const imgUpload = await customAxios.post('auth/rideruploadimage', formData, {
 				headers: {
@@ -107,10 +153,10 @@ const ImageUploadScreen = ({ navigation }) => {
 			reactotron.log(imgUpload, "IMAGE")
 			if (imgUpload?.data?.status === 200 || 201) {
 				toast.show({
-                    description: 'Attendance Added',
-                    backgroundColor: 'success.500',
-                    duration: 1700
-                })
+					description: 'Attendance Added',
+					backgroundColor: 'success.500',
+					duration: 1700
+				})
 				navigation.navigate('Menu')
 			}
 		}
@@ -121,8 +167,8 @@ const ImageUploadScreen = ({ navigation }) => {
 				duration: 1500
 			})
 		} finally {
-            setLoading(false);
-        }
+			setLoading(false);
+		}
 
 	}
 
@@ -158,7 +204,7 @@ const ImageUploadScreen = ({ navigation }) => {
 						alignSelf='center'
 						source={{ uri: filePath?.assets?.[0]?.uri }} alt='img'
 					/> :
-						<View style={{marginTop:50}}>
+						<View style={{ marginTop: 50 }}>
 							<Image
 								style={styles.logo}
 								source={require('../../../Images/pandacam.png')}
@@ -188,7 +234,7 @@ const ImageUploadScreen = ({ navigation }) => {
 					mt={30}
 					mb={10}
 					loading={loading}
-                    disabled={!filePath || loading ? true : false }
+					disabled={!filePath || loading ? true : false}
 				/>
 				<Text
 					style={styles.unableSubmit}
@@ -246,8 +292,8 @@ const styles = StyleSheet.create({
 		marginTop: 40
 	},
 	logo: {
-        width: 100,
-        height: 150,
-        alignSelf: 'center',
-    },
+		width: 100,
+		height: 150,
+		alignSelf: 'center',
+	},
 })
