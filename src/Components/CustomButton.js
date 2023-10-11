@@ -15,7 +15,7 @@ const CustomButton = ({ onPress, label, loading, mt, ml, bg, width, alignSelf, d
                 alignItems: 'center',
                 justifyContent: 'center',
                 minHeight: 50,
-                shadowColor: "#f2f2f2",
+                shadowColor: Platform.OS === 'android' ? "#e2e2e2" : "#f2f2f2",
                 shadowOpacity: 1,
                 shadowRadius: 2,
                 shadowOffset: { width: 1, height: 5 },

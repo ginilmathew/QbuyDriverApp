@@ -4,13 +4,28 @@ import CommonAuthBg from '../CommonAuthBg';
 import CustomButton from '../../../Components/CustomButton';
 import CommonTexts from '../../../Components/CommonTexts';
 import CommonAuthHeading from '../CommonAuthHeading';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { launchCamera } from 'react-native-image-picker';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import reactotron from 'reactotron-react-native';
+import { useToast } from 'native-base';
+import customAxios from '../../../CustomeAxios';
+import dayjs from 'dayjs';
 
 
 const ImageUploadScreen = ({ navigation }) => {
 
 	const [filePath, setFilePath] = useState(null);
+	const [loading, setLoading] = useState(false)
+
+	const toast = useToast()
+
+	const currentDate = dayjs().format('DD/MM/YYYY')
+	const currentTime = dayjs().format('hh:mm a')
+
+	reactotron.log(currentDate, "DATE")
+	reactotron.log(currentTime, "Time")
+
+	reactotron.log(filePath, "PHOTO")
 
 	useEffect(() => {
 		requestCameraPermission()
@@ -69,9 +84,52 @@ const ImageUploadScreen = ({ navigation }) => {
 		});
 	}, [])
 
-	const onSubmit = useCallback(() => {
-		navigation.navigate('Menu')
-	}, [])
+	const onSubmit = async () => {
+
+		setLoading(true)
+		try {
+			const formData = new FormData();
+			if (filePath?.assets?.[0]) {
+				formData.append('image', {
+					uri: filePath?.assets?.[0]?.uri,
+					type: 'image/jpeg',
+					name: 'attendance.jpg',
+				});
+			}
+			formData.append('attendance_date', currentDate);
+			formData.append('attendance_time', currentTime);
+
+			const imgUpload = await customAxios.post('auth/rideruploadimage', formData, {
+				headers: {
+					"Content-Type": 'multipart/form-data'
+				}
+			})
+			reactotron.log(imgUpload, "IMAGE")
+			if (imgUpload?.data?.status === 200 || 201) {
+				toast.show({
+                    description: 'Attendance Added',
+                    backgroundColor: 'success.500',
+                    duration: 1700
+                })
+				navigation.navigate('Menu')
+			}
+		}
+		catch (error) {
+			toast.show({
+				title: error,
+				backgroundColor: "error.400",
+				duration: 1500
+			})
+		} finally {
+            setLoading(false);
+        }
+
+	}
+
+
+	// const onSubmit = useCallback(() => {
+	// 	navigation.navigate('Menu')
+	// }, [])
 
 	const onLogin = useCallback(() => {
 		navigation.navigate('Login')
@@ -96,7 +154,7 @@ const ImageUploadScreen = ({ navigation }) => {
 					style={styles.imageContainer}
 				>
 					{filePath ? <Image
-						style={{ width: '100%', height: 300, borderRadius: 20 }}
+						style={{ width: '100%', height: 296, borderRadius: 20 }}
 						alignSelf='center'
 						source={{ uri: filePath?.assets?.[0]?.uri }} alt='img'
 					/> :
@@ -119,7 +177,7 @@ const ImageUploadScreen = ({ navigation }) => {
 						onPress={() => setFilePath(null)}
 						style={styles.closeBtn}
 					>
-						<Ionicons name='close' color='#fff' size={35} />
+						<Ionicons name='close' color='#fff' size={25} />
 					</TouchableOpacity>}
 				</View>
 
@@ -129,6 +187,8 @@ const ImageUploadScreen = ({ navigation }) => {
 					label={'Submit Image'}
 					mt={30}
 					mb={10}
+					loading={loading}
+                    disabled={!filePath || loading ? true : false }
 				/>
 				<Text
 					style={styles.unableSubmit}
@@ -170,13 +230,13 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		backgroundColor: "#FF4B4B",
 		borderRadius: 40,
-		width: 40,
-		height: 40,
+		width: 30,
+		height: 30,
 		alignItems: 'center',
 		justifyContent: 'center',
-		right: -12,
+		right: 5,
 		zIndex: 1,
-		top: -15
+		top: 5
 	},
 	unableSubmit: {
 		fontFamily: 'Poppins-Light',

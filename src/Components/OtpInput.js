@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { Platform, StyleSheet } from 'react-native'
 import React, { memo } from 'react'
 import OTPTextInput from 'react-native-otp-textinput'
 
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderBottomWidth: 0,
         color: '#000',
-        shadowColor: "#f2f2f2",
+        shadowColor: Platform.OS === 'android' ? "#A2A2A2" : "#f2f2f2",
         shadowOpacity: 1,
         shadowRadius: 5,
         shadowOffset: { width: 1, height: 10 },

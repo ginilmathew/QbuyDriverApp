@@ -40,12 +40,6 @@ const Login = ({ navigation }) => {
 		resolver: yupResolver(schema)
 	});
 
-	// const onSubmit = useCallback((data) => {
-	//     navigation.navigate('Otp')
-	// 	// loadingg.setLoading(true)
-	// 	loginUser.setLogin(data)
-	// }, [])
-
 	const onSubmit = async(data) => {
 
 		setLoading(true);

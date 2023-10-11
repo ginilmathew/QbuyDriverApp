@@ -26,17 +26,10 @@ const Register = ({ navigation }) => {
 
 	const [currentTab, setCurrentTab] = useState(0)
 	const [loading, setLoading] = useState(false)
-	//const [values, setValues] = useState(null);
-
-	//reactotron.log(values, "Values")
 
 	const [basicData, setBasicData] = useState(null)
 	const [kycData, setKycData] = useState(null)
 	const [bankData, setBankData] = useState(null)
-
-	reactotron.log(basicData, "BASIC")
-	reactotron.log(kycData, "KYC")
-	reactotron.log(bankData, "BANK")
 
 	const onLogin = useCallback(() => {
 		navigation.navigate('Login')
