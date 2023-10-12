@@ -19,7 +19,7 @@ const ImageUploadScreen = ({ navigation }) => {
 	const [loading, setLoading] = useState(false)
 	const [location, setLocation] = useState(null)
 
-	reactotron.log(location, "LOCATION")
+	//reactotron.log(location, "LOCATION")
 
 	const toast = useToast()
 
@@ -32,7 +32,7 @@ const ImageUploadScreen = ({ navigation }) => {
 		}
 	]
 
-	reactotron.log(currentLocation, "BDGigbso")
+	reactotron.log(currentLocation, "currentLocation")
 
 	useEffect(() => {
 		requestCameraPermission()
@@ -52,7 +52,7 @@ const ImageUploadScreen = ({ navigation }) => {
 				}
 			);
 			if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-				getOneTimeLocation()
+
 				console.log("Camera permission given");
 			} else {
 				console.log("Camera permission denied");
@@ -87,6 +87,7 @@ const ImageUploadScreen = ({ navigation }) => {
 				}
 			)
 			if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+				getOneTimeLocation()
 				console.log("Location access given")
 				//alert("Location access given");
 			} else {
@@ -99,6 +100,7 @@ const ImageUploadScreen = ({ navigation }) => {
 	}
 
 	const openCamera = useCallback(() => {
+
 		let options = {
 			title: "Select Images",
 			mediaType: "mixed",
@@ -143,7 +145,7 @@ const ImageUploadScreen = ({ navigation }) => {
 			}
 			formData.append('attendance_date', currentDate);
 			formData.append('attendance_time', currentTime);
-			formData.append('location', currentLocation);
+			formData.append('location', JSON.stringify(currentLocation?.[0]));
 
 			const imgUpload = await customAxios.post('auth/rideruploadimage', formData, {
 				headers: {

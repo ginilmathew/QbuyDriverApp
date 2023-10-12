@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Image, ScrollView, View, useWindowDimensions } from 'react-native'
+import { StyleSheet, Text, Image, ScrollView, View, useWindowDimensions, RefreshControl } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
@@ -10,40 +10,50 @@ import DetailsBox from '../../../Components/DetailsBox'
 import CommonDropdown from '../../../Components/CommonDropdown'
 import customAxios from '../../../CustomeAxios'
 import reactotron from 'reactotron-react-native'
+import { useToast } from 'native-base';
 
 
 const Attendance = ({ navigation }) => {
 
     const { width } = useWindowDimensions()
+    const toast = useToast()
 
     const [selectedMonth, SetSelectedMonth] = useState(null);
     const [selectedYear, SetSelectedYear] = useState(null);
-
     const [newData, setNewData] = useState(null)
+    const [years, setYears] = useState(null)
 
-    reactotron.log(newData, "NEW")
+    reactotron.log(years,"KGKU:FDJK")
 
     const [loading, setLoading] = useState(false)
 
-    // console.log({ selectedMonth, selectedYear })
+    reactotron.log(selectedMonth, "selectedMonth")
+    reactotron.log(selectedYear, "selectedYear")
 
     useEffect(() => {
         getAttendance()
+        yearData()
     }, [])
 
+    useEffect(() => {
+        if (selectedMonth && selectedYear) {
+            filterData()
+        }
+    }, [selectedMonth, selectedYear])
+
     const months = [
-        { label: 'January', value: '1' },
-        { label: 'February', value: '2' },
-        { label: 'March', value: '3' },
-        { label: 'April', value: '4' },
-        { label: 'May', value: '5' },
-        { label: 'June', value: '6' },
-        { label: 'July', value: '7' },
-        { label: 'August', value: '8' },
-        { label: 'September', value: '9' },
-        { label: 'October', value: '10' },
-        { label: 'November', value: '11' },
-        { label: 'December', value: '12' },
+        { label: '01', value: '1' },
+        { label: '02', value: '2' },
+        { label: '03', value: '3' },
+        { label: '04', value: '4' },
+        { label: '05', value: '5' },
+        { label: '06', value: '6' },
+        { label: '07', value: '7' },
+        { label: '08', value: '8' },
+        { label: '09', value: '9' },
+        { label: '10', value: '10' },
+        { label: '11', value: '11' },
+        { label: '12', value: '12' },
     ];
 
     const year = [
@@ -54,8 +64,8 @@ const Attendance = ({ navigation }) => {
     ];
 
     const getAttendance = async () => {
+        setLoading(true);
         try {
-            //setLoading(true);
             const attData = await customAxios.get(`rider/attendance`)
             if (attData?.data?.message === "Success") {
                 reactotron.log(attData, "ATTTTT")
@@ -63,33 +73,94 @@ const Attendance = ({ navigation }) => {
             } else {
                 throw "Internal server error"
             }
-            //setLoading(false);
 
         } catch (error) {
-            //setIsLoading(false);
-            if (error?.response) {
-                // toast.show({
-                //     description: error?.response?.data?.message,
-                //     backgroundColor: 'error.400'
-                // })
+            if (error) {
+                toast.show({
+                    title: error,
+                    backgroundColor: "error.400",
+                    duration: 1500
+                })
             }
             else {
-                // toast.show({
-                //     description: error,
-                //     backgroundColor: 'error.400'
-                // })
+                toast.show({
+                    description: error,
+                    backgroundColor: 'error.400'
+                })
+            }
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const filterData = async () => {
+
+        let data = {
+            month: selectedMonth,
+            year: selectedYear,
+        }
+
+        //if (loading) return;
+        //setLoading(true);
+
+        try {
+            const filteredData = await customAxios.post(`rider/attendance-filter`, data)
+            reactotron.log(filteredData, "FLITER")
+            // if (filteredData?.data?.status === 200) {
+            //     if (filteredData?.data?.data) {
+            //         //setNewData(filteredData?.data?.data)
+            //     }
+            //     else {
+            //        // setSearchResults([])
+            //     }
+            // }
+
+        } catch (error) {
+            if (error) {
+                toast.show({
+                    description: error,
+                    backgroundColor: 'error.400'
+                })
+            }
+            else {
+                toast.show({
+                    description: error,
+                    backgroundColor: 'error.400'
+                })
             }
         }
     }
 
-
-
-
+    const yearData = async () => {
+        try {
+            const yrsData = await customAxios.get(`rider/get-year`)
+            if (yrsData?.data?.message === "Success") {
+                setYears(yrsData?.data?.data)
+            } else {
+                throw "Internal server error"
+            }
+        }
+        catch (error) {
+            if (error) {
+                toast.show({
+                    title: error,
+                    backgroundColor: "error.400",
+                    duration: 1500
+                })
+            }
+            else {
+                toast.show({
+                    description: error,
+                    backgroundColor: 'error.400'
+                })
+            }
+        }
+    }
 
     return (
         <>
             <HeaderWithTitle title={'Attendance'} drawerOpen={() => navigation.openDrawer()} />
-            <ScrollView style={{ backgroundColor: '#fff' }}>
+            <ScrollView style={{ backgroundColor: '#fff' }} refreshControl={<RefreshControl refreshing={loading} onRefresh={getAttendance} />}>
                 <View style={{ paddingHorizontal: 15 }}>
                     <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'space-between' }}>
                         <CommonDropdown
@@ -124,14 +195,12 @@ const Attendance = ({ navigation }) => {
                         alignSelf={'center'}
                     />
                 </View>
-                <View style={styles.border}/>
+                <View style={styles.border} />
                 <Text style={styles.attndHistory}>{'Attendance History'}</Text>
 
-                <TableHeading/>
+                <TableHeading />
 
-                {newData?.attendance_list?.map((item, index)=>(<HistoryList item={item} key={index}/>))}
-
-                
+                {newData?.attendance_list?.map((item, index) => (<HistoryList item={item} key={index} />))}
 
             </ScrollView>
         </>
@@ -145,15 +214,15 @@ const styles = StyleSheet.create({
         width: 22,
         height: 22,
     },
-    border: { 
-        height: 4, 
-        backgroundColor: '#0D4E810D', 
-        marginTop:20 
+    border: {
+        height: 4,
+        backgroundColor: '#0D4E810D',
+        marginTop: 20
     },
-    attndHistory: { 
-        fontFamily: 'Poppins-SemiBold', 
-        color: '#000000', 
-        fontSize: 15, 
-        padding:15
+    attndHistory: {
+        fontFamily: 'Poppins-SemiBold',
+        color: '#000000',
+        fontSize: 15,
+        padding: 15
     }
 })

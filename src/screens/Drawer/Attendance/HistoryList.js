@@ -3,7 +3,7 @@ import React, { memo } from 'react'
 import reactotron from 'reactotron-react-native'
 
 const HistoryList = memo(({item}) => {
-    reactotron.log(item, "ITEm")
+    //reactotron.log(item, "ITEm")
     return (
         <View style={styles.container}>
             <View style={{ flex: 0.4 }}>

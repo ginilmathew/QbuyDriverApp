@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Platform, } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Platform, Keyboard, } from 'react-native'
 import React, { useCallback, useContext, useState } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -41,6 +41,7 @@ const Login = ({ navigation }) => {
 	});
 
 	const onSubmit = async(data) => {
+		Keyboard.dismiss()
 
 		setLoading(true);
 
@@ -75,7 +76,7 @@ const Login = ({ navigation }) => {
 	return (
 		<CommonAuthBg>
 
-			<ScrollView style={{ flex: 1, paddingHorizontal: 40, }}>
+			<ScrollView style={{ flex: 1, paddingHorizontal: 40, }} keyboardShouldPersistTaps="always">
 
 				<Image
 					style={styles.logo}
