@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Dropdown } from 'react-native-element-dropdown';
 
-const CommonDropdown = ({topLabel, mb, placeholder, data, value, setValue, search, height, mt, width, leftIcon}) => {
+const CommonDropdown = ({topLabel, mb, placeholder, data, render, value, setValue, search, height, mt, width, leftIcon}) => {
 
     const [isFocus, setIsFocus] = useState(false);
 
@@ -36,6 +36,7 @@ const CommonDropdown = ({topLabel, mb, placeholder, data, value, setValue, searc
             inputSearchStyle={styles.inputSearchStyle}
             iconStyle={styles.iconStyle}
             data={data}
+            renderItem={render}
             search = {search ? search : null} 
             maxHeight={300}
             labelField="label"

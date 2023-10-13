@@ -20,10 +20,10 @@ const Attendance = ({ navigation }) => {
 
     const [selectedMonth, SetSelectedMonth] = useState(null);
     const [selectedYear, SetSelectedYear] = useState(null);
-    const [newData, setNewData] = useState(null)
+    const [newData, setNewData] = useState('')
     const [years, setYears] = useState(null)
 
-    reactotron.log(years,"KGKU:FDJK")
+    reactotron.log(newData,"DATA")
 
     const [loading, setLoading] = useState(false)
 
@@ -56,12 +56,12 @@ const Attendance = ({ navigation }) => {
         { label: '12', value: '12' },
     ];
 
-    // const year = [
-    //     { label: '2020', value: '1' },
-    //     { label: '2021', value: '2' },
-    //     { label: '2022', value: '3' },
-    //     { label: '2023', value: '4' },
-    // ];
+    const year = [
+        { label: '2020', value: '1' },
+        { label: '2021', value: '2' },
+        { label: '2022', value: '3' },
+        { label: '2023', value: '4' },
+    ];
 
     const getAttendance = async () => {
         setLoading(true);
@@ -100,20 +100,20 @@ const Attendance = ({ navigation }) => {
             year: selectedYear,
         }
 
-        //if (loading) return;
-        //setLoading(true);
+        if (loading) return;
+        setLoading(true);
 
         try {
             const filteredData = await customAxios.post(`rider/attendance-filter`, data)
             reactotron.log(filteredData, "FLITER")
-            // if (filteredData?.data?.status === 200) {
-            //     if (filteredData?.data?.data) {
-            //         //setNewData(filteredData?.data?.data)
-            //     }
-            //     else {
-            //        // setSearchResults([])
-            //     }
-            // }
+            if (filteredData?.data?.status === 200) {
+                if (filteredData?.data?.data) {
+                    setNewData(filteredData?.data?.data)
+                }
+                else {
+                    setNewData([])
+                }
+            }
 
         } catch (error) {
             if (error) {
@@ -128,6 +128,8 @@ const Attendance = ({ navigation }) => {
                     backgroundColor: 'error.400'
                 })
             }
+        }finally {
+            setLoading(false);
         }
     }
 
@@ -157,6 +159,7 @@ const Attendance = ({ navigation }) => {
         }
     }
 
+
     return (
         <>
             <HeaderWithTitle title={'Attendance'} drawerOpen={() => navigation.openDrawer()} />
@@ -175,7 +178,7 @@ const Attendance = ({ navigation }) => {
                         <CommonDropdown
                             topLabel={'Year'}
                             mb={20}
-                            data={years}
+                            data={year}
                             value={selectedYear}
                             setValue={SetSelectedYear}
                             width={width / 2.25}
@@ -224,5 +227,16 @@ const styles = StyleSheet.create({
         color: '#000000',
         fontSize: 15,
         padding: 15
-    }
+    },
+    item: {
+        paddingVertical: 17,
+        paddingHorizontal: 4,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    textItem: {
+        flex: 1,
+        fontSize: 16,
+    },
 })

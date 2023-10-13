@@ -7,8 +7,7 @@ import ProfileDp from './ProfileDp'
 import customAxios from '../../../CustomeAxios'
 import reactotron from 'reactotron-react-native'
 import { useToast } from 'native-base';
-
-
+import { IMG_URL } from '../../../config/constants'
 
 const Settings = ({ navigation }) => {
 
@@ -74,7 +73,7 @@ const Settings = ({ navigation }) => {
                 rider_id={profileItems?.rider_id} 
                 franchise={"TEST"} 
                 days={28}
-                src={profileItems?.image ? ({ uri: profileItems?.image }) : (require('../../../Images/pandapic.png'))}
+                src={profileItems?.image ? ({ uri: IMG_URL + profileItems?.image }) : (require('../../../Images/pandapic.png'))}
                 />
                 <SettingsCard 
                     onPress={goProfile}
