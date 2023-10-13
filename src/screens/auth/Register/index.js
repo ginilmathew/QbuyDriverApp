@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Keyboard, } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -36,6 +36,8 @@ const Register = ({ navigation }) => {
 	}, [])
 
 	const onRegister = async (data) => {
+
+		Keyboard.dismiss()
 
 		setBankData(data)
 
@@ -87,7 +89,7 @@ const Register = ({ navigation }) => {
 	return (
 		<CommonAuthBg>
 
-			<ScrollView style={{ flex: 1, paddingHorizontal: 40, }}>
+			<ScrollView style={{ flex: 1, paddingHorizontal: 40, }} keyboardShouldPersistTaps="always">
 
 				<Image
 					style={styles.logo}

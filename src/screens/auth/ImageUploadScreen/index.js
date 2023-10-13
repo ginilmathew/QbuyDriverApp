@@ -23,7 +23,7 @@ const ImageUploadScreen = ({ navigation }) => {
 
 	const toast = useToast()
 
-	const currentDate = dayjs().format('DD/MM/YYYY')
+	const currentDate = dayjs().format('YYYY-MM-DD')
 	const currentTime = dayjs().format('hh:mm a')
 	const currentLocation = [
 		{
@@ -31,8 +31,6 @@ const ImageUploadScreen = ({ navigation }) => {
 			'latitude': location?.coords?.latitude
 		}
 	]
-
-	reactotron.log(currentLocation, "currentLocation")
 
 	useEffect(() => {
 		requestCameraPermission()

@@ -1,16 +1,57 @@
 import { StyleSheet, Text, Image, ScrollView, View } from 'react-native'
-import React, { useCallback } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import SettingsCard from './SettingsCard'
 import HeaderWithTitle from '../../../Components/HeaderWithTitle'
 import ProfileDp from './ProfileDp'
+import customAxios from '../../../CustomeAxios'
+import reactotron from 'reactotron-react-native'
+import { useToast } from 'native-base';
+
 
 
 const Settings = ({ navigation }) => {
 
-    const goProfile = useCallback(() => {
-        navigation.navigate('Profile')
+    const toast = useToast()
+
+    const [profileItems, setProfileItems] = useState(null)
+
+    reactotron.log(profileItems, "PITEMS")
+
+    useEffect(() => {
+        profileData()
     }, [])
+    
+
+    const profileData = async () => {
+        try {
+            const res = await customAxios.get(`rider/profile`)
+            if (res?.data?.message === "success") {
+                setProfileItems(res?.data?.data)
+            } else {
+                throw "Internal server error"
+            }
+        }
+        catch (error) {
+            if (error) {
+                toast.show({
+                    title: error,
+                    backgroundColor: "error.400",
+                    duration: 1500
+                })
+            }
+            else {
+                toast.show({
+                    description: error,
+                    backgroundColor: 'error.400'
+                })
+            }
+        }
+    }
+
+    const goProfile = useCallback(() => {
+        navigation.navigate('Profile', { item: profileItems })
+    }, [navigation, profileItems])
 
     const goRateCard = useCallback(() => {
         navigation.navigate('RateCard')
@@ -28,7 +69,13 @@ const Settings = ({ navigation }) => {
         <>
             <HeaderWithTitle title={'Settings'} drawerOpen={() => navigation.openDrawer()} />
             <ScrollView style={{ backgroundColor: '#F3F3F3', paddingHorizontal:15, }}>
-                <ProfileDp />
+                <ProfileDp 
+                name={profileItems?.name}
+                rider_id={profileItems?.rider_id} 
+                franchise={"TEST"} 
+                days={28}
+                src={profileItems?.image ? ({ uri: profileItems?.image }) : (require('../../../Images/pandapic.png'))}
+                />
                 <SettingsCard 
                     onPress={goProfile}
                     label={'Profile'} 

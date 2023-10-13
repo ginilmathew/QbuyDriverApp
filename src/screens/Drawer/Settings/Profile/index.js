@@ -4,9 +4,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import HeaderWithTitle from '../../../../Components/HeaderWithTitle'
 import CommonTexts from '../../../../Components/CommonTexts'
 import CommonReadonlyBox from '../../../../Components/CommonReadonlyBox'
+import reactotron from 'reactotron-react-native'
 
 
-const Profile = ({ navigation }) => {
+const Profile = ({ navigation, route }) => {
+
+    const { item } = route?.params
+
+    reactotron.log(item, "PIT")
 
     const {width} = useWindowDimensions()
     return (
@@ -19,10 +24,10 @@ const Profile = ({ navigation }) => {
                         <View style={{alignSelf:'center', marginTop:10, alignItems:'center', marginBottom:10}}>
                             <Image
                                 style={{ width: 100, height: 100, borderRadius: 12 }}
-                                source={require('../../../../Images/men.jpg')} alt='img'
+                                source={item?.image ? ({ uri: item?.image }) : (require('../../../../Images/pandapic.png'))} alt='img'
                             />
-                            <CommonTexts label={'Ben Johnson'} fontSize={15} mt={5}/>
-                            <Text style={{fontSize:10, color: '#909091',}}>ID : #638237</Text>
+                            <CommonTexts label={item?.name} fontSize={15} mt={5}/>
+                            <Text style={{fontSize:10, color: '#909091',}}>ID : {item?.rider_id}</Text>
                         </View>
 
                         <CommonReadonlyBox 
@@ -35,16 +40,16 @@ const Profile = ({ navigation }) => {
                         />
                         <CommonReadonlyBox 
                             topLabel={'Phone Number'}
-                            label={'1234567890'}
+                            label={item?.mobile}
                         />
                         <CommonReadonlyBox 
                             topLabel={'Emergency Contact'}
-                            label={'9874563214'}
+                            label={item?.emergency_contact}
                         />
                         <View style={{flexDirection:'row',  justifyContent:'space-between'}}>
                             <CommonReadonlyBox 
                                 topLabel={'Gender'}
-                                label={'Male'}
+                                label={item?.gender}
                                 width={width/2.25}
                             />
                             <CommonReadonlyBox 
@@ -71,19 +76,22 @@ const Profile = ({ navigation }) => {
                         <CommonTexts label={'KYC'} fontSize={12} mb={8}/>
                         <CommonReadonlyBox 
                             topLabel={'Aadhaar Number'}
-                            label={'124512412451'}
+                            label={item?.kyc_details?.aadhar_card_number}
                         />
                         <CommonReadonlyBox 
                             topLabel={'PAN Card Number'}
-                            label={'BRIPE0608F'}
+                            label={item?.kyc_details?.pan_card_number}
+
                         />
                         <CommonReadonlyBox 
                             topLabel={'Driving License'}
-                            label={'YHG675DD3'}
+                            label={item?.kyc_details?.driving_license}
+
                         />
                         <CommonReadonlyBox 
                             topLabel={'RC Book Number'}
-                            label={'CCAIU8765RRF'}
+                            label={item?.kyc_details?.rc_book_number}
+
                         />
                     </View>
                     <View style={styles.border}/>
@@ -91,19 +99,19 @@ const Profile = ({ navigation }) => {
                         <CommonTexts label={'Bank Details '} fontSize={12} mb={8}/>
                         <CommonReadonlyBox 
                             topLabel={'Bank Name'}
-                            label={'State Bank of India'}
+                            label={item?.bank_account_details?.branch}
                         />
                         <CommonReadonlyBox 
                             topLabel={'IFSC Code'}
-                            label={'SBI000884'}
+                            label={item?.bank_account_details?.ifsc}
                         />
                         <CommonReadonlyBox 
                             topLabel={'Account Number'}
-                            label={'8877456544156'}
+                            label={item?.bank_account_details?.account_number}
                         />
                         <CommonReadonlyBox 
                             topLabel={'Account Name'}
-                            label={'Ben Johnson'}
+                            label={item?.bank_account_details?.account_name}
                         />
                     </View>
 

@@ -56,12 +56,12 @@ const Attendance = ({ navigation }) => {
         { label: '12', value: '12' },
     ];
 
-    const year = [
-        { label: '2020', value: '1' },
-        { label: '2021', value: '2' },
-        { label: '2022', value: '3' },
-        { label: '2023', value: '4' },
-    ];
+    // const year = [
+    //     { label: '2020', value: '1' },
+    //     { label: '2021', value: '2' },
+    //     { label: '2022', value: '3' },
+    //     { label: '2023', value: '4' },
+    // ];
 
     const getAttendance = async () => {
         setLoading(true);
@@ -175,7 +175,7 @@ const Attendance = ({ navigation }) => {
                         <CommonDropdown
                             topLabel={'Year'}
                             mb={20}
-                            data={year}
+                            data={years}
                             value={selectedYear}
                             setValue={SetSelectedYear}
                             width={width / 2.25}
