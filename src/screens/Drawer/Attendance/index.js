@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Image, ScrollView, View, useWindowDimensions, RefreshControl } from 'react-native'
+import { StyleSheet, Text, Image, ScrollView, View, useWindowDimensions, RefreshControl, Button, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
@@ -23,7 +23,12 @@ const Attendance = ({ navigation }) => {
     const [newData, setNewData] = useState('')
     const [years, setYears] = useState(null)
 
-    reactotron.log(newData,"DATA")
+    const [isfilteredData, setIsFilteredData] = useState(null);
+    //const [noDataFound, setNoDataFound] = useState(false);
+    const [showClearButton, setShowClearButton] = useState(false);
+
+    reactotron.log(newData, "DATA")
+    reactotron.log(isfilteredData, "isfilteredData")
 
     const [loading, setLoading] = useState(false)
 
@@ -36,10 +41,13 @@ const Attendance = ({ navigation }) => {
     }, [])
 
     useEffect(() => {
-        if (selectedMonth && selectedYear) {
-            filterData()
+        if (selectedMonth !== null && selectedYear !== null) {
+            filterData();
+            setShowClearButton(true); // Show clear button
+        } else {
+            setShowClearButton(false); // Hide clear button
         }
-    }, [selectedMonth, selectedYear])
+    }, [selectedMonth, selectedYear]);
 
     const months = [
         { label: '01', value: '1' },
@@ -106,15 +114,11 @@ const Attendance = ({ navigation }) => {
         try {
             const filteredData = await customAxios.post(`rider/attendance-filter`, data)
             reactotron.log(filteredData, "FLITER")
-            if (filteredData?.data?.status === 200) {
+            if (filteredData?.data?.message === "Success") {
                 if (filteredData?.data?.data) {
-                    setNewData(filteredData?.data?.data)
-                }
-                else {
-                    setNewData([])
+                    setIsFilteredData(filteredData?.data?.data);
                 }
             }
-
         } catch (error) {
             if (error) {
                 toast.show({
@@ -128,7 +132,7 @@ const Attendance = ({ navigation }) => {
                     backgroundColor: 'error.400'
                 })
             }
-        }finally {
+        } finally {
             setLoading(false);
         }
     }
@@ -137,7 +141,7 @@ const Attendance = ({ navigation }) => {
         try {
             const yrsData = await customAxios.get(`rider/get-year`)
             if (yrsData?.data?.message === "Success") {
-                setYears(yrsData?.data?.data)
+                setYears(yrsData?.data?.data || [])
             } else {
                 throw "Internal server error"
             }
@@ -159,6 +163,33 @@ const Attendance = ({ navigation }) => {
         }
     }
 
+    const clearFilter = () => {
+        SetSelectedMonth(null);
+        SetSelectedYear(null);
+        setIsFilteredData(null);
+        setShowClearButton(false);
+    }
+
+    const filterProcess = () => {
+        return (
+            <>
+                {isfilteredData?.attendance_list?.map((item, index) => (
+                    <HistoryList item={item} key={index} />
+                ))}
+            </>
+        )
+    }
+
+    const dataProcess = () => {
+        return (
+            <>
+                {newData?.attendance_list?.map((item, index) => (
+                    <HistoryList item={item} key={index} />
+                ))}
+            </>
+        )
+    }
+
 
     return (
         <>
@@ -178,12 +209,24 @@ const Attendance = ({ navigation }) => {
                         <CommonDropdown
                             topLabel={'Year'}
                             mb={20}
-                            data={year}
+                            data={years || []}
                             value={selectedYear}
                             setValue={SetSelectedYear}
                             width={width / 2.25}
                             placeholder="Eg:- 2023"
                         />
+                    </View>
+                    <View style={{ alignItems: "flex-end" }}>
+                        {showClearButton && (
+                            <TouchableOpacity
+                                title="Clear Filter"
+                                onPress={() => clearFilter()}
+                                style={styles.clearStyle}
+                            >
+                                <Text style={{ fontSize: 15, color: "white", fontFamily: "Poppins-Medium", marginTop: 3, marginRight: 5 }}>Clear</Text>
+                                <Ionicons name='close' color='white' size={25} />
+                            </TouchableOpacity>
+                        )}
                     </View>
                     <DetailsBox
                         count={newData?.total_attendance}
@@ -200,10 +243,18 @@ const Attendance = ({ navigation }) => {
                 </View>
                 <View style={styles.border} />
                 <Text style={styles.attndHistory}>{'Attendance History'}</Text>
-
-                <TableHeading />
-
-                {newData?.attendance_list?.map((item, index) => (<HistoryList item={item} key={index} />))}
+                {isfilteredData?.attendance_list?.length === 0 ? (
+                    <View style={{alignItems: "center", gap: 8}}>
+                    <Ionicons name='alert-circle' color='#D2D2D2' size={50} />
+                    <Text style={styles.noDataMessage}>No Attendance Found!</Text>
+                    </View>
+                    
+                ) : (
+                    <>
+                        <TableHeading />
+                        {isfilteredData ? filterProcess() : dataProcess()}
+                    </>
+                )}
 
             </ScrollView>
         </>
@@ -239,4 +290,19 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 16,
     },
+    noDataMessage: {
+        fontSize: 20,
+        color: "#D2D2D2",
+        fontFamily: "Poppins-SemiBold"
+    },
+    clearStyle: {
+        backgroundColor: "red",
+        marginTop: -10,
+        paddingHorizontal: 10,
+        paddingVertical: 3,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 5,
+        flexDirection: "row"
+    }
 })

@@ -25,7 +25,7 @@ const Profile = ({ navigation, route }) => {
                         <View style={{alignSelf:'center', marginTop:10, alignItems:'center', marginBottom:10}}>
                             <Image
                                 style={{ width: 100, height: 100, borderRadius: 12 }}
-                                source={item?.image ? ({ uri: IMG_URL + item?.image }) : (require('../../../../Images/pandapic.png'))} alt='img'
+                                source={item?.image ? ({ uri: IMG_URL + item?.image }) : (require('../../../../Images/drawerLogo.png'))} alt='img'
                             />
                             <CommonTexts label={item?.name} fontSize={15} mt={5}/>
                             <Text style={{fontSize:10, color: '#909091',}}>ID : {item?.rider_id}</Text>
