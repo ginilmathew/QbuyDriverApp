@@ -1,7 +1,10 @@
 import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions, Modal,  } from 'react-native'
 import React, { useState, memo } from 'react'
+import reactotron from 'reactotron-react-native'
 
 const CommonStoreName = memo(({item}) => {
+
+    reactotron.log(item, "GTEsg")
     return (
         <View style={styles.container}>
             <View
@@ -22,7 +25,7 @@ const CommonStoreName = memo(({item}) => {
                 fontFamily: 'Poppins-Medium',
                 color: '#23233C',
                 fontSize: 10
-            }}>{item?.name}</Text>
+            }}>{item?.store_name}</Text>
         </View>
     )
 })

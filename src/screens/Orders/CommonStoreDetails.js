@@ -2,20 +2,23 @@ import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowD
 import React, { useState, memo, useCallback } from 'react'
 import CountCircle from '../../Components/CountCircle'
 import CommonItems from './CommonItems'
+import reactotron from 'reactotron-react-native'
 
 
 const CommonStoreDetails = memo(({ item }) => {
+
+    reactotron.log(item, "STORE")
     const { width } = useWindowDimensions()
     return (
         <View key={item?.id} style={styles.container}>
             <View style={styles.header}>
                 <CountCircle label={item?.id} />
                 <Text style={styles.nameText}>{"Store Name : "}</Text>
-                <Text style={styles.mediumText}>{item?.name}</Text>
+                <Text style={styles.mediumText}>{item?.store_name}</Text>
             </View>
             <View style={{ flexDirection: 'row', width: width - 140, marginTop: 5, marginBottom: 5 }}>
                 <Text style={styles.locationText}>{"Location : "}</Text>
-                <Text style={styles.mediumText}>{item?.location}</Text>
+                <Text style={styles.mediumText}>{item?.store_address}</Text>
             </View>
             <View style={styles.itemBox}>
                 <View style={styles.itemHeader}>
@@ -29,7 +32,7 @@ const CommonStoreDetails = memo(({ item }) => {
                         <Text style={styles.boldText}>{'Price'}</Text>
                     </View>
                 </View>
-                {item?.food?.map((item, index) => (<CommonItems item={item} key={index} />))}
+                {item?.product_details?.map((item, index) => (<CommonItems item={item} key={index} />))}
                 <View style={styles.totalBox} >
                     <Text style={styles.boldText}>{'Total Bill'}</Text>
                     <Text style={styles.total}>₹ {'1320'}</Text>

@@ -8,6 +8,7 @@ import CommonStoreDetails from './CommonStoreDetails';
 import CommonStoreName from './CommonStoreName';
 import CustomerNameLocation from './CustomerNameLocation';
 import CommonStatusCard from '../../Components/CommonStatusCard';
+import reactotron from 'reactotron-react-native';
 
 const CommonOrderCard = memo(({ item }) => {
 
@@ -17,6 +18,7 @@ const CommonOrderCard = memo(({ item }) => {
     const [showItems, setShowItems] = useState(false)
     const [modalVisible, setModalVisible] = useState(false);
 
+    reactotron.log(item, "ORDERDETAILS")
 
     const openDropdown = useCallback(() => {
         setShowItems(!showItems)
@@ -46,16 +48,15 @@ const CommonOrderCard = memo(({ item }) => {
                 <View key={item?.id} style={styles.container}>
                     <View style={styles.containerHead}>
                         <View style={{ flexDirection: 'row', paddingTop: 8, paddingBottom: 8 }}>
-                            <Text style={styles.orderIdLabel}>{"Order ID "}</Text>
-                            <Text style={styles.orderId}>{item?.name}</Text>
+                            <Text style={styles.orderIdLabel}>Order ID  #<Text style={styles.orderIdLabelTwo}>{item?.order_id}</Text></Text>
                         </View>
-                        {item?.status === 'new' && <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        {/* {item?.status === 'ready' && <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={styles.reassignLabel}>{"Order reassign time  "}</Text>
                             <Text style={styles.countDouwn}>{"00:59"}</Text>
-                        </View>}
+                        </View>} */}
                         {item?.status === 'complete' && <CommonStatusCard label={'Completed'} bg='#BCFFC8' labelColor={'#07AF25'} />}
                     </View>
-                    {item?.status === 'new' && item?.hotel?.map((item) => (
+                    {item?.status === 'ready' && item?.store?.map((item) => (
                         <CommonStoreName item={item} key={item?.id} />
                     ))}
                     {item?.status === 'active' || item?.status === 'complete' ?
@@ -70,9 +71,9 @@ const CommonOrderCard = memo(({ item }) => {
                         </TouchableOpacity>
                     </View>
                     {showItems && <>
-                        {item?.hotel?.map((item, index) => <CommonStoreDetails item={item} key={index} />)}
+                        {item?.store?.map((item, index) => <CommonStoreDetails item={item} key={index} />)}
                     </>}
-                    {item?.status === 'new' && <CustomButton
+                    {item?.status === 'ready' && <CustomButton
                         onPress={openModal}
                         label={'Accept Order'} bg='#576FD0' mt={8} mx={8}
                     />}
@@ -140,11 +141,16 @@ const styles = StyleSheet.create({
         color: '#23233C',
         fontSize: 12,
     },
-    orderId: {
-        fontFamily: 'Poppins-SemiBold',
+    orderIdLabelTwo: {
+        fontFamily: 'Poppins-Bold',
+        color: '#23233C',
         fontSize: 12,
-        color: '#23233C'
     },
+    // orderId: {
+    //     fontFamily: 'Poppins-SemiBold',
+    //     fontSize: 12,
+    //     color: '#23233C'
+    // },
     reassignLabel: {
         fontFamily: 'Poppins-LightItalic',
         color: '#23233C',

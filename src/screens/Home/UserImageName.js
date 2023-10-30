@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 
-const UserImageName = () => {
+const UserImageName = ({name}) => {
     return (
         <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
             <Image
@@ -10,7 +10,7 @@ const UserImageName = () => {
             />
             <View style={{ marginLeft: 10 }}>
                 <Text style={styles.textRegular}>{"Welcome"}</Text>
-                <Text style={styles.textBold}>{"Ben Johnson..."}</Text>
+                <Text style={styles.textBold}>{name}</Text>
             </View>
         </View>
     )
