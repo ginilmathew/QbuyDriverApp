@@ -11,6 +11,7 @@ import Register from '../screens/auth/Register';
 import ImageUploadScreen from '../screens/auth/ImageUploadScreen';
 import SplashScreen from '../screens/SplashScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import AuthContext from '../contexts/Auth';
 
 
 const Stack = createStackNavigator();
@@ -18,15 +19,19 @@ const Stack = createStackNavigator();
 const Navigation = () => {
 
     const [initialScreen, setInitialScreen] = useState(null)
+    const authContext = useContext(AuthContext)
+
     useEffect(() => { 
         checkLogin();   
     }, [])
+
     const checkLogin = async() => {
         //await AsyncStorage.clear()
         const token = await AsyncStorage.getItem("token");
         // reactotron.log({token})
         if(token){
             // const user = await AsyncStorage.getItem("user");
+            authContext.getProfileDetails()
             setInitialScreen('Menu');
             // if(user){
             //     let userData = JSON.parse(user);

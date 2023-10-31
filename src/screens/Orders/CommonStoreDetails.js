@@ -35,7 +35,7 @@ const CommonStoreDetails = memo(({ item }) => {
                 {item?.product_details?.map((item, index) => (<CommonItems item={item} key={index} />))}
                 <View style={styles.totalBox} >
                     <Text style={styles.boldText}>{'Total Bill'}</Text>
-                    <Text style={styles.total}>₹ {'1320'}</Text>
+                    <Text style={styles.total}>₹ {item?.grand_total_details}</Text>
                 </View>
             </View>
         </View>

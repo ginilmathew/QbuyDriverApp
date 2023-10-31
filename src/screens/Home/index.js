@@ -1,5 +1,5 @@
 import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions, RefreshControl } from 'react-native'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import Header from '../../Components/Header'
 import { BlurView } from "@react-native-community/blur";
 import TotalCard from './TotalCard';
@@ -10,6 +10,8 @@ import dark from '../../Images/dark.png'
 import light from '../../Images/light.png'
 import reactotron from 'reactotron-react-native';
 import customAxios from '../../CustomeAxios';
+import AuthContext from '../../contexts/Auth';
+import { IMG_URL } from '../../config/constants';
 
 
 const Home = ({ navigation, }) => {
@@ -17,8 +19,9 @@ const Home = ({ navigation, }) => {
 
     const [loading, setLoading] = useState(false)
     const [newHomeData, setNewHomeData] = useState('')
+    const { userData } = useContext(AuthContext)
 
-    reactotron.log(newHomeData, "NEW1")
+    reactotron.log(userData, "USER")
 
     useEffect(() => {
         getHome()
@@ -72,9 +75,9 @@ const Home = ({ navigation, }) => {
                 showsVerticalScrollIndicator={false}
                 refreshControl={<RefreshControl refreshing={loading} onRefresh={getHome} />}
             >
-                <UserImageName name={"TEST"}/>
+                <UserImageName name={userData?.name} src={userData?.image ? ({ uri: IMG_URL + userData?.image }) : (require('../../Images/drawerLogo.png'))}/>
                 <TotalCard label={'Orders Today'} count={newHomeData?.total_order_count} bg='#58D36E' bgImg={light}/>
-                <TotalCard label={'Amount Earned'} count={'₹ ' + newHomeData?.total_order_payment} bg='#58D39D' bgImg={dark}/>
+                <TotalCard label={'Amount Earned'} count={newHomeData?.total_order_payment ? '₹ ' + newHomeData?.total_order_payment : null} bg='#58D39D' bgImg={dark}/>
                 <View style={styles.newOrders}>
                     <CommonTexts label={'New Orders'} fontSize={18} />
                     <TouchableOpacity onPress={ViewAllOrders}>

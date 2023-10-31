@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, ScrollView, Platform, PermissionsAndroid, TouchableOpacity, } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import CommonAuthBg from '../CommonAuthBg';
 import CustomButton from '../../../Components/CustomButton';
 import CommonTexts from '../../../Components/CommonTexts';
@@ -11,6 +11,7 @@ import { useToast } from 'native-base';
 import customAxios from '../../../CustomeAxios';
 import dayjs from 'dayjs';
 import Geolocation from '@react-native-community/geolocation';
+import AuthContext from '../../../contexts/Auth';
 
 
 const ImageUploadScreen = ({ navigation }) => {
@@ -18,8 +19,9 @@ const ImageUploadScreen = ({ navigation }) => {
 	const [filePath, setFilePath] = useState(null);
 	const [loading, setLoading] = useState(false)
 	const [location, setLocation] = useState(null)
+	const { user } = useContext(AuthContext)
 
-	//reactotron.log(location, "LOCATION")
+	reactotron.log(user, "DTA")
 
 	const toast = useToast()
 
@@ -129,6 +131,26 @@ const ImageUploadScreen = ({ navigation }) => {
 		});
 	}, [])
 
+	const getStatus = async () => {
+
+		const datas = {
+			user_id: user?._id,
+			online_status: "online"
+		};
+
+        try {
+            const response = await customAxios.post(`rider/online-status-change`,datas);
+			reactotron.log(response, "RES!@")
+           
+        } catch (error) {
+   
+            toast.show({
+                type: 'error',
+                title: error
+            });
+        }
+    }
+
 	const onSubmit = async () => {
 
 		setLoading(true)
@@ -158,6 +180,7 @@ const ImageUploadScreen = ({ navigation }) => {
 					duration: 1700
 				})
 				navigation.navigate('Menu')
+				getStatus()
 			}
 		}
 		catch (error) {

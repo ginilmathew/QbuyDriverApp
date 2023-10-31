@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 
-const UserImageName = ({name}) => {
+const UserImageName = ({name, src}) => {
     return (
         <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
             <Image
                 style={styles.imgBox}
-                source={require('../../Images/men.jpg')} alt='img'
+                source={src} alt='img'
             />
             <View style={{ marginLeft: 10 }}>
                 <Text style={styles.textRegular}>{"Welcome"}</Text>
