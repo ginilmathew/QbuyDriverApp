@@ -1,5 +1,5 @@
-import { Image, Platform, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import { AppState, Image, Platform, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 import Navigation from './Navigations'
 import { Provider } from 'react-redux'
 import store from './Redux/store'
@@ -8,7 +8,12 @@ import AuthProvider from './contexts/Auth/AuthContext'
 import { NativeBaseProvider } from 'native-base'
 import LocationStatus from './hooks/LocationStatus'
 
+
 const App = () => {
+
+    // const { user, getProfileDetails } = useContext(AuthContext)
+
+    // reactotron.log(user, "DTA")
 
     // const isLoco = LocationStatus();
 
@@ -17,6 +22,7 @@ const App = () => {
     //         console.log("NOTHING");
     //     }
     //   }, [isLoco])
+
 
     return (
         <Provider store={store}>

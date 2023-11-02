@@ -6,11 +6,11 @@ const UserImageName = ({name, src}) => {
         <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
             <Image
                 style={styles.imgBox}
-                source={src} alt='img'
+                source={(require('../../Images/drawerLogo.png'))} alt='img'
             />
             <View style={{ marginLeft: 10 }}>
                 <Text style={styles.textRegular}>{"Welcome"}</Text>
-                <Text style={styles.textBold}>{name}</Text>
+                <Text style={styles.textBold}>{"name"}</Text>
             </View>
         </View>
     )

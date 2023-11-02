@@ -12,17 +12,18 @@ import reactotron from 'reactotron-react-native';
 
 const CommonOrderCard = memo(({ item }) => {
 
+    reactotron.log(item, "gsiugdsi")
+
     const { width } = useWindowDimensions()
 
     const navigation = useNavigation();
-    const [showItems, setShowItems] = useState(false)
+    //const [showItems, setShowItems] = useState(false)
     const [modalVisible, setModalVisible] = useState(false);
 
-    reactotron.log(item, "ORDERDETAILS")
 
-    const openDropdown = useCallback(() => {
-        setShowItems(!showItems)
-    })
+    // const openDropdown = useCallback(() => {
+    //     setShowItems(!showItems)
+    // })
 
     const openModal = useCallback(() => {
         setModalVisible(true)
@@ -43,20 +44,21 @@ const CommonOrderCard = memo(({ item }) => {
 
     return (
         <>
-            <View style={{ marginBottom: 20, paddingHorizontal: 1 }}>
+            <View style={{ marginBottom: 15, paddingHorizontal: 1 }}>
                 <Text style={styles.dateText}>{"22/05/2022 10:30am"}</Text>
                 <View key={item?.id} style={styles.container}>
                     <View style={styles.containerHead}>
-                        <View style={{ flexDirection: 'row', paddingTop: 8, paddingBottom: 8 }}>
-                            <Text style={styles.orderIdLabel}>Order ID  #<Text style={styles.orderIdLabelTwo}>{item?.order_id}</Text></Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={styles.orderIdLabel}>{"Order ID "}</Text>
+                            <Text style={styles.orderId}>{item?.name}</Text>
                         </View>
-                        {/* {item?.status === 'ready' && <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        {/* {item?.status === 'new' && <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={styles.reassignLabel}>{"Order reassign time  "}</Text>
                             <Text style={styles.countDouwn}>{"00:59"}</Text>
                         </View>} */}
                         {item?.status === 'complete' && <CommonStatusCard label={'Completed'} bg='#BCFFC8' labelColor={'#07AF25'} />}
                     </View>
-                    {item?.status === 'ready' && item?.store?.map((item) => (
+                    {item?.status === 'new' && item?.hotel?.map((item) => (
                         <CommonStoreName item={item} key={item?.id} />
                     ))}
                     {item?.status === 'active' || item?.status === 'complete' ?
@@ -64,16 +66,35 @@ const CommonOrderCard = memo(({ item }) => {
                             customerName={item?.customerName}
                             customerLocation={item?.addr}
                         /> : null}
-                    <View style={item?.status === 'complete' ? styles.orderBreakBox : styles.orderBreakBoxTwo} >
+                    {/* <View style={styles.orderBreakBox} >
                         <Text style={styles.orderBreakText}>{'Order Breakdown'}</Text>
                         <TouchableOpacity onPress={openDropdown}>
                             <Ionicons name={showItems ? 'chevron-up-circle' : 'chevron-down-circle'} size={22} color={'#58D36E'} />
                         </TouchableOpacity>
+                    </View> */}
+                    {/* {showItems && <>
+                        {item?.hotel?.map((item, index) => <CommonStoreDetails item={item} key={index} />)}
+                    </>} */}
+
+                    <TouchableOpacity style={styles.customerLoc}>
+                        <Text style={{ marginRight: 8, fontFamily: 'Poppins-Medium', color: '#2EA10C', fontSize: 12 }}>Customer Location</Text>
+                        <Image style={{ width: 15, height: 15 }} source={(require('../../Images/arrow.png'))} alt='img' />
+                    </TouchableOpacity>
+
+                    <View style={{ paddingHorizontal: 10, paddingVertical: 5 }}>
+                        <View style={styles.box}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <Text style={styles.total}>{'Payment Method'}</Text>
+                                <Text style={styles.totalTwo}>{'COD'}</Text>
+                            </View>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <Text style={styles.total}>{'Grand Total'}</Text>
+                                <Text style={styles.totalThree}>{'₹ 960'}</Text>
+                            </View>
+                        </View>
                     </View>
-                    {showItems && <>
-                        {item?.store?.map((item, index) => <CommonStoreDetails item={item} key={index} />)}
-                    </>}
-                    {item?.status === 'ready' && <CustomButton
+
+                    {item?.status === 'new' && <CustomButton
                         onPress={openModal}
                         label={'Accept Order'} bg='#576FD0' mt={8} mx={8}
                     />}
@@ -84,6 +105,8 @@ const CommonOrderCard = memo(({ item }) => {
                     />}
                 </View>
             </View>
+
+
 
             <CommonModal
                 visible={modalVisible}
@@ -96,9 +119,9 @@ const CommonOrderCard = memo(({ item }) => {
                 <CustomButton
                     onPress={onSubmit}
                     label={'Confirm'} bg='#58D36E'
-                    width={200}
+                    width={width / 3.5}
                     alignSelf='center'
-                    my={20}
+                    my={10}
                 />
             </CommonModal>
 
@@ -110,19 +133,17 @@ export default CommonOrderCard
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 11,
+        borderRadius: 15,
         backgroundColor: '#fff',
         paddingBottom: 10,
-        shadowOffset: { height: 10, width: 1 },
+        shadowOffset: { height: 1, width: 1 },
         elevation: 1,
-        shadowColor: "#f2f2f2",
-        shadowOpacity: 1,
-        shadowRadius: 5,
+        shadowOpacity: 0.2
     },
     containerHead: {
         flexDirection: 'row',
-        borderTopRightRadius: 11,
-        borderTopLeftRadius: 11,
+        borderTopRightRadius: 15,
+        borderTopLeftRadius: 15,
         backgroundColor: '#F8F8F8',
         paddingHorizontal: 10,
         paddingVertical: 5,
@@ -133,28 +154,23 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Medium',
         color: '#23233C',
         fontSize: 11,
-        marginBottom: 10,
+        marginBottom: 3,
         // marginLeft: 1
     },
     orderIdLabel: {
         fontFamily: 'Poppins-Medium',
         color: '#23233C',
-        fontSize: 12,
+        fontSize: 10,
     },
-    orderIdLabelTwo: {
-        fontFamily: 'Poppins-Bold',
-        color: '#23233C',
-        fontSize: 12,
+    orderId: {
+        fontFamily: 'Poppins-SemiBold',
+        fontSize: 10,
+        color: '#23233C'
     },
-    // orderId: {
-    //     fontFamily: 'Poppins-SemiBold',
-    //     fontSize: 12,
-    //     color: '#23233C'
-    // },
     reassignLabel: {
         fontFamily: 'Poppins-LightItalic',
         color: '#23233C',
-        fontSize: 10,
+        fontSize: 7,
     },
     countDouwn: {
         fontFamily: 'Poppins-Bold',
@@ -165,22 +181,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal: 10,
-        paddingVertical: 2,
-        borderTopWidth: 1,
-        //borderBottomWidth: 1,
-        marginTop: 10,
-        borderColor: '#7070700F'
-    },
-    orderBreakBoxTwo: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingHorizontal: 10,
+        paddingHorizontal: 5,
         paddingVertical: 2,
         borderTopWidth: 1,
         borderBottomWidth: 1,
-        marginTop: 10,
+        marginTop: 5,
         borderColor: '#7070700F'
     },
     orderBreakText: {
@@ -195,12 +200,48 @@ const styles = StyleSheet.create({
         paddingRight: 50
     },
     lightText: {
-        fontFamily: 'Poppins-Medium',
+        fontFamily: 'Poppins-Light',
         color: '#000000',
         fontSize: 20,
         textAlign: 'center',
-        paddingHorizontal: 30,
-        marginTop: 10
+        paddingHorizontal: 30
+    },
+    customerLoc: {
+        flexDirection: 'row',
+        width: '100%',
+        backgroundColor: '#D3FFD0',
+        paddingVertical: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 5
+    },
+    total: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 12,
+        color: '#000',
+        marginLeft: 5,
+        marginRight: 10
+    },
+    totalTwo: {
+        fontFamily: 'Poppins-Bold',
+        fontSize: 12,
+        color: '#000',
+        marginLeft: 5,
+        marginRight: 10
+    },
+    totalThree: {
+        fontFamily: 'Poppins-Bold',
+        fontSize: 12,
+        color: '#2EA10C',
+        marginLeft: 5,
+        marginRight: 10
+    },
+    box: {
+        borderWidth: 1,
+        borderRadius: 9,
+        borderStyle: 'dashed',
+        borderColor: '#E6E6E6',
+        padding: 10,
     }
 
 })
