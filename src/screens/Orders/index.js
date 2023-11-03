@@ -1,217 +1,109 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useState, useEffect, useCallback } from 'react'
 import HeaderWithTitle from '../../Components/HeaderWithTitle'
 import CommonOrderCard from './CommonOrderCard'
 import SelectTab from '../../Components/SelectTab'
+import { useToast } from 'native-base'
+import customAxios from '../../CustomeAxios'
+import reactotron from 'reactotron-react-native'
 
-const Orders = ({navigation, route}) => {
+const Orders = ({ navigation, route }) => {
+
+    const toast = useToast()
 
     const mode = route?.params?.mode
 
-	const [currentTab, setCurrentTab] = useState(0)
+    const [currentTab, setCurrentTab] = useState(0)
+    const [loading, setLoading] = useState(false)
+    const [newOrder, setNewOrder] = useState('')
+    const [activeOrder, setActiveOrder] = useState('')
 
-    useEffect(() => {
-        if(mode === 'maps'){
-            setCurrentTab(1)
-        }
-        if(mode === 'active'){
-            setCurrentTab(2)
-        }
-    }, [mode])
+    reactotron.log(activeOrder, "ACTIVE")
+
+    // useEffect(() => {
+    //     if(mode === 'maps'){
+    //         setCurrentTab(1)
+    //     }
+    //     if(mode === 'active'){
+    //         setCurrentTab(2)
+    //     }
+    // }, [mode])
 
     // console.log({mode, currentTab})
 
-    const orders = [
-        {
-            id:'1',
-            customerName: 'Raj',
-            addr: 'Neendakara - Chinnakkada Rd, Kavanad, Kollam, Kerala 691003',
-            name:'#10765',
-            hotel : [
-                {
-                    id:'1',
-                    name:'Aalife Restaurant',
-                    location: 'Neendakara - Chinnakkada Rd, Kavanad, Kollam, Kerala 691003',
-                    food : [
-                        {
-                            id:'1',
-                            name:'Chicken Biriyani',
-                            qty: '2',
-                            price: '520'
-                        },
-                        {
-                            id:'2',
-                            name:'Mutton Biriyani',
-                            qty: '3',
-                            price: '800'
-                        },
-                    ],
+    // useEffect(() => {
+    //     if (currentTab === 0) {
+    //         getNewOrders()
+    //     } else if (currentTab === 1) {
+    //         getActiveOrders()
+    //     }
+    // }, [])
 
-                },
-                {
-                    id:'2',
-                    name:'Aariyas Vegetarian Restaurant',
-                    location: 'Kottiyam, Kollam, Kerala 691003',
-                    food : [
-                        {
-                            id:'1',
-                            name:'Meals',
-                            qty: '1',
-                            price: '120'
-                        },
-                        {
-                            id:'2',
-                            name:'Fried Rice',
-                            qty: '2',
-                            price: '500'
-                        },
-                    ],
-                },
-                
-            ],
-            status: 'new'
-        },
-        {
-            id:'2',
-            name:'#87452',
-            hotel : [
-                {
-                    id:'1',
-                    name:'Zam Zam Restaurant',
-                    location: 'Palaym, TVM , 695101',
-                    food : [
-                        {
-                            id:'1',
-                            name:'Chicken Biriyani',
-                            qty: '1',
-                            price: '130'
-                        },
-                     
-                    ],
-                },
-                {
-                    id:'2',
-                    name:'MRA',
-                    location: 'Palaym, TVM , 695101',
-                    food : [
-                        {
-                            id:'2',
-                            name:'Fried Rice',
-                            qty: '3',
-                            price: '600'
-                        },
-                    ],
-                },
-            ],
-            status: 'new'
-        },
-    ]
+    useEffect(() => { 
+        getNewOrders();
+        getActiveOrders();
+    }, [])
 
-    const activeOrders = [
-        {
-            id:'1',
-            name:'#10765',
-            customerName: 'Raj',
-            addr: 'Neendakara - Chinnakkada Rd, Kavanad, Kollam, Kerala 691003',
-            hotel : [
-                {
-                    id:'1',
-                    name:'Aalife Restaurant',
-                    location: 'Neendakara - Chinnakkada Rd, Kavanad, Kollam, Kerala 691003',
-                    food : [
-                        {
-                            id:'1',
-                            name:'Chicken Biriyani',
-                            qty: '2',
-                            price: '520'
-                        },
-                        {
-                            id:'2',
-                            name:'Mutton Biriyani',
-                            qty: '3',
-                            price: '800'
-                        },
-                    ],
+    const getNewOrders = async () => {
+        setLoading(true);
+        try {
+            const newData = await customAxios.get(`rider/orders/new`)
+            if (newData?.data?.message === "success") {
+                reactotron.log(newData, "NEWORDER")
+                setNewOrder(newData?.data?.data)
+            } else {
+                throw "Internal server error"
+            }
 
-                },
-                {
-                    id:'2',
-                    name:'Aariyas Vegetarian Restaurant',
-                    location: 'Kottiyam, Kollam, Kerala 691003',
-                    food : [
-                        {
-                            id:'1',
-                            name:'Meals',
-                            qty: '1',
-                            price: '120'
-                        },
-                        {
-                            id:'2',
-                            name:'Fried Rice',
-                            qty: '2',
-                            price: '500'
-                        },
-                    ],
-                },
-                
-            ],
-            status : 'active'
-        },
-       
-    ]
+        } catch (error) {
+            if (error) {
+                toast.show({
+                    title: error,
+                    backgroundColor: "error.400",
+                    duration: 1500
+                })
+            }
+            else {
+                toast.show({
+                    description: error,
+                    backgroundColor: 'error.400'
+                })
+            }
+        } finally {
+            setLoading(false);
+        }
+    }
 
-    const completedOrders = [
-        {
-            id:'1',
-            name:'#10765',
-            customerName: 'Raj',
-            addr: 'Neendakara - Chinnakkada Rd, Kavanad, Kollam, Kerala 691003',
-            hotel : [
-                {
-                    id:'1',
-                    name:'Aalife Restaurant',
-                    location: 'Neendakara - Chinnakkada Rd, Kavanad, Kollam, Kerala 691003',
-                    food : [
-                        {
-                            id:'1',
-                            name:'Chicken Biriyani',
-                            qty: '2',
-                            price: '520'
-                        },
-                        {
-                            id:'2',
-                            name:'Mutton Biriyani',
-                            qty: '3',
-                            price: '800'
-                        },
-                    ],
+    const getActiveOrders = async () => {
+        setLoading(true);
+        try {
+            const activeData = await customAxios.get(`rider/orders/active`)
+            if (activeData?.data?.message === "success") {
+                reactotron.log(activeData, "ActiveORDER")
+                setActiveOrder(activeData?.data?.data)
+            } else {
+                throw "Internal server error"
+            }
 
-                },
-                {
-                    id:'2',
-                    name:'Aariyas Vegetarian Restaurant',
-                    location: 'Kottiyam, Kollam, Kerala 691003',
-                    food : [
-                        {
-                            id:'1',
-                            name:'Meals',
-                            qty: '1',
-                            price: '120'
-                        },
-                        {
-                            id:'2',
-                            name:'Fried Rice',
-                            qty: '2',
-                            price: '500'
-                        },
-                    ],
-                },
-                
-            ],
-            status : 'complete'
-        },
-       
-    ]
+        } catch (error) {
+            if (error) {
+                toast.show({
+                    title: error,
+                    backgroundColor: "error.400",
+                    duration: 1500
+                })
+            }
+            else {
+                toast.show({
+                    description: error,
+                    backgroundColor: 'error.400'
+                })
+            }
+        } finally {
+            setLoading(false);
+        }
+    }
+
 
     const openDrawer = useCallback(() => {
         navigation.openDrawer()
@@ -229,36 +121,49 @@ const Orders = ({navigation, route}) => {
         setCurrentTab(2)
     }, [])
 
+    const refreshState = () => {
+        if (currentTab === 0) {
+            getNewOrders()
+        } else if (currentTab === 1) {
+            getActiveOrders()
+        } else if (currentTab === 2) {
+            getCompletedOrders()
+        }
+    }
+
     return (
         <>
-            <HeaderWithTitle title={'Orders'} drawerOpen={openDrawer}/>
-            <ScrollView style={{backgroundColor: '#F3F3F3', paddingHorizontal:15 }}>
-                <View style={{ marginTop: 15, flexDirection: 'row', flex:1, justifyContent: 'space-between' }}>
-					<SelectTab 
+            <HeaderWithTitle title={'Orders'} drawerOpen={openDrawer} />
+            <ScrollView
+                style={{ backgroundColor: '#F3F3F3', paddingHorizontal: 15 }}
+                refreshControl={<RefreshControl refreshing={loading} onRefresh={refreshState} />}
+            >
+                <View style={{ marginTop: 15, flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
+                    <SelectTab
                         label={"New"}
                         onPress={selectNew}
                         selected={currentTab === 0 ? true : false}
                     />
-                    <SelectTab 
+                    <SelectTab
                         label={"Active"}
                         onPress={selectActive}
                         selected={currentTab === 1 ? true : false}
                     />
-                    <SelectTab 
+                    <SelectTab
                         label={"Completed"}
                         onPress={selectCompleted}
                         selected={currentTab === 2 ? true : false}
                     />
-				</View>
-				<View style={{ backgroundColor: '#00000014', height: 2, marginTop: -1.5, marginBottom:10 }}/>
-                {currentTab === 0 && orders?.map((item)=>(
-                    <CommonOrderCard key={item?.id} item={item}/>
+                </View>
+                <View style={{ backgroundColor: '#00000014', height: 2, marginTop: -1.5, marginBottom: 10 }} />
+                {currentTab === 0 && newOrder?.orders?.map((item) => (
+                    <CommonOrderCard key={item?.id} item={item} currentTab={currentTab}/>
                 ))}
-                {currentTab === 1 && activeOrders?.map((item)=>(
-                    <CommonOrderCard key={item?.id} item={item}/>
+                {currentTab === 1 && activeOrder?.orders?.map((item) => (
+                    <CommonOrderCard key={item?.id} item={item} currentTab={currentTab}/>
                 ))}
-                {currentTab === 2 && completedOrders?.map((item)=>(
-                    <CommonOrderCard key={item?.id} item={item}/>
+                {currentTab === 2 && completedOrders?.map((item) => (
+                    <CommonOrderCard key={item?.id} item={item} />
                 ))}
             </ScrollView>
         </>

@@ -9,10 +9,14 @@ import CommonStoreName from './CommonStoreName';
 import CustomerNameLocation from './CustomerNameLocation';
 import CommonStatusCard from '../../Components/CommonStatusCard';
 import reactotron from 'reactotron-react-native';
+import { useToast } from 'native-base';
+import customAxios from '../../CustomeAxios';
 
-const CommonOrderCard = memo(({ item }) => {
+const CommonOrderCard = memo(({ item, currentTab }) => {
 
-    reactotron.log(item, "gsiugdsi")
+    const toast = useToast()
+
+    reactotron.log(item, "Card")
 
     const { width } = useWindowDimensions()
 
@@ -35,22 +39,67 @@ const CommonOrderCard = memo(({ item }) => {
 
     const onSubmit = useCallback(() => {
         setModalVisible(false)
-        if (item?.status === 'new') {
-            navigation.navigate('RouteMap')
+        if (currentTab === 0) {
+            acceptOrder();
         } else {
             navigation.navigate('Orders', { mode: 'active' })
         }
     }, [])
 
+    const acceptOrder = async () => {
+
+        const datas = {
+            order_id: item?._id,
+            status: "active"
+        };
+
+        try {
+            const acceptData = await customAxios.post(`rider/orders/updateStatus`, datas)
+            if (acceptData?.status === 201 && acceptData?.data?.message === "success") {
+                reactotron.log(acceptData, "ACCEPTED")
+                //setNewOrder(acceptData?.data?.data)
+            } else {
+                throw "Internal server error"
+            }
+
+        } catch (error) {
+            if (error) {
+                toast.show({
+                    title: error,
+                    backgroundColor: "error.400",
+                    duration: 1500
+                })
+            }
+            else {
+                toast.show({
+                    description: error,
+                    backgroundColor: 'error.400'
+                })
+            }
+        }
+    }
+
+    const renderText = () => {
+        if (currentTab === 0) {
+            return (
+                <Text>Are you sure you want to accept this order?</Text>
+            )
+        } else if (currentTab === 1) {
+            return (
+                <Text>Are you sure you want to change this order to pickup?</Text>
+            )
+        }
+    }
+
     return (
         <>
             <View style={{ marginBottom: 15, paddingHorizontal: 1 }}>
-                <Text style={styles.dateText}>{"22/05/2022 10:30am"}</Text>
+                <Text style={styles.dateText}>{item?.delivery_date}</Text>
                 <View key={item?.id} style={styles.container}>
                     <View style={styles.containerHead}>
                         <View style={{ flexDirection: 'row' }}>
                             <Text style={styles.orderIdLabel}>{"Order ID "}</Text>
-                            <Text style={styles.orderId}>{item?.name}</Text>
+                            <Text style={styles.orderId}>{item?.order_id}</Text>
                         </View>
                         {/* {item?.status === 'new' && <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={styles.reassignLabel}>{"Order reassign time  "}</Text>
@@ -58,14 +107,22 @@ const CommonOrderCard = memo(({ item }) => {
                         </View>} */}
                         {item?.status === 'complete' && <CommonStatusCard label={'Completed'} bg='#BCFFC8' labelColor={'#07AF25'} />}
                     </View>
-                    {item?.status === 'new' && item?.hotel?.map((item) => (
+                    {currentTab === 0 && item?.store?.map((item) => (
                         <CommonStoreName item={item} key={item?.id} />
                     ))}
-                    {item?.status === 'active' || item?.status === 'complete' ?
+                    {currentTab === 1 && item?.store?.map((item) => (
+                        <CommonStoreName item={item} key={item?.id} currentTab={currentTab} onpress={openModal} />
+                    ))}
+                    {currentTab === 1 ?
+                        <CustomerNameLocation
+                            customerName={item?.customer_details?.customer_name}
+                            customerLocation={item?.customer_details?.customer_address?.area?.address}
+                        /> : null}
+                    {/* {item?.status === 'active' || item?.status === 'complete' ?
                         <CustomerNameLocation
                             customerName={item?.customerName}
                             customerLocation={item?.addr}
-                        /> : null}
+                        /> : null} */}
                     {/* <View style={styles.orderBreakBox} >
                         <Text style={styles.orderBreakText}>{'Order Breakdown'}</Text>
                         <TouchableOpacity onPress={openDropdown}>
@@ -85,16 +142,16 @@ const CommonOrderCard = memo(({ item }) => {
                         <View style={styles.box}>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={styles.total}>{'Payment Method'}</Text>
-                                <Text style={styles.totalTwo}>{'COD'}</Text>
+                                <Text style={styles.totalTwo}>{item?.payment_type}</Text>
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={styles.total}>{'Grand Total'}</Text>
-                                <Text style={styles.totalThree}>{'₹ 960'}</Text>
+                                <Text style={styles.totalThree}>{`₹ ${item?.grand_total}`}</Text>
                             </View>
                         </View>
                     </View>
 
-                    {item?.status === 'new' && <CustomButton
+                    {currentTab === 0 && <CustomButton
                         onPress={openModal}
                         label={'Accept Order'} bg='#576FD0' mt={8} mx={8}
                     />}
@@ -113,9 +170,7 @@ const CommonOrderCard = memo(({ item }) => {
                 onClose={closeModal}
             >
                 <Ionicons name={'ios-alert-circle'} size={40} color={'#FF0000'} alignSelf='center' marginTop={-10} />
-                <Text style={styles.lightText}>{item?.status === 'new' ? 'Are you sure you want to accept this order?' :
-                    'Are you sure you want to confirm completion of this order ?'
-                }</Text>
+                <Text style={styles.lightText}>{renderText()}</Text>
                 <CustomButton
                     onPress={onSubmit}
                     label={'Confirm'} bg='#58D36E'

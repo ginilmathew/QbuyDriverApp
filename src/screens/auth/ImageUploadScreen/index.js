@@ -26,7 +26,7 @@ const ImageUploadScreen = ({ navigation }) => {
 	const toast = useToast()
 
 	const currentDate = dayjs().format('YYYY-MM-DD')
-	const currentTime = dayjs().format('hh:mm a')
+	const currentTime = dayjs().format('HH:mm')
 	const currentLocation = [
 		{
 			'longitude': location?.coords?.longitude,

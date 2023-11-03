@@ -3,10 +3,11 @@ import React, { useState, memo, useCallback } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import CommonStoreDetails from './CommonStoreDetails'
 import reactotron from 'reactotron-react-native'
+import CustomButton from '../../Components/CustomButton'
 
-const CommonStoreName = memo(({ item }) => {
+const CommonStoreName = memo(({ item, currentTab, onpress }) => {
 
-    reactotron.log(item, "dfsf")
+    reactotron.log(item, "Name")
 
     const [showItems, setShowItems] = useState(false)
 
@@ -24,7 +25,7 @@ const CommonStoreName = memo(({ item }) => {
                         color: '#23233C',
                         fontSize: 12,
                         marginLeft: 5
-                    }}>{item?.name}</Text>
+                    }}>{item?.store_name}</Text>
                 </View>
                 <View>
                     <TouchableOpacity onPress={openDropdown}>
@@ -34,14 +35,22 @@ const CommonStoreName = memo(({ item }) => {
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5, marginHorizontal: 10 }}>
                 <Image style={{ width: 20, height: 20 }} source={(require('../../Images/price.png'))} alt='img' />
-                <Text style={styles.total}>₹ {'1320'}</Text>
-                {/* <Text style={styles.type}>{'Ready Cash'}</Text> */}
+                <Text style={styles.total}>{`₹ ${item?.grand_total_details}`}</Text>
+                {item?.account_type === "Ready Cash" ? (<Text style={styles.type}>{'Ready Cash'}</Text>) : null}
             </View>
             {showItems &&
                 <>
-                    <CommonStoreDetails item={item} />
+                    <CommonStoreDetails item={item}/>
                 </>
             }
+            {currentTab === 1 && <CustomButton
+                        onPress={onpress}
+                        label={'Pickup Order'} bg='#CEBB37' mt={8} mx={8}
+                    />}
+
+            {/* {showItems && <>
+                        {item?.product_details?.map((item, index) => <CommonStoreDetails item={item} key={index} />)}
+                    </>} */}
 
         </View>
     )
