@@ -6,12 +6,11 @@ import HeaderWithTitle from '../../../Components/HeaderWithTitle'
 import ProfileDp from './ProfileDp'
 import customAxios from '../../../CustomeAxios'
 import reactotron from 'reactotron-react-native'
-import { useToast } from 'native-base';
 import { IMG_URL } from '../../../config/constants'
+import Toast from 'react-native-toast-message'
 
 const Settings = ({ navigation }) => {
 
-    const toast = useToast()
 
     const [profileItems, setProfileItems] = useState(null)
 
@@ -32,19 +31,10 @@ const Settings = ({ navigation }) => {
             }
         }
         catch (error) {
-            if (error) {
-                toast.show({
-                    title: error,
-                    backgroundColor: "error.400",
-                    duration: 1500
-                })
-            }
-            else {
-                toast.show({
-                    description: error,
-                    backgroundColor: 'error.400'
-                })
-            }
+            Toast.show({
+                type: 'error',
+                text1: error
+            });
         }
     }
 

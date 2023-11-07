@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		00B27F0D0D494F579C2AF022 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FD7D78A3348417F9647DE27 /* Montserrat-Medium.ttf */; };
 		00E356F31AD99517003FC87E /* QbuyPandaDriverAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* QbuyPandaDriverAppTests.m */; };
-		06447987F12E77AACC06ED5B /* libPods-QbuyPandaDriverApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 353B6D6CBE1E4E15A2444AE6 /* libPods-QbuyPandaDriverApp.a */; };
 		084C9B0F91D245AA8DBB00C5 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0FE17DC9E740DDA71C5E65 /* Montserrat-SemiBold.ttf */; };
 		09DADACDA5DD4A0A9F0A9A69 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22D23F0739BB4C31BCD182AC /* Poppins-SemiBold.ttf */; };
 		0CD146F10F1B442293649FFD /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE33587EA4F345ECB5BC6F14 /* Quicksand-Regular.ttf */; };
@@ -17,10 +16,10 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		19E887195C19417F87D78D35 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BBA0E98C0464FBBBE20834D /* Poppins-ExtraBold.ttf */; };
+		1AF9C6F40F53792E87918AA0 /* libPods-QbuyPandaDriverApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43565DF20F26B10F7238ABBB /* libPods-QbuyPandaDriverApp.a */; };
 		31A1D7ED282F46E3BEF49E8C /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F697EA2B8DD423883748C99 /* Quicksand-Medium.ttf */; };
 		3A21B262B29248F8A83CE51E /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 224BE23D5C3F4D0B95C42369 /* Montserrat-Bold.ttf */; };
 		41A9E08E723B482184815599 /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB5C9E1C6CCB4D67A5512BE8 /* Quicksand-Light.ttf */; };
-		455E1ED06CD36FA039265137 /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 996BDAEDB5C390A0D6699FC0 /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a */; };
 		4965A0DB093E4D949620D52A /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B186B89878B4F5AA346827A /* Poppins-BoldItalic.ttf */; };
 		4D8FD209388648E1818FACCC /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D698388D1F3482982ECA381 /* Montserrat-Thin.ttf */; };
 		511171C0683C4850A230AF62 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2323D5C2F7C54A2C8CC58354 /* Quicksand-Bold.ttf */; };
@@ -36,6 +35,7 @@
 		924ACA6F030141AC96E287CC /* Nunito-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEE2E00E39404C5790D89834 /* Nunito-Medium.ttf */; };
 		9A12AE6853D74EEEA8E73B00 /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F2A287D94BA45CFA8AFF0EF /* Nunito-ExtraLight.ttf */; };
 		A0DD5252B770454CA01906CD /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BAAA24D65244B8AACF5E1AE /* Quicksand-SemiBold.ttf */; };
+		A18532B15EF9AD2C9848A95C /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1205A20C05535A9AE20B3BD /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a */; };
 		B5F9E1A13F2945619277DBCD /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4867A82EE35F4D84BE772C06 /* Poppins-BlackItalic.ttf */; };
 		B982237B0F9C492DBD518393 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 419D5D51EEF14236A1FC073E /* Nunito-SemiBold.ttf */; };
 		CDABAD51B90F472FA410197B /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F93BBABC43CE49E9A5F3FFE5 /* Montserrat-ExtraBold.ttf */; };
@@ -62,7 +62,7 @@
 		00E356EE1AD99517003FC87E /* QbuyPandaDriverAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QbuyPandaDriverAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* QbuyPandaDriverAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QbuyPandaDriverAppTests.m; sourceTree = "<group>"; };
-		05D3794A3F4D499E73733E27 /* Pods-QbuyPandaDriverApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp.release.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp.release.xcconfig"; sourceTree = "<group>"; };
+		08DB192C6F206D01F04891C5 /* Pods-QbuyPandaDriverApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp.debug.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp.debug.xcconfig"; sourceTree = "<group>"; };
 		0AC94A02E3114143A33D87B4 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-LightItalic.ttf"; path = "../assets/fonts/Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
 		0E2D280536164BB78E481BE0 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-MediumItalic.ttf"; path = "../assets/fonts/Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
 		115D643DF5644E00A170A1EE /* Nunito-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Bold.ttf"; path = "../assets/fonts/Nunito-Bold.ttf"; sourceTree = "<group>"; };
@@ -74,7 +74,6 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = QbuyPandaDriverApp/main.m; sourceTree = "<group>"; };
 		1A0FE17DC9E740DDA71C5E65 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		1B186B89878B4F5AA346827A /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BoldItalic.ttf"; path = "../assets/fonts/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
-		1CA053A36060B99B09129ABA /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1F056778C2CA40418851502F /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		224BE23D5C3F4D0B95C42369 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		22D23F0739BB4C31BCD182AC /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -83,14 +82,12 @@
 		28F2944123CF4AE8A0854985 /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
 		2F2A287D94BA45CFA8AFF0EF /* Nunito-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-ExtraLight.ttf"; path = "../assets/fonts/Nunito-ExtraLight.ttf"; sourceTree = "<group>"; };
 		2FD7D78A3348417F9647DE27 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
-		353B6D6CBE1E4E15A2444AE6 /* libPods-QbuyPandaDriverApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QbuyPandaDriverApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		383CF1B50DD948E3AB07C336 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; };
 		419D5D51EEF14236A1FC073E /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-SemiBold.ttf"; path = "../assets/fonts/Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
-		43EDB427B6303A6D50B93C6A /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		43565DF20F26B10F7238ABBB /* libPods-QbuyPandaDriverApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QbuyPandaDriverApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4867A82EE35F4D84BE772C06 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BlackItalic.ttf"; path = "../assets/fonts/Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
 		4BAAA24D65244B8AACF5E1AE /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-SemiBold.ttf"; path = "../assets/fonts/Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
 		4BBA0E98C0464FBBBE20834D /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
-		4F5E3E9D802C9A6BB140EF62 /* Pods-QbuyPandaDriverApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp.debug.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp.debug.xcconfig"; sourceTree = "<group>"; };
 		4F697EA2B8DD423883748C99 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Medium.ttf"; path = "../assets/fonts/Quicksand-Medium.ttf"; sourceTree = "<group>"; };
 		53C39683E333418FA66F0721 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-ExtraBold.ttf"; path = "../assets/fonts/Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
 		5CD6B81D6DA64D85AD603045 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
@@ -100,9 +97,12 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = QbuyPandaDriverApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		826098DAF64947A3818F83A7 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.ttf"; path = "../assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		8E01864AD2084AE99D481FE1 /* Nunito-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Light.ttf"; path = "../assets/fonts/Nunito-Light.ttf"; sourceTree = "<group>"; };
-		996BDAEDB5C390A0D6699FC0 /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E44F6E5216F075BB29D6EA7 /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C1205A20C05535A9AE20B3BD /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBD04102FCA6453C88AAFAC4 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		CC7C734A5B6C40CA9873E4CB /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLight.ttf"; path = "../assets/fonts/Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
+		CE0ABA9FA1BDE151C40FDB4E /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		DD2FBABD1789E08D70E8D331 /* Pods-QbuyPandaDriverApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp.release.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp.release.xcconfig"; sourceTree = "<group>"; };
 		DEE2E00E39404C5790D89834 /* Nunito-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Medium.ttf"; path = "../assets/fonts/Nunito-Medium.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EE33587EA4F345ECB5BC6F14 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Regular.ttf"; path = "../assets/fonts/Quicksand-Regular.ttf"; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				455E1ED06CD36FA039265137 /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a in Frameworks */,
+				A18532B15EF9AD2C9848A95C /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06447987F12E77AACC06ED5B /* libPods-QbuyPandaDriverApp.a in Frameworks */,
+				1AF9C6F40F53792E87918AA0 /* libPods-QbuyPandaDriverApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,8 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				353B6D6CBE1E4E15A2444AE6 /* libPods-QbuyPandaDriverApp.a */,
-				996BDAEDB5C390A0D6699FC0 /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a */,
+				43565DF20F26B10F7238ABBB /* libPods-QbuyPandaDriverApp.a */,
+				C1205A20C05535A9AE20B3BD /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -205,10 +205,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4F5E3E9D802C9A6BB140EF62 /* Pods-QbuyPandaDriverApp.debug.xcconfig */,
-				05D3794A3F4D499E73733E27 /* Pods-QbuyPandaDriverApp.release.xcconfig */,
-				1CA053A36060B99B09129ABA /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig */,
-				43EDB427B6303A6D50B93C6A /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig */,
+				08DB192C6F206D01F04891C5 /* Pods-QbuyPandaDriverApp.debug.xcconfig */,
+				DD2FBABD1789E08D70E8D331 /* Pods-QbuyPandaDriverApp.release.xcconfig */,
+				9E44F6E5216F075BB29D6EA7 /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig */,
+				CE0ABA9FA1BDE151C40FDB4E /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -259,12 +259,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "QbuyPandaDriverAppTests" */;
 			buildPhases = (
-				F8C44C4C396B8EEC8AF1CCF0 /* [CP] Check Pods Manifest.lock */,
+				F5B1E37AD07DF56848F61964 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				02FC614E070B9CE552A5A804 /* [CP] Embed Pods Frameworks */,
-				85EA27BD7A400485F8C65F7A /* [CP] Copy Pods Resources */,
+				7205D403A47B188F0F214A55 /* [CP] Embed Pods Frameworks */,
+				032A6914DD67FFBD347294EE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -280,14 +280,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "QbuyPandaDriverApp" */;
 			buildPhases = (
-				C222BEA962F9DD234C4EECAB /* [CP] Check Pods Manifest.lock */,
+				6F462B7882943249ED4AD2C9 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				456F6D03E7C3ED47E603821B /* [CP] Embed Pods Frameworks */,
-				EBECF3D52BEC14D91BAFFBA1 /* [CP] Copy Pods Resources */,
+				4AF43137A0CD0A270A7BE128 /* [CP] Embed Pods Frameworks */,
+				F0A3399FE1C793D155DDCF96 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -402,41 +402,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		02FC614E070B9CE552A5A804 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		456F6D03E7C3ED47E603821B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		85EA27BD7A400485F8C65F7A /* [CP] Copy Pods Resources */ = {
+		032A6914DD67FFBD347294EE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -453,7 +419,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C222BEA962F9DD234C4EECAB /* [CP] Check Pods Manifest.lock */ = {
+		4AF43137A0CD0A270A7BE128 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F462B7882943249ED4AD2C9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -475,7 +458,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EBECF3D52BEC14D91BAFFBA1 /* [CP] Copy Pods Resources */ = {
+		7205D403A47B188F0F214A55 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0A3399FE1C793D155DDCF96 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -492,7 +492,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F8C44C4C396B8EEC8AF1CCF0 /* [CP] Check Pods Manifest.lock */ = {
+		F5B1E37AD07DF56848F61964 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -566,7 +566,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1CA053A36060B99B09129ABA /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig */;
+			baseConfigurationReference = 9E44F6E5216F075BB29D6EA7 /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -593,7 +593,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43EDB427B6303A6D50B93C6A /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig */;
+			baseConfigurationReference = CE0ABA9FA1BDE151C40FDB4E /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -617,7 +617,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F5E3E9D802C9A6BB140EF62 /* Pods-QbuyPandaDriverApp.debug.xcconfig */;
+			baseConfigurationReference = 08DB192C6F206D01F04891C5 /* Pods-QbuyPandaDriverApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -645,7 +645,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05D3794A3F4D499E73733E27 /* Pods-QbuyPandaDriverApp.release.xcconfig */;
+			baseConfigurationReference = DD2FBABD1789E08D70E8D331 /* Pods-QbuyPandaDriverApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -741,6 +741,7 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					" ",
+					"-Wl -ld_classic ",
 				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
@@ -814,6 +815,7 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					" ",
+					"-Wl -ld_classic ",
 				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;

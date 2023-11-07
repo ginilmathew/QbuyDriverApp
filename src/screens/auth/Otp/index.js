@@ -13,11 +13,9 @@ import LoaderContext from '../../../contexts/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import customAxios from '../../../CustomeAxios';
 import reactotron from 'reactotron-react-native';
-import { useToast } from 'native-base';
+import Toast from 'react-native-toast-message'
 
 const Otp = ({ navigation, route }) => {
-
-	const toast = useToast()
 
 	const [loading, setLoading] = useState(false)
 
@@ -61,11 +59,10 @@ const Otp = ({ navigation, route }) => {
             }
 		}
 		catch (error) {
-			toast.show({
-				title: error,
-				backgroundColor: "error.400",
-				duration: 1500
-			})
+			Toast.show({
+				type: 'error',
+				text1: error
+			  });
 		}  finally {
             setLoading(false);
         }

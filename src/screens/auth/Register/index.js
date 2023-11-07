@@ -17,7 +17,7 @@ import CommonSelectDropdown from '../../../Components/CommonSelectDropdown';
 import SelectTab from '../../../Components/SelectTab';
 import customAxios from '../../../CustomeAxios';
 import reactotron from 'reactotron-react-native';
-import { Toast } from 'native-base';
+import Toast from 'react-native-toast-message'
 import BasicDetails from '../../../Components/register/BasicDetails';
 import BankDetails from '../../../Components/register/BankDetails';
 import KYC from '../../../Components/register/KYC';
@@ -67,19 +67,19 @@ const Register = ({ navigation }) => {
 			reactotron.log(regs, "Register")
 			if (regs?.data?.status === 200 || 201) {
 				Toast.show({
-                    description: 'Your Account has been successfully registered!',
-                    backgroundColor: 'success.500',
-                    duration: 1700
-                })
+					type: 'success',
+					text1: 'Your Account has been successfully registered!'
+				});
+
+
 				navigation.navigate('Login')
 			}
 		}
 		catch (error) {
 			Toast.show({
-				title: error,
-				backgroundColor: "error.400",
-				duration: 1500
-			})
+				type: 'error',
+				text1: error
+			});
 		} finally {
             setLoading(false);
         }

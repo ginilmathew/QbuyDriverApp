@@ -5,7 +5,7 @@ import CommonStoreDetails from './CommonStoreDetails'
 import reactotron from 'reactotron-react-native'
 import CustomButton from '../../Components/CustomButton'
 
-const CommonStoreName = memo(({ item, currentTab, onpress }) => {
+const CommonStoreName = memo(({ item, currentTab, orderPicked, status }) => {
 
     reactotron.log(item, "Name")
 
@@ -14,6 +14,11 @@ const CommonStoreName = memo(({ item, currentTab, onpress }) => {
     const openDropdown = useCallback(() => {
         setShowItems(!showItems)
     })
+
+    const onPress = () => {
+        console.log({key: item?._id})
+        orderPicked(item?._id)
+    }
 
     return (
         <View style={styles.container}>
@@ -43,8 +48,8 @@ const CommonStoreName = memo(({ item, currentTab, onpress }) => {
                     <CommonStoreDetails item={item}/>
                 </>
             }
-            {currentTab === 1 && <CustomButton
-                        onPress={onpress}
+            {(currentTab === 1 && status === "active") && <CustomButton
+                        onPress={onPress}
                         label={'Pickup Order'} bg='#CEBB37' mt={8} mx={8}
                     />}
 

@@ -10,13 +10,11 @@ import DetailsBox from '../../../Components/DetailsBox'
 import CommonDropdown from '../../../Components/CommonDropdown'
 import customAxios from '../../../CustomeAxios'
 import reactotron from 'reactotron-react-native'
-import { useToast } from 'native-base';
-
+import Toast from 'react-native-toast-message'
 
 const Attendance = ({ navigation }) => {
 
     const { width } = useWindowDimensions()
-    const toast = useToast()
 
     const [selectedMonth, SetSelectedMonth] = useState(null);
     const [selectedYear, SetSelectedYear] = useState(null);
@@ -83,19 +81,10 @@ const Attendance = ({ navigation }) => {
             }
 
         } catch (error) {
-            if (error) {
-                toast.show({
-                    title: error,
-                    backgroundColor: "error.400",
-                    duration: 1500
-                })
-            }
-            else {
-                toast.show({
-                    description: error,
-                    backgroundColor: 'error.400'
-                })
-            }
+            Toast.show({
+                type: 'error',
+                text1: error
+            });
         } finally {
             setLoading(false);
         }
@@ -120,18 +109,10 @@ const Attendance = ({ navigation }) => {
                 }
             }
         } catch (error) {
-            if (error) {
-                toast.show({
-                    description: error,
-                    backgroundColor: 'error.400'
-                })
-            }
-            else {
-                toast.show({
-                    description: error,
-                    backgroundColor: 'error.400'
-                })
-            }
+            Toast.show({
+                type: 'error',
+                text1: error
+            });
         } finally {
             setLoading(false);
         }
@@ -147,19 +128,10 @@ const Attendance = ({ navigation }) => {
             }
         }
         catch (error) {
-            if (error) {
-                toast.show({
-                    title: error,
-                    backgroundColor: "error.400",
-                    duration: 1500
-                })
-            }
-            else {
-                toast.show({
-                    description: error,
-                    backgroundColor: 'error.400'
-                })
-            }
+            Toast.show({
+                type: 'error',
+                text1: error
+            });
         }
     }
 

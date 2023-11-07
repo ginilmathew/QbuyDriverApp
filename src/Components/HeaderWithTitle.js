@@ -18,10 +18,10 @@ const HeaderWithTitle = ({ title, backAction, drawerOpen,  onPress}) => {
         <>
             <StatusBar backgroundColor={Platform.OS === 'android' ? '#58D36E' : null} />
             <View
-                style={{ backgroundColor: '#58D36E', height: Platform.OS === 'android' ? 60 : 100, flexDirection: 'row', paddingLeft: 15, alignItems: 'flex-end', }}
+                style={{ backgroundColor: '#58D36E', height: Platform.OS === 'android' ? 60 : 100, flexDirection: 'row', paddingHorizontal: 15, alignItems: 'flex-end', justifyContent:'space-between' }}
             >
                 <View
-                    style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 5 }}
+                    style={{ flexDirection: 'row', alignItems: 'center' }}
                 >
                     {backAction && <TouchableOpacity onPress={ onPress ? onPress : goBack}>
                         <Ionicons name={"chevron-back"} size={30} color='#fff' />
@@ -35,9 +35,13 @@ const HeaderWithTitle = ({ title, backAction, drawerOpen,  onPress}) => {
                         label={title}
                         color={'#fff'}
                         fontSize={21}
-                        mt={2}
+                        mt={7}
                     />
+                    
                 </View>
+                <TouchableOpacity onPress={drawerOpen} style={{ justifyContent:'flex-end', marginBottom: 4}}>
+                    <Ionicons name={"add-circle"} color="#fff" size={30} />
+                </TouchableOpacity>
             </View>
         </>
     )

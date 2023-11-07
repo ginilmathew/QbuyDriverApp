@@ -7,11 +7,11 @@ import CommonAuthHeading from '../CommonAuthHeading';
 import { launchCamera } from 'react-native-image-picker';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import reactotron from 'reactotron-react-native';
-import { useToast } from 'native-base';
 import customAxios from '../../../CustomeAxios';
 import dayjs from 'dayjs';
 import Geolocation from '@react-native-community/geolocation';
 import AuthContext from '../../../contexts/Auth';
+import Toast from 'react-native-toast-message'
 
 
 const ImageUploadScreen = ({ navigation }) => {
@@ -23,7 +23,6 @@ const ImageUploadScreen = ({ navigation }) => {
 
 	reactotron.log(user, "DTA")
 
-	const toast = useToast()
 
 	const currentDate = dayjs().format('YYYY-MM-DD')
 	const currentTime = dayjs().format('HH:mm')
@@ -143,11 +142,10 @@ const ImageUploadScreen = ({ navigation }) => {
 			reactotron.log(response, "RES!@")
            
         } catch (error) {
-   
-            toast.show({
-                type: 'error',
-                title: error
-            });
+			Toast.show({
+				type: 'error',
+				text1: error
+			});
         }
     }
 
@@ -174,21 +172,19 @@ const ImageUploadScreen = ({ navigation }) => {
 			})
 			reactotron.log(imgUpload, "IMAGE")
 			if (imgUpload?.data?.status === 200 || 201) {
-				toast.show({
-					description: 'Attendance Added',
-					backgroundColor: 'success.500',
-					duration: 1700
-				})
+				Toast.show({
+					type: 'success',
+					text1: 'Attendance Added'
+				});
 				navigation.navigate('Menu')
 				getStatus()
 			}
 		}
 		catch (error) {
-			toast.show({
-				title: error,
-				backgroundColor: "error.400",
-				duration: 1500
-			})
+			Toast.show({
+				type: 'error',
+				text1: error
+			});
 		} finally {
 			setLoading(false);
 		}

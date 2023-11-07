@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { Platform, StyleSheet } from 'react-native'
 import React, { useState, useEffect, useContext } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,9 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthContext from '../contexts/Auth';
 import { AppState } from 'react-native';
 import { useRef } from 'react';
-import reactotron from '../ReactotronConfig';
-import customAxios from '../CustomeAxios';
-import { useToast } from 'native-base';
+import { focusManager } from '@tanstack/react-query'
 
 
 const Stack = createStackNavigator();
@@ -29,52 +27,35 @@ const Navigation = () => {
     const appState = useRef(AppState.currentState);
     const [appStateVisible, setAppStateVisible] = useState(appState.current);
 
-    reactotron.log(appStateVisible, "STATUS")
+    //reactotron.log(appStateVisible, "STATUS")
   
 
     useEffect(() => { 
         checkLogin();   
     }, [])
 
+
     
-    useEffect(() => {
-      const onlineStatus = AppState.addEventListener('change', nextAppState => {
-        if (
-          appState.current.match(/inactive|background/) &&
-          nextAppState === 'active'
-        ) {
-            getStatus();
-        }
-  
-        appState.current = nextAppState;
-        setAppStateVisible(appState.current);
-        console.log('AppState', appState.current);
-      });
-  
-      return () => {
-        onlineStatus.remove();
-      };
-    }, []);
 
-    const getStatus = async () => {
+    // const getStatus = async () => {
 
-		const datas = {
-			user_id: user?._id,
-			online_status: appStateVisible
-		};
+	// 	const datas = {
+	// 		user_id: user?._id,
+	// 		online_status: appStateVisible
+	// 	};
 
-        try {
-            const response = await customAxios.post(`rider/online-status-change`,datas);
-			reactotron.log(response, "RES!@")
+    //     try {
+    //         const response = await customAxios.post(`rider/online-status-change`,datas);
+	// 		reactotron.log(response, "RES!@")
            
-        } catch (error) {
+    //     } catch (error) {
    
-            Toast.show({
-                type: 'error',
-                title: error
-            });
-        }
-    }
+    //         Toast.show({
+    //             type: 'error',
+    //             title: error
+    //         });
+    //     }
+    // }
 
     const checkLogin = async() => {
         //await AsyncStorage.clear()

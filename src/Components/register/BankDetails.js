@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React, { useCallback } from 'react'
 import CommonInput from '../CommonInput'
 import CommonSelectDropdown from '../CommonSelectDropdown'
@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import reactotron from 'reactotron-react-native'
-import { View } from 'native-base'
 
 const BankDetails = ({ reg, tabChangeBack, data, loading }) => {
 

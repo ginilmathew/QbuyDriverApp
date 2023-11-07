@@ -1,13 +1,20 @@
-import { AppState, Image, Platform, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { AppState, Platform, StyleSheet } from 'react-native'
+import React, { useEffect } from 'react'
 import Navigation from './Navigations'
-import { Provider } from 'react-redux'
-import store from './Redux/store'
 import LoadProvider from './contexts/Loader/loaderContext'
 import AuthProvider from './contexts/Auth/AuthContext'
-import { NativeBaseProvider } from 'native-base'
-import LocationStatus from './hooks/LocationStatus'
+import Toast from 'react-native-toast-message';
+import NetInfo from '@react-native-community/netinfo'
+import { focusManager, onlineManager, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
+
+onlineManager.setEventListener(setOnline => {
+    return NetInfo.addEventListener(state => {
+      setOnline(!!state.isConnected)
+    })
+})
+
+const queryClient = new QueryClient()
 
 const App = () => {
 
@@ -23,17 +30,34 @@ const App = () => {
     //     }
     //   }, [isLoco])
 
+    
+
+    function onAppStateChange(status) {
+        if (Platform.OS !== 'web') {
+          focusManager.setFocused(status === 'active')
+        }
+      }
+
+    
+    useEffect(() => {
+        const subscription = AppState.addEventListener('change', onAppStateChange)
+
+        return () => subscription.remove()
+    }, []);
+
 
     return (
-        <Provider store={store}>
-            <NativeBaseProvider>
-                <LoadProvider>
-                    <AuthProvider>
-                        <Navigation />
-                    </AuthProvider>
-                </LoadProvider>
-            </NativeBaseProvider>
-        </Provider>
+        <QueryClientProvider client={queryClient}>
+            <LoadProvider>
+                <AuthProvider>
+                    <Navigation />
+                </AuthProvider>
+            </LoadProvider>
+            <Toast
+                position='bottom'
+                bottomOffset={20}
+            />
+        </QueryClientProvider>
 
     )
 }

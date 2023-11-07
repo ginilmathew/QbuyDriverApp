@@ -15,7 +15,7 @@ import AuthContext from '../../../contexts/Auth';
 import LoaderContext from '../../../contexts/Loader';
 import customAxios from '../../../CustomeAxios';
 import reactotron from 'reactotron-react-native';
-import { useToast } from 'native-base';
+import Toast from 'react-native-toast-message'
 
 const phoneRegExp = /^(0|[1-9]\d*)(\.\d+)?$/
 
@@ -23,9 +23,6 @@ const Login = ({ navigation }) => {
 
 	const loginUser = useContext(AuthContext)
 	const [loading, setLoading] = useState(false)
-
-	const toast = useToast()
-
 	//const successID = "Success Token"
 	//const errorID = "Error Token"
 
@@ -49,19 +46,17 @@ const Login = ({ navigation }) => {
 			const res = await customAxios.post('auth/riderloginotp', data);
 			reactotron.log(res, "RES")
 			if (res?.data?.status === 201 || 200) {
-				toast.show({
-                    description: 'A OTP has been sent to your registered mobile number',
-                    backgroundColor: 'success.500',
-                    duration: 1700
-                })
+				Toast.show({
+					type: 'success',
+					text1: 'A OTP has been sent to your registered mobile number'
+				});
 			navigation.navigate('Otp', data);
 			}
 		} catch (error) {
-				toast.show({
-					title: error,
-					backgroundColor: "error.400",
-					duration: 1500
-				})
+			Toast.show({
+				type: 'success',
+				text1: error
+			});
 		} finally {
             setLoading(false);
         }

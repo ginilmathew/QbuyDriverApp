@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions, Modal, } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions, Modal, Alert, } from 'react-native'
 import React, { useState, memo, useCallback } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native';
@@ -9,12 +9,13 @@ import CommonStoreName from './CommonStoreName';
 import CustomerNameLocation from './CustomerNameLocation';
 import CommonStatusCard from '../../Components/CommonStatusCard';
 import reactotron from 'reactotron-react-native';
-import { useToast } from 'native-base';
 import customAxios from '../../CustomeAxios';
+import Toast from 'react-native-toast-message'
+import Animated, { FadeIn, LinearTransition } from 'react-native-reanimated';
+import dayjs from 'dayjs';
 
-const CommonOrderCard = memo(({ item, currentTab }) => {
+const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
 
-    const toast = useToast()
 
     reactotron.log(item, "Card")
 
@@ -44,40 +45,11 @@ const CommonOrderCard = memo(({ item, currentTab }) => {
         } else {
             navigation.navigate('Orders', { mode: 'active' })
         }
-    }, [])
+    }, [currentTab])
 
-    const acceptOrder = async () => {
-
-        const datas = {
-            order_id: item?._id,
-            status: "active"
-        };
-
-        try {
-            const acceptData = await customAxios.post(`rider/orders/updateStatus`, datas)
-            if (acceptData?.status === 201 && acceptData?.data?.message === "success") {
-                reactotron.log(acceptData, "ACCEPTED")
-                //setNewOrder(acceptData?.data?.data)
-            } else {
-                throw "Internal server error"
-            }
-
-        } catch (error) {
-            if (error) {
-                toast.show({
-                    title: error,
-                    backgroundColor: "error.400",
-                    duration: 1500
-                })
-            }
-            else {
-                toast.show({
-                    description: error,
-                    backgroundColor: 'error.400'
-                })
-            }
-        }
-    }
+    const acceptOrder = useCallback(() => {
+        onAccept(item)
+    }, [item])
 
     const renderText = () => {
         if (currentTab === 0) {
@@ -91,10 +63,32 @@ const CommonOrderCard = memo(({ item, currentTab }) => {
         }
     }
 
+
+    const orderPicked = (key) => {
+        Alert.alert('Warning?', 'Are you sure you want to change this order to pickup?', [
+            {
+              text: 'Cancel',
+              //onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            {text: 'OK', onPress: () => confirmPickup(key)},
+          ]);
+    }
+
+
+    const confirmPickup = (storeId) => {
+        onAccept("pickup", item, storeId )
+    }
+
+
+    const updateOnlocation = () => {
+        onAccept("onlocation", item)
+    }
+
     return (
         <>
-            <View style={{ marginBottom: 15, paddingHorizontal: 1 }}>
-                <Text style={styles.dateText}>{item?.delivery_date}</Text>
+            <Animated.View style={{ marginBottom: 15, paddingHorizontal: 1 }}>
+                <Text style={styles.dateText}>{dayjs(item?.delivery_date, "YYYY-MM-DD HH:mm:ss").format("DD-MM-YYYY hh:mm A") }</Text>
                 <View key={item?.id} style={styles.container}>
                     <View style={styles.containerHead}>
                         <View style={{ flexDirection: 'row' }}>
@@ -107,11 +101,11 @@ const CommonOrderCard = memo(({ item, currentTab }) => {
                         </View>} */}
                         {item?.status === 'complete' && <CommonStatusCard label={'Completed'} bg='#BCFFC8' labelColor={'#07AF25'} />}
                     </View>
-                    {currentTab === 0 && item?.store?.map((item) => (
-                        <CommonStoreName item={item} key={item?.id} />
+                    {currentTab === 0 && item?.store?.map((items) => (
+                        <CommonStoreName item={items} key={items?._id}  />
                     ))}
-                    {currentTab === 1 && item?.store?.map((item) => (
-                        <CommonStoreName item={item} key={item?.id} currentTab={currentTab} onpress={openModal} />
+                    {currentTab === 1 && item?.store?.map((items) => (
+                        <CommonStoreName item={items} key={items?._id} status={item?.status} currentTab={currentTab} orderPicked={orderPicked} />
                     ))}
                     {currentTab === 1 ?
                         <CustomerNameLocation
@@ -156,12 +150,17 @@ const CommonOrderCard = memo(({ item, currentTab }) => {
                         label={'Accept Order'} bg='#576FD0' mt={8} mx={8}
                     />}
 
+                    {item?.status === 'onTheWay' && <CustomButton
+                        onPress={updateOnlocation}
+                        label={'On Location'} bg='#58D36E' mt={8} mx={8}
+                    />}
+
                     {item?.status === 'active' && <CustomButton
                         onPress={openModal}
                         label={'Complete Delivery'} bg='#58D36E' mt={8} mx={8}
                     />}
                 </View>
-            </View>
+            </Animated.View>
 
 
 
