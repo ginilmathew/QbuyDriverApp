@@ -19,9 +19,9 @@ const ImageUploadScreen = ({ navigation }) => {
 	const [filePath, setFilePath] = useState(null);
 	const [loading, setLoading] = useState(false)
 	const [location, setLocation] = useState(null)
-	const { user } = useContext(AuthContext)
+	const { userData } = useContext(AuthContext)
 
-	reactotron.log(user, "DTA")
+	reactotron.log(userData, "DTA")
 
 
 	const currentDate = dayjs().format('YYYY-MM-DD')
@@ -133,7 +133,7 @@ const ImageUploadScreen = ({ navigation }) => {
 	const getStatus = async () => {
 
 		const datas = {
-			user_id: user?._id,
+			user_id: userData?.user_id,
 			online_status: "online"
 		};
 
@@ -176,7 +176,7 @@ const ImageUploadScreen = ({ navigation }) => {
 					type: 'success',
 					text1: 'Attendance Added'
 				});
-				navigation.navigate('Menu')
+				navigation.goBack()
 				getStatus()
 			}
 		}
@@ -199,6 +199,10 @@ const ImageUploadScreen = ({ navigation }) => {
 	const onLogin = useCallback(() => {
 		navigation.navigate('Login')
 	}, [])
+
+	const goBack = useCallback(() => {
+        navigation.goBack()
+    }, [])
 
 
 
@@ -255,11 +259,9 @@ const ImageUploadScreen = ({ navigation }) => {
 					loading={loading}
 					disabled={!filePath || loading ? true : false}
 				/>
-				<Text
-					style={styles.unableSubmit}
-				>Unable to submit picture?</Text>
-				<TouchableOpacity onPress={onLogin}>
-					<Text style={styles.textBold}>{"Return to Login"}</Text>
+				<Text style={styles.unableSubmit}>Unable to submit picture?</Text>
+				<TouchableOpacity onPress={goBack}>
+					<Text style={styles.textBold}>{"Go Back"}</Text>
 				</TouchableOpacity>
 			</ScrollView>
 		</CommonAuthBg>

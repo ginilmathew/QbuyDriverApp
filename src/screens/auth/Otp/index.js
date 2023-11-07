@@ -19,7 +19,7 @@ const Otp = ({ navigation, route }) => {
 
 	const [loading, setLoading] = useState(false)
 
-	const { setUser } = useContext(AuthContext)
+	const { setUser, getProfileDetails } = useContext(AuthContext)
 	const { mobile } = route?.params
 
 	const schema = yup.object({
@@ -52,7 +52,8 @@ const Otp = ({ navigation, route }) => {
 				await AsyncStorage.setItem("_id", _id)
 				await AsyncStorage.setItem("token", data?.access_token)
 				setUser(data?.user)
-				navigation.navigate('ImageUploadScreen')
+				navigation.navigate('Menu')
+				getProfileDetails()
 
 			} else {
                 throw "Internal server error"

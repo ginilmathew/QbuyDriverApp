@@ -5,7 +5,7 @@ import CommonStoreDetails from './CommonStoreDetails'
 import reactotron from 'reactotron-react-native'
 import CustomButton from '../../Components/CustomButton'
 
-const CommonStoreName = memo(({ item, currentTab, orderPicked, status }) => {
+const CommonStoreName = memo(({ item, currentTab, orderPicked, status, cusStatus }) => {
 
     reactotron.log(item, "Name")
 
@@ -16,7 +16,7 @@ const CommonStoreName = memo(({ item, currentTab, orderPicked, status }) => {
     })
 
     const onPress = () => {
-        console.log({key: item?._id})
+        console.log({ key: item?._id })
         orderPicked(item?._id)
     }
 
@@ -45,13 +45,18 @@ const CommonStoreName = memo(({ item, currentTab, orderPicked, status }) => {
             </View>
             {showItems &&
                 <>
-                    <CommonStoreDetails item={item}/>
+                    <CommonStoreDetails item={item} currentTab={currentTab}/>
                 </>
             }
-            {(currentTab === 1 && status === "active") && <CustomButton
-                        onPress={onPress}
-                        label={'Pickup Order'} bg='#CEBB37' mt={8} mx={8}
-                    />}
+            {(currentTab === 1 && status === "ready") && <CustomButton
+                onPress={onPress}
+                label={'Pickup Order'} bg='#CEBB37' mt={8} mx={8}
+            />}
+
+            {(currentTab === 1 && cusStatus === "cancelled") && <CustomButton
+                onPress={onPress}
+                label={'Return Order'} bg='#FF7B7B' mt={8} mx={8}
+            />}
 
             {/* {showItems && <>
                         {item?.product_details?.map((item, index) => <CommonStoreDetails item={item} key={index} />)}

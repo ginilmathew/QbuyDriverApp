@@ -5,7 +5,7 @@ import CommonItems from './CommonItems'
 import reactotron from 'reactotron-react-native'
 
 
-const CommonStoreDetails = memo(({ item }) => {
+const CommonStoreDetails = memo(({ item, currentTab }) => {
 
     reactotron.log(item, "store")
     const { width } = useWindowDimensions()
@@ -16,12 +16,12 @@ const CommonStoreDetails = memo(({ item }) => {
                     <Image style={{ width: 20, height: 20, marginLeft: 10, marginRight: 5 }} source={(require('../../Images/location2.png'))} alt='img' />
                     <Text style={styles.mediumText}>{item?.store_address}</Text>
                 </View>
-                <View style={{ marginRight: 10 }}>
+                {currentTab === 1 ? (<View style={{ marginRight: 10 }}>
                     <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={{ fontFamily: "Poppins-Medium", fontSize: 12, color: "#2EA10C" }}>View Map</Text>
                         <Image style={{ width: 15, height: 15, marginLeft: 5, marginRight: 5 }} source={(require('../../Images/arrow.png'))} alt='img' />
                     </TouchableOpacity>
-                </View>
+                </View>) : null}
             </View>
             <View style={styles.itemBox}>
                 <View style={styles.itemHeader}>
@@ -32,10 +32,10 @@ const CommonStoreDetails = memo(({ item }) => {
                         <Text style={styles.boldText}>{'Qty'}</Text>
                     </View>
                     {item?.account_type === "Ready Cash" ? (<View style={{ flex: 0.38 }}>
-                        <Text style={styles.boldText}>{'Regular Price'}</Text>
+                        <Text style={styles.boldText}>{'Seller Price'}</Text>
                     </View>) : null}
                     <View style={{ flex: (item?.account_type === "Ready Cash") ? 0.32 : 0.14 }}>
-                        <Text style={styles.boldText}>{item?.account_type === "Ready Cash" ? 'Seller Price' : 'Price'}</Text>
+                        <Text style={styles.boldText}>{item?.account_type === "Ready Cash" ? 'Regular Price' : 'Price'}</Text>
                     </View>
                 </View>
                 {item?.product_details?.map((items, index) => (<CommonItems item={items} key={index} type={item?.account_type}/>))}

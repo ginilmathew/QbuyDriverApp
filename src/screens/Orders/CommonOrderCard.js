@@ -67,28 +67,31 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
     const orderPicked = (key) => {
         Alert.alert('Warning?', 'Are you sure you want to change this order to pickup?', [
             {
-              text: 'Cancel',
-              //onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
+                text: 'Cancel',
+                //onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
             },
-            {text: 'OK', onPress: () => confirmPickup(key)},
-          ]);
+            { text: 'OK', onPress: () => confirmPickup(key) },
+        ]);
     }
 
 
     const confirmPickup = (storeId) => {
-        onAccept("pickup", item, storeId )
+        onAccept("pickup", item, storeId)
     }
-
 
     const updateOnlocation = () => {
         onAccept("onlocation", item)
     }
 
+    const updateCompleted = () => {
+        onAccept("completed", item)
+    }
+
     return (
         <>
             <Animated.View style={{ marginBottom: 15, paddingHorizontal: 1 }}>
-                <Text style={styles.dateText}>{dayjs(item?.delivery_date, "YYYY-MM-DD HH:mm:ss").format("DD-MM-YYYY hh:mm A") }</Text>
+                <Text style={styles.dateText}>{dayjs(item?.delivery_date, "YYYY-MM-DD HH:mm:ss").format("DD-MM-YYYY hh:mm A")}</Text>
                 <View key={item?.id} style={styles.container}>
                     <View style={styles.containerHead}>
                         <View style={{ flexDirection: 'row' }}>
@@ -99,19 +102,27 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
                             <Text style={styles.reassignLabel}>{"Order reassign time  "}</Text>
                             <Text style={styles.countDouwn}>{"00:59"}</Text>
                         </View>} */}
-                        {item?.status === 'complete' && <CommonStatusCard label={'Completed'} bg='#BCFFC8' labelColor={'#07AF25'} />}
+                        {item?.status === 'completed' && <CommonStatusCard label={'Completed'} bg='#BCFFC8' labelColor={'#07AF25'} />}
                     </View>
                     {currentTab === 0 && item?.store?.map((items) => (
-                        <CommonStoreName item={items} key={items?._id}  />
+                        <CommonStoreName item={items} key={items?._id} />
                     ))}
                     {currentTab === 1 && item?.store?.map((items) => (
-                        <CommonStoreName item={items} key={items?._id} status={item?.status} currentTab={currentTab} orderPicked={orderPicked} />
+                        <CommonStoreName item={items} key={items?._id} status={item?.status} cusStatus={item?.customer_status} currentTab={currentTab} orderPicked={orderPicked} />
                     ))}
-                    {currentTab === 1 ?
+                    {currentTab === 2 && item?.store?.map((items) => (
+                        <CommonStoreName item={items} key={items?._id} />
+                    ))}
+                    {currentTab === 1 || currentTab === 2 ?
                         <CustomerNameLocation
                             customerName={item?.customer_details?.customer_name}
                             customerLocation={item?.customer_details?.customer_address?.area?.address}
                         /> : null}
+                    {item?.customer_status === "cancelled" ?(<View style={{ flexDirection: 'row', marginVertical: 3, marginHorizontal: 10 }}>
+                        <Text style={styles.regularText}>{'Status: '}</Text>
+                        <Text style={styles.semiBoldText}>{"Cancelled"}</Text>
+                    </View>) : null
+                    }
                     {/* {item?.status === 'active' || item?.status === 'complete' ?
                         <CustomerNameLocation
                             customerName={item?.customerName}
@@ -127,10 +138,10 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
                         {item?.hotel?.map((item, index) => <CommonStoreDetails item={item} key={index} />)}
                     </>} */}
 
-                    <TouchableOpacity style={styles.customerLoc}>
+                    {currentTab === 1 ? (<TouchableOpacity style={styles.customerLoc}>
                         <Text style={{ marginRight: 8, fontFamily: 'Poppins-Medium', color: '#2EA10C', fontSize: 12 }}>Customer Location</Text>
                         <Image style={{ width: 15, height: 15 }} source={(require('../../Images/arrow.png'))} alt='img' />
-                    </TouchableOpacity>
+                    </TouchableOpacity>) : null}
 
                     <View style={{ paddingHorizontal: 10, paddingVertical: 5 }}>
                         <View style={styles.box}>
@@ -155,10 +166,15 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
                         label={'On Location'} bg='#58D36E' mt={8} mx={8}
                     />}
 
-                    {item?.status === 'active' && <CustomButton
+                    {item?.status === 'onLocation' && "customer_status" in item !== true && <CustomButton
+                        onPress={updateCompleted}
+                        label={'Complete Order'} bg='#58D36E' mt={8} mx={8}
+                    />}
+
+                    {/* {item?.status === 'active' && <CustomButton
                         onPress={openModal}
                         label={'Complete Delivery'} bg='#58D36E' mt={8} mx={8}
-                    />}
+                    />} */}
                 </View>
             </Animated.View>
 
@@ -296,6 +312,16 @@ const styles = StyleSheet.create({
         borderStyle: 'dashed',
         borderColor: '#E6E6E6',
         padding: 10,
+    },
+    regularText: {
+        fontFamily: 'Poppins-Regular',
+        color: '#23233C',
+        fontSize: 10
+    },
+    semiBoldText: {
+        fontFamily: 'Poppins-SemiBold',
+        color: 'red',
+        fontSize: 10
     }
 
 })

@@ -64,13 +64,16 @@ const ActiveOrders = () => {
         else if(mode === "onlocation"){
             mutation.mutate({ order_id: item?._id, status: "onLocation" })
         }
+        else if(mode === "completed"){
+            mutation.mutate({ order_id: item?._id, status: "completed" })
+        }
         
     }
 
 
     const renderCard = ({ item }) => {
         return (
-            <CommonOrderCard key={item?.id} item={item} currentTab={1}  onAccept={updateOrder} />
+            <CommonOrderCard key={item?.id} item={item} currentTab={1} onAccept={updateOrder} />
         )
     }
 
