@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions, Modal, } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions, Modal, Platform, Linking, } from 'react-native'
 import React, { useState, memo, useCallback } from 'react'
 import CountCircle from '../../Components/CountCircle'
 import CommonItems from './CommonItems'
@@ -9,6 +9,20 @@ const CommonStoreDetails = memo(({ item, currentTab }) => {
 
     reactotron.log(item, "store")
     const { width } = useWindowDimensions()
+
+
+     
+        // var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';
+        // var url = scheme + `${item?.vendor_location?.[0]?.lat},${item?.vendor_location?.[0]?.lng}`;
+        // Linking.openURL(url);
+        const openGoogleMaps = () => {
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${item?.vendor_location?.[0]?.lat},${item?.vendor_location?.[0]?.lng}`;
+            Linking.openURL(url);
+          };
+      
+      
+
+
     return (
         <View key={item?.id} style={styles.container}>
             <View style={{ flexDirection: 'row', justifyContent: "space-between", marginBottom: 3, alignItems: 'center' }}>
@@ -17,7 +31,7 @@ const CommonStoreDetails = memo(({ item, currentTab }) => {
                     <Text style={styles.mediumText}>{item?.store_address}</Text>
                 </View>
                 {currentTab === 1 ? (<View style={{ marginRight: 10 }}>
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} onPress={openGoogleMaps}>
                         <Text style={{ fontFamily: "Poppins-Medium", fontSize: 12, color: "#2EA10C" }}>View Map</Text>
                         <Image style={{ width: 15, height: 15, marginLeft: 5, marginRight: 5 }} source={(require('../../Images/arrow.png'))} alt='img' />
                     </TouchableOpacity>
