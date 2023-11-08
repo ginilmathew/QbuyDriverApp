@@ -3,7 +3,7 @@ import React from 'react'
 
 const CustomerNameLocation = ({ customerName, customerLocation, customerNumber, customerComments, onpress, currentTab }) => {
     return (
-        <View style={{ paddingHorizontal: 10, marginTop: 10, marginBottom: 3, flexDirection: 'row' }}>
+        <View style={{ paddingHorizontal: 10, marginTop: 10, marginBottom: 3, flexDirection: 'row', justifyContent: "space-between" }}>
             <View>
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={styles.regularText}>{'Customer Name : '}</Text>
@@ -22,7 +22,7 @@ const CustomerNameLocation = ({ customerName, customerLocation, customerNumber, 
                     <Text style={styles.addressText}>{customerComments}</Text>
                 </View>
             </View>
-            {currentTab === 1 ? (<View style={{ paddingHorizontal: 10, marginTop: 10, marginBottom: 3 }}>
+            {currentTab === 1 ? (<View style={{ paddingHorizontal: 10, marginTop: 10, marginBottom: 3, alignSelf: "center" }}>
                 <TouchableOpacity onPress={onpress}>
                 <Image style={styles.call} source={require('../../Images/phone.png')} resizeMode='contain' />
                 </TouchableOpacity>
