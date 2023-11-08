@@ -1,5 +1,5 @@
 import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions } from 'react-native'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import Header from '../../Components/Header'
 import { BlurView } from "@react-native-community/blur";
 import TotalCard from './TotalCard';
@@ -8,14 +8,22 @@ import UserImageName from './UserImageName';
 import CommonOrderCard from '../Orders/CommonOrderCard';
 import dark from '../../Images/dark.png'
 import light from '../../Images/light.png'
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { homeDetails } from '../../Api/homeapi';
 import { useFocusNotifyOnChangeProps } from '../../hooks/useFocusNotifyOnChangeProps';
 import reactotron from 'reactotron-react-native';
+import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
+import { updateOrderStatus } from '../../Api/orders';
+import Toast from 'react-native-toast-message';
+import AuthContext from '../../contexts/Auth';
+import { IMG_URL } from '../../config/constants';
 
 
 const Home = ({ navigation, }) => {
     const{height,width} = useWindowDimensions()
+    const { userData } = useContext(AuthContext)
+
+    reactotron.log(userData, "USER")
 
     const notifyOnChangeProps = useFocusNotifyOnChangeProps();
 
@@ -28,7 +36,39 @@ const Home = ({ navigation, }) => {
 
     reactotron.log(data, "TESTITEM!")
 
-    //useRefreshOnFocus(refetch)
+    useRefreshOnFocus(refetch)
+
+    const mutation = useMutation({
+        mutationFn: updateOrderStatus,
+    })
+
+    useRefreshOnFocus(refetch)
+
+
+    useEffect(() => {
+        if(mutation.isSuccess){
+            Toast.show({
+                type: 'success',
+                text1: 'Order Accepted successfully'
+            })
+            refetch()
+        }
+
+        if(mutation?.isError){
+            Toast.show({
+                type: 'error',
+                text1: mutation?.error
+            })
+        }
+
+        if(error){
+            Toast.show({
+                type: 'error',
+                text1: error
+            })
+        }
+
+    }, [mutation.isSuccess, mutation?.isError, isError])
 
 
     // const orders = [
@@ -125,6 +165,10 @@ const Home = ({ navigation, }) => {
         navigation.navigate('Orders')
     }, [])
 
+    const updateOrder = (item) => {
+        mutation.mutate({ order_id: item?._id, status: "active" })
+    }
+
     return (
         <>
             <Header onPress={openDrawer} />
@@ -133,9 +177,9 @@ const Home = ({ navigation, }) => {
                 style={{ backgroundColor: '#fff', paddingHorizontal: 15, marginBottom:80}} 
                 showsVerticalScrollIndicator={false}
             >
-                <UserImageName/>
-                <TotalCard label={'Orders Today'} count={251} bg='#58D36E' bgImg={light}/>
-                <TotalCard label={'Amount Earned'} count={'₹ 5250'} bg='#58D39D' bgImg={dark}/>
+                <UserImageName name={userData?.name} src={userData?.image ? ({ uri: IMG_URL + userData?.image }) : (require('../../Images/drawerLogo.png'))}/>
+                <TotalCard label={'Orders Today'} count={data?.total_order_count} bg='#58D36E' bgImg={light}/>
+                <TotalCard label={'Amount Earned'} count={data?.total_order_payment} bg='#58D39D' bgImg={dark}/>
                 <View style={styles.newOrders}>
                     <CommonTexts label={'New Orders'} fontSize={18} />
                     <TouchableOpacity onPress={ViewAllOrders}>
@@ -143,7 +187,7 @@ const Home = ({ navigation, }) => {
                     </TouchableOpacity>
                 </View>
                 {data?.orders?.map((item)=>(
-                    <CommonOrderCard key={item?.id} item={item}/>
+                    <CommonOrderCard key={item?.id} item={item} currentTab={0} onAccept={updateOrder}/>
                 ))}
             </ScrollView>
             </View>
