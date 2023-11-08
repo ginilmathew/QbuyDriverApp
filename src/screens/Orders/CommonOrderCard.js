@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions, Modal, Alert, } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions, Modal, Alert, Platform, Linking, } from 'react-native'
 import React, { useState, memo, useCallback } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native';
@@ -19,7 +19,7 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
 
     reactotron.log(item, "Card")
 
-    const { width } = useWindowDimensions()
+    const { width } = useWindowDimensions();
 
     const navigation = useNavigation();
     //const [showItems, setShowItems] = useState(false)
@@ -119,6 +119,17 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
     
     }
 
+
+    let customerLocation = item?.customer_details?.customer_address?.area;
+
+
+
+    const openGpsCustomer = () => {
+        const url = `https://www.google.com/maps/dir/?api=1&destination=${customerLocation?.latitude},${customerLocation?.longitude}`;
+        Linking.openURL(url);
+      }
+      
+
     return (
         <>
             <Animated.View style={{ marginBottom: 15, paddingHorizontal: 1 }}>
@@ -169,7 +180,7 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
                         {item?.hotel?.map((item, index) => <CommonStoreDetails item={item} key={index} />)}
                     </>} */}
 
-                    {currentTab === 1 ? (<TouchableOpacity style={styles.customerLoc}>
+                    {currentTab === 1 ? (<TouchableOpacity style={styles.customerLoc} onPress={openGpsCustomer}>
                         <Text style={{ marginRight: 8, fontFamily: 'Poppins-Medium', color: '#2EA10C', fontSize: 12 }}>Customer Location</Text>
                         <Image style={{ width: 15, height: 15 }} source={(require('../../Images/arrow.png'))} alt='img' />
                     </TouchableOpacity>) : null}
