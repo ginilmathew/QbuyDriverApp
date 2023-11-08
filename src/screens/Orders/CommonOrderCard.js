@@ -104,7 +104,7 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
             },
             { text: 'OK', onPress: () => onAccept("onlocation", item) },
         ]);
-        
+
     }
 
     const updateCompleted = () => {
@@ -116,7 +116,7 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
             },
             { text: 'OK', onPress: () => onAccept("completed", item) },
         ]);
-    
+
     }
 
 
@@ -127,8 +127,14 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
     const openGpsCustomer = () => {
         const url = `https://www.google.com/maps/dir/?api=1&destination=${customerLocation?.latitude},${customerLocation?.longitude}`;
         Linking.openURL(url);
-      }
-      
+    }
+
+    const dialCall = () => {
+        let phoneNumber = '';
+        if (Platform.OS === 'android') { phoneNumber = `tel:${item?.customer_details?.mobile}`; }
+        else { phoneNumber = `telprompt:${item?.customer_details?.mobile}`; }
+        Linking.openURL(phoneNumber);
+    };
 
     return (
         <>
@@ -150,7 +156,7 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
                         <CommonStoreName item={items} key={items?._id} />
                     ))}
                     {currentTab === 1 && item?.store?.map((items) => (
-                        <CommonStoreName item={items} key={items?._id} status={item?.status} cusStatus={item?.customer_status} currentTab={currentTab} orderPicked={orderPicked} orderReturned={orderReturned}/>
+                        <CommonStoreName item={items} key={items?._id} status={item?.status} cusStatus={item?.customer_status} currentTab={currentTab} orderPicked={orderPicked} orderReturned={orderReturned} />
                     ))}
                     {currentTab === 2 && item?.store?.map((items) => (
                         <CommonStoreName item={items} key={items?._id} />
@@ -159,8 +165,14 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
                         <CustomerNameLocation
                             customerName={item?.customer_details?.customer_name}
                             customerLocation={item?.customer_details?.customer_address?.area?.address}
+                            customerNumber={item?.customer_details?.mobile}
+                            customerComments={
+                                item?.customer_details?.customer_address?.comments ? item?.customer_details?.customer_address?.comments : "No Comments"
+                            }
+                            onpress={dialCall}
+                            currentTab={currentTab}
                         /> : null}
-                    {item?.customer_status === "cancelled" ?(<View style={{ flexDirection: 'row', marginVertical: 3, marginHorizontal: 10 }}>
+                    {item?.customer_status === "cancelled" ? (<View style={{ flexDirection: 'row', marginVertical: 3, marginHorizontal: 10 }}>
                         <Text style={styles.regularText}>{'Status: '}</Text>
                         <Text style={styles.semiBoldText}>{"Cancelled"}</Text>
                     </View>) : null

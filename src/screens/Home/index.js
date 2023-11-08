@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions, RefreshControl } from 'react-native'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import Header from '../../Components/Header'
 import { BlurView } from "@react-native-community/blur";
@@ -71,92 +71,6 @@ const Home = ({ navigation, }) => {
     }, [mutation.isSuccess, mutation?.isError, isError])
 
 
-    // const orders = [
-    //     {
-    //         id:'1',
-    //         customerName: 'Raj',
-    //         addr: 'Neendakara - Chinnakkada Rd, Kavanad, Kollam, Kerala 691003',
-    //         name:'#10765',
-    //         hotel : [
-    //             {
-    //                 id:'1',
-    //                 name:'Aalife Restaurant',
-    //                 location: 'Neendakara - Chinnakkada Rd, Kavanad, Kollam, Kerala 691003',
-    //                 food : [
-    //                     {
-    //                         id:'1',
-    //                         name:'Chicken Biriyani',
-    //                         qty: '2',
-    //                         price: '520'
-    //                     },
-    //                     {
-    //                         id:'2',
-    //                         name:'Mutton Biriyani',
-    //                         qty: '3',
-    //                         price: '800'
-    //                     },
-    //                 ],
-
-    //             },
-    //             {
-    //                 id:'2',
-    //                 name:'Aariyas Vegetarian Restaurant',
-    //                 location: 'Kottiyam, Kollam, Kerala 691003',
-    //                 food : [
-    //                     {
-    //                         id:'1',
-    //                         name:'Meals',
-    //                         qty: '1',
-    //                         price: '120'
-    //                     },
-    //                     {
-    //                         id:'2',
-    //                         name:'Fried Rice',
-    //                         qty: '2',
-    //                         price: '500'
-    //                     },
-    //                 ],
-    //             },
-                
-    //         ],
-    //         status: 'new'
-    //     },
-    //     {
-    //         id:'2',
-    //         name:'#87452',
-    //         hotel : [
-    //             {
-    //                 id:'1',
-    //                 name:'Zam Zam Restaurant',
-    //                 location: 'Palaym, TVM , 695101',
-    //                 food : [
-    //                     {
-    //                         id:'1',
-    //                         name:'Chicken Biriyani',
-    //                         qty: '1',
-    //                         price: '130'
-    //                     },
-                     
-    //                 ],
-    //             },
-    //             {
-    //                 id:'2',
-    //                 name:'MRA',
-    //                 location: 'Palaym, TVM , 695101',
-    //                 food : [
-    //                     {
-    //                         id:'2',
-    //                         name:'Fried Rice',
-    //                         qty: '3',
-    //                         price: '600'
-    //                     },
-    //                 ],
-    //             },
-    //         ],
-    //         status: 'new'
-    //     },
-    // ]
-
     const openDrawer = useCallback(() => {
         navigation.openDrawer()
     }, [])
@@ -176,6 +90,8 @@ const Home = ({ navigation, }) => {
             <ScrollView 
                 style={{ backgroundColor: '#fff', paddingHorizontal: 15, marginBottom:80}} 
                 showsVerticalScrollIndicator={false}
+                refreshControl={
+                    <RefreshControl refreshing={isLoading} onRefresh={homeDetails} />}
             >
                 <UserImageName name={userData?.name} src={userData?.image ? ({ uri: IMG_URL + userData?.image }) : (require('../../Images/drawerLogo.png'))}/>
                 <TotalCard label={'Orders Today'} count={data?.total_order_count} bg='#58D36E' bgImg={light}/>
