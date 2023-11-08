@@ -25,7 +25,7 @@ const WorkCard = memo(({item}) => {
     
 
     const goWorkLogs = useCallback(() => {
-        navigation.navigate('WorkLogs')
+        navigation.navigate('WorkLogs', { date: item?.date })
     }, [])
 
     return (
@@ -41,27 +41,27 @@ const WorkCard = memo(({item}) => {
             <View style={styles.totalDetails}>
                 <View style={{ flex: 0.35 }}>
                     <Text style={styles.regularText}>{'Total Orders'}</Text>
-                    <Text style={styles.totalCount}>{'205'}</Text>
+                    <Text style={styles.totalCount}>{item?.total_sales}</Text>
                 </View>
                 <View style={{ flex: 0.35 }}>
                     <Text style={styles.regularText}>{'Total Revenue'}</Text>
-                    <Text style={styles.totalCount}>₹ {'550'}</Text>
+                    <Text style={styles.totalCount}>₹ {item?.total_revenue}</Text>
                 </View>
                 <View style={{ flex: 0.35 }}>
                     <Text style={styles.regularText}>{'Amount Earned'}</Text>
-                    <Text style={styles.totalCount}>₹ {'550'}</Text>
+                    <Text style={styles.totalCount}>₹ {item?.total_amount_earned}</Text>
                 </View>
             </View>
             <View style={styles.loginTimeBox}>
                 <Text style={styles.regularText}>{'Total Logged In Time'}</Text>
-                <Text style={styles.semiboldText}>{'8 hrs 38 mins'}</Text>
+                <Text style={styles.semiboldText}>{item?.total_logged_in_time}</Text>
             </View>
 
-            <CodCollectProgress amount={amount}/>
+            <CodCollectProgress amount={item?.cod_count}/>
 
             <View style={{flexDirection:'row', position:'absolute', alignSelf:'center', alignItems:'center', bottom:4}}>
                 <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 9, color: amount === 1000 ? '#fff' : '#23233C' }}>{'COD Collected : '}</Text>
-                <Text style={{fontFamily: 'Poppins-SemiBold', fontSize: 10, color: amount === 1000 ? '#fff' : '#23233C' }}>{amount} / 1000</Text>
+                <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 10, color: amount === 1000 ? '#fff' : '#23233C' }}>{item?.cod_count} / 1000</Text>
             </View>
 
         </TouchableOpacity>

@@ -6,122 +6,89 @@ import Calendar from "react-native-calendar-range-picker";
 import moment from 'moment';
 import CustomButton from '../../Components/CustomButton';
 import CommonTexts from '../../Components/CommonTexts';
+import CommonInput from '../../Components/CommonInput';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
-const Filter = ({ item, closeFilter, filterAction, selectedDatas }) => {
 
 
-    const { width, height } = useWindowDimensions()
+const Filter = ({ item, closeFilter, onSubmit }) => {
 
-    const [selected, setSelected] = useState('Daily Report')
-
-    const [calendarShow, setCalendarShow] = useState(false);
-    const [dateList, setDateList] = useState([]);
+    const [selected, setSelected] = useState('Daily Report');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
-    const calendarAction = useCallback(() => {
-        setCalendarShow(!calendarShow)
-    })
 
-    const onCaledarChange = useCallback(({ startDate, endDate }) => {
-        let dates = getDates(startDate, endDate)
+    const { width, height } = useWindowDimensions();
+
+    const onCaledarChange = ({ startDate, endDate }) => {
         setStartDate(startDate)
         setEndDate(endDate)
-        setDateList(dates)
-    }, [])
-
-    function getDates(startDate, stopDate) {
-        var dateArray = [];
-        var currentDate = moment(startDate);
-        var stopDate = moment(stopDate);
-        while (currentDate <= stopDate) {
-            dateArray.push(moment(currentDate).format('DD/MM/YYYY'))
-            currentDate = moment(currentDate).add(1, 'days');
-        }
-        return dateArray;
     }
-    
-    const onSubmit = useCallback(() => {
-        filterAction(selected === 'Monthly Report' ? endDate ? moment(dateList).format('DD/MM/YYYY') : moment(startDate).format('DD/MM/YYYY') : selected)
-    })
+
+
 
     return (
-        <View style={styles.filterView}>
+
+        <View style={[styles.filterView, { top: -50 }]}>
             <TouchableOpacity onPress={closeFilter} style={{ alignSelf: 'flex-end', padding: 5, zIndex: 1 }}>
                 <Ionicons name={'close-circle'} size={28} color={'#000'} />
             </TouchableOpacity>
             <CommonTexts textAlign={'center'} label={'Filter'} fontSize={22} mt={-30} mb={-5} />
-            {item && item?.map((res, i)=>
-                (<View  style={styles.filters} key={i}>
-                    <TouchableOpacity
-                        onPress={()=>setSelected(res?.name)}
-                        style={{ flexDirection: 'row', alignItems:'center' }}
-                    >
-                        <Ionicons name={selected === res?.name ? 'ios-radio-button-on' : 'ios-radio-button-off'} color={'#58D36E'} size={17} />
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={styles.textRegular}>{res?.name}</Text>
-                        </View>
+            {item && item?.map((res, i) =>
+            (<View style={styles.filters} key={i}>
+                <TouchableOpacity
+                    onPress={() => setSelected(res?.name)}
+                    style={{ flexDirection: 'row', alignItems: 'center' }}
+                >
+                    <Ionicons name={selected === res?.name ? 'ios-radio-button-on' : 'ios-radio-button-off'} color={'#58D36E'} size={17} />
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={styles.textRegular}>{res?.name}</Text>
+                    </View>
 
-                        {res?.month && <Ionicons name={selected === res?.name ? 'chevron-up' : 'chevron-down'} color='#000' size={20} position='absolute' alignSelf='center' right={10} />}
-
-                    </TouchableOpacity>
-                    {selected === res?.name && res?.month &&
-                        <>
-                            <CommonPicker
-                                onPress={calendarAction}
-                                //bg='#F2F2F2'
-                                icon={<Ionicons name='calendar' color='#5261E0' size={30} />}
-                                mt={5}
-                            >
-                                {startDate ? 
-                                <View style={{ flexDirection: 'row', paddingLeft: 10 }} justifyContent='space-between' >
-                                    {startDate && <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 10, color: '#000' }}>{moment(startDate).format("DD/MM/YYYY")}</Text>}
-                                    {endDate && <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 10, color: startDate == endDate ? "#fff" : "#000" }} > - </Text>}
-                                    {endDate && <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 10, color: '#000' }}>{startDate == endDate ? "" : moment(endDate).format("DD/MM/YYYY")}</Text>}
-                                </View> :
-                                    <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 10, color: '#000', paddingLeft: 10 }}>{'Choose Dates'}</Text>
-                                }
-                            </CommonPicker>
-                            {calendarShow && <View style={{ height: height / 3.5, zIndex: 1, }} >
-                                <Calendar
-                                    onChange={onCaledarChange}
-                                    disabledBeforeToday={true}
-                                    style={{
-                                        // filters: {},
-                                        // monthfilters: {},
-                                        // weekfilters:{},
-                                        monthNameText: { color: '#057EC1', fontWeight: '700' },
-                                        // dayNameText: {},
-                                        // dayText: {},
-                                        // dayTextColor: '#f7f7f7',
-                                        // holidayColor: 'rgba(0,0,0,0.5)',
-                                        todayColor: 'blue',
-                                        // disabledTextColor: '#Hex',
-                                        // selectedDayTextColor: '#Hex',
-                                        // selectedDayBackgroundColor: '#Hex',
-                                        // selectedBetweenDayTextColor: '#Hex',
-                                        // selectedBetweenDayBackgroundTextColor: '#Hex',
-                                    }}
-                                />
-                                {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                                <CustomButton bg={'#FF7B7B'} label='Cancel' width={width / 2.3} onPress={() => setCalendarShow(false)} />
-                                <CustomButton bg={'#58D36E'} label='Confirm' width={width / 2.3} onPress={() => setCalendarShow(false)} />
-                            </View> */}
-                            </View>}
-                        </>
-                    }
-                </View>)
+                </TouchableOpacity>
+            </View>)
             )}
 
+            {
+                selected === 'Date Picker' && (
+                    <View style={styles.datePicker}>
+                        <View style={{ zIndex: 132, height: height / 3, width: '100%' }} >
+                            <Calendar
+                                onChange={onCaledarChange}
+                                // disabledBeforeToday={true}
+                                futureYearRange={1}
+                                style={{
+                                    monthNameText: { color: '#057EC1', fontWeight: '700' },
+                                    container: { width: '100%', height: '100%' },
+                                    // dayNameText: {},
+                                    // dayText: {},
+                                    // dayTextColor: '#f7f7f7',
+                                    // holidayColor: 'rgba(0,0,0,0.5)',
+                                    todayColor: 'blue',
+                                    // disabledTextColor: '#Hex',
+                                    // selectedDayTextColor: '#Hex',
+                                    // selectedDayBackgroundColor: '#Hex',
+                                    // selectedBetweenDayTextColor: '#Hex',
+                                    // selectedBetweenDayBackgroundTextColor: '#Hex',
+                                }}
+                            />
+                        </View>
+                    </View>
+                )
+            }
 
             <CustomButton
-                onPress={onSubmit}
+                onPress={onSubmit({ startDate, endDate, selected })}
                 label={'Apply'} bg='#58D36E'
                 width={170}
                 alignSelf='center'
                 my={10}
             />
         </View>
+
+
     )
 }
 
@@ -133,6 +100,21 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         paddingVertical: 10,
         borderColor: "#F3F3F3"
+    },
+    datePicker: {
+        width: '100%',
+        padding: 20,
+        alignItems: 'center',
+        paddingVertical: 12
+    },
+    dateBtn: {
+        width: '94%',
+        padding: 10,
+        borderRadius: 7,
+        borderWidth: 2,
+    },
+    dateText: {
+        textAlign: 'left'
     },
     textRegular: {
         color: '#23233C',
@@ -152,10 +134,9 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         alignSelf: 'center',
         shadowOffset: { height: 1, width: 1 },
-        elevation: 1,
+        elevation: 10000,
         shadowOpacity: 0.2,
-        position: 'absolute',
-        zIndex: 1,
+        zIndex: 1000,
         top: 70,
         gap: 8
     },

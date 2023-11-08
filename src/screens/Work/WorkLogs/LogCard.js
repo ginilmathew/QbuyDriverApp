@@ -2,21 +2,22 @@ import { StyleSheet, Text, ScrollView, TouchableOpacity, View } from 'react-nati
 import React, { memo, useState } from 'react'
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import moment from 'moment'
 
 const LogCard = memo(({ item }) => {
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.semiboldText}>Order ID {'#10765'}</Text>
-                <Text style={styles.dateText}>{'22/05/2022 10:30am'}</Text>
+                <Text style={styles.semiboldText}>Order ID {item?.order_id}</Text>
+                <Text style={styles.dateText}>{moment(item?.created_at).format('DD-MM-YYYY')}</Text>
             </View>
             <View style={styles.totalDetails}>
                 <Text style={styles.semiboldText}>{'Total Revenue'}</Text>
                 {item?.cod && <View style={{ borderRadius: 5, backgroundColor: '#FFDDDD' }}>
                     <Text style={styles.cod}>COD</Text>
                 </View>}
-                <Text style={styles.boldText}>₹ {'260'}</Text>
+                <Text style={styles.boldText}>₹ {item?.grand_total}</Text>
             </View>
         </View>
     )
