@@ -16,8 +16,10 @@ const CommonStoreDetails = memo(({ item, currentTab }) => {
         // var url = scheme + `${item?.vendor_location?.[0]?.lat},${item?.vendor_location?.[0]?.lng}`;
         // Linking.openURL(url);
         const openGoogleMaps = () => {
-            const url = `https://www.google.com/maps/dir/?api=1&destination=${item?.vendor_location?.[0]?.lat},${item?.vendor_location?.[0]?.lng}`;
-            Linking.openURL(url);
+            
+                const url = `https://www.google.com/maps/dir/?api=1&destination=${item?.vendor_location?.[0]?.lat},${item?.vendor_location?.[0]?.lng}`;
+                Linking.openURL(url);
+        
           };
       
       
@@ -31,10 +33,11 @@ const CommonStoreDetails = memo(({ item, currentTab }) => {
                     <Text style={styles.mediumText}>{item?.store_address}</Text>
                 </View>
                 {currentTab === 1 ? (<View style={{ marginRight: 10 }}>
+                    {item?.vendor_location && item?.vendor_location?.length > 0 &&
                     <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} onPress={openGoogleMaps}>
                         <Text style={{ fontFamily: "Poppins-Medium", fontSize: 12, color: "#2EA10C" }}>View Map</Text>
                         <Image style={{ width: 15, height: 15, marginLeft: 5, marginRight: 5 }} source={(require('../../Images/arrow.png'))} alt='img' />
-                    </TouchableOpacity>
+                    </TouchableOpacity>}
                 </View>) : null}
             </View>
             <View style={styles.itemBox}>
