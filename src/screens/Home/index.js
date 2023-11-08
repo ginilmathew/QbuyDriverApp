@@ -8,97 +8,114 @@ import UserImageName from './UserImageName';
 import CommonOrderCard from '../Orders/CommonOrderCard';
 import dark from '../../Images/dark.png'
 import light from '../../Images/light.png'
+import { useQuery } from '@tanstack/react-query';
+import { homeDetails } from '../../Api/homeapi';
+import { useFocusNotifyOnChangeProps } from '../../hooks/useFocusNotifyOnChangeProps';
+import reactotron from 'reactotron-react-native';
 
 
 const Home = ({ navigation, }) => {
     const{height,width} = useWindowDimensions()
 
+    const notifyOnChangeProps = useFocusNotifyOnChangeProps();
 
-    const orders = [
-        {
-            id:'1',
-            customerName: 'Raj',
-            addr: 'Neendakara - Chinnakkada Rd, Kavanad, Kollam, Kerala 691003',
-            name:'#10765',
-            hotel : [
-                {
-                    id:'1',
-                    name:'Aalife Restaurant',
-                    location: 'Neendakara - Chinnakkada Rd, Kavanad, Kollam, Kerala 691003',
-                    food : [
-                        {
-                            id:'1',
-                            name:'Chicken Biriyani',
-                            qty: '2',
-                            price: '520'
-                        },
-                        {
-                            id:'2',
-                            name:'Mutton Biriyani',
-                            qty: '3',
-                            price: '800'
-                        },
-                    ],
 
-                },
-                {
-                    id:'2',
-                    name:'Aariyas Vegetarian Restaurant',
-                    location: 'Kottiyam, Kollam, Kerala 691003',
-                    food : [
-                        {
-                            id:'1',
-                            name:'Meals',
-                            qty: '1',
-                            price: '120'
-                        },
-                        {
-                            id:'2',
-                            name:'Fried Rice',
-                            qty: '2',
-                            price: '500'
-                        },
-                    ],
-                },
+    const { isLoading, isError, data, error, refetch } = useQuery({
+        queryKey: ['homeData'],
+        queryFn: homeDetails,
+        notifyOnChangeProps
+    })
+
+    reactotron.log(data, "TESTITEM!")
+
+    //useRefreshOnFocus(refetch)
+
+
+    // const orders = [
+    //     {
+    //         id:'1',
+    //         customerName: 'Raj',
+    //         addr: 'Neendakara - Chinnakkada Rd, Kavanad, Kollam, Kerala 691003',
+    //         name:'#10765',
+    //         hotel : [
+    //             {
+    //                 id:'1',
+    //                 name:'Aalife Restaurant',
+    //                 location: 'Neendakara - Chinnakkada Rd, Kavanad, Kollam, Kerala 691003',
+    //                 food : [
+    //                     {
+    //                         id:'1',
+    //                         name:'Chicken Biriyani',
+    //                         qty: '2',
+    //                         price: '520'
+    //                     },
+    //                     {
+    //                         id:'2',
+    //                         name:'Mutton Biriyani',
+    //                         qty: '3',
+    //                         price: '800'
+    //                     },
+    //                 ],
+
+    //             },
+    //             {
+    //                 id:'2',
+    //                 name:'Aariyas Vegetarian Restaurant',
+    //                 location: 'Kottiyam, Kollam, Kerala 691003',
+    //                 food : [
+    //                     {
+    //                         id:'1',
+    //                         name:'Meals',
+    //                         qty: '1',
+    //                         price: '120'
+    //                     },
+    //                     {
+    //                         id:'2',
+    //                         name:'Fried Rice',
+    //                         qty: '2',
+    //                         price: '500'
+    //                     },
+    //                 ],
+    //             },
                 
-            ],
-            status: 'new'
-        },
-        {
-            id:'2',
-            name:'#87452',
-            hotel : [
-                {
-                    id:'1',
-                    name:'Zam Zam Restaurant',
-                    location: 'Palaym, TVM , 695101',
-                    food : [
-                        {
-                            id:'1',
-                            name:'Chicken Biriyani',
-                            qty: '1',
-                            price: '130'
-                        },
+    //         ],
+    //         status: 'new'
+    //     },
+    //     {
+    //         id:'2',
+    //         name:'#87452',
+    //         hotel : [
+    //             {
+    //                 id:'1',
+    //                 name:'Zam Zam Restaurant',
+    //                 location: 'Palaym, TVM , 695101',
+    //                 food : [
+    //                     {
+    //                         id:'1',
+    //                         name:'Chicken Biriyani',
+    //                         qty: '1',
+    //                         price: '130'
+    //                     },
                      
-                    ],
-                },
-                {
-                    id:'2',
-                    name:'MRA',
-                    location: 'Palaym, TVM , 695101',
-                    food : [
-                        {
-                            id:'2',
-                            name:'Fried Rice',
-                            qty: '3',
-                            price: '600'
-                        },
-                    ],
-                },
-            ],
-            status: 'new'
-        },
-    ]
+    //                 ],
+    //             },
+    //             {
+    //                 id:'2',
+    //                 name:'MRA',
+    //                 location: 'Palaym, TVM , 695101',
+    //                 food : [
+    //                     {
+    //                         id:'2',
+    //                         name:'Fried Rice',
+    //                         qty: '3',
+    //                         price: '600'
+    //                     },
+    //                 ],
+    //             },
+    //         ],
+    //         status: 'new'
+    //     },
+    // ]
 
     const openDrawer = useCallback(() => {
         navigation.openDrawer()
@@ -125,7 +142,7 @@ const Home = ({ navigation, }) => {
                         <Text style={styles.viewAllText}>{"View All >>"}</Text>
                     </TouchableOpacity>
                 </View>
-                {orders?.map((item)=>(
+                {data?.orders?.map((item)=>(
                     <CommonOrderCard key={item?.id} item={item}/>
                 ))}
             </ScrollView>

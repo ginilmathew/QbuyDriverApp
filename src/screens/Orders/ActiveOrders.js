@@ -67,6 +67,9 @@ const ActiveOrders = () => {
         else if(mode === "completed"){
             mutation.mutate({ order_id: item?._id, status: "completed" })
         }
+        else if(mode === "return"){
+            mutation.mutate({ order_id: item?._id, status: "orderReturn" })
+        }
         
     }
 

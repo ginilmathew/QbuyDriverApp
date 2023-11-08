@@ -64,14 +64,25 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
     }
 
 
-    const orderPicked = (key) => {
+    const orderPicked = (id) => {
         Alert.alert('Warning?', 'Are you sure you want to change this order to pickup?', [
             {
                 text: 'Cancel',
                 //onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
             },
-            { text: 'OK', onPress: () => confirmPickup(key) },
+            { text: 'OK', onPress: () => confirmPickup(id) },
+        ]);
+    }
+
+    const orderReturned = (id) => {
+        Alert.alert('Warning?', 'Are you sure you want to return this order?', [
+            {
+                text: 'Cancel',
+                //onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            { text: 'OK', onPress: () => confirmReturn(id) },
         ]);
     }
 
@@ -80,12 +91,32 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
         onAccept("pickup", item, storeId)
     }
 
+    const confirmReturn = (storeId) => {
+        onAccept("return", item, storeId)
+    }
+
     const updateOnlocation = () => {
-        onAccept("onlocation", item)
+        Alert.alert('Warning?', 'Are you sure you want to change this order to onlocation?', [
+            {
+                text: 'Cancel',
+                //onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            { text: 'OK', onPress: () => onAccept("onlocation", item) },
+        ]);
+        
     }
 
     const updateCompleted = () => {
-        onAccept("completed", item)
+        Alert.alert('Warning?', 'Are you sure you want to change this order to Completed?', [
+            {
+                text: 'Cancel',
+                //onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            { text: 'OK', onPress: () => onAccept("completed", item) },
+        ]);
+    
     }
 
     return (
@@ -108,7 +139,7 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
                         <CommonStoreName item={items} key={items?._id} />
                     ))}
                     {currentTab === 1 && item?.store?.map((items) => (
-                        <CommonStoreName item={items} key={items?._id} status={item?.status} cusStatus={item?.customer_status} currentTab={currentTab} orderPicked={orderPicked} />
+                        <CommonStoreName item={items} key={items?._id} status={item?.status} cusStatus={item?.customer_status} currentTab={currentTab} orderPicked={orderPicked} orderReturned={orderReturned}/>
                     ))}
                     {currentTab === 2 && item?.store?.map((items) => (
                         <CommonStoreName item={items} key={items?._id} />
