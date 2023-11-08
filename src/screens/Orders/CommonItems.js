@@ -14,10 +14,10 @@ const CommonItems = memo(({item, type}) => {
                 <Text style={styles.mediumText}>{item?.quantity}</Text>
             </View>
             {type === "Ready Cash" ? (<View style={{ flex: 0.40 }}>
-                <Text style={styles.mediumText}>{item?.regular_price}</Text>
+                <Text style={styles.mediumText}>{item?.seller_price}</Text>
             </View>) : null}
             <View style={{ flex: (type === "Ready Cash") ? 0.14 : 0.12 }}>
-                <Text style={styles.mediumText}>{item?.seller_price}</Text>
+                <Text style={styles.mediumText}>{item?.regular_price}</Text>
             </View>
         </View>
     )
