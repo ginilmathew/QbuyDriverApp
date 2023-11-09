@@ -14,7 +14,9 @@ const Profile = ({ navigation, route }) => {
 
     reactotron.log(item, "PIT")
 
-    const {width} = useWindowDimensions()
+    const {width} = useWindowDimensions();
+
+    console.log(item);
     return (
         <>
             <HeaderWithTitle title={'Profile'} backAction />
@@ -33,7 +35,7 @@ const Profile = ({ navigation, route }) => {
 
                         <CommonReadonlyBox 
                             topLabel={'Primary Franchisee'}
-                            label={'Qbuy Kollam'}
+                            label={item?.primary_franchise?.franchise_name}
                         />
                         <CommonReadonlyBox 
                             topLabel={'Secondary Franchisee'}
@@ -62,7 +64,7 @@ const Profile = ({ navigation, route }) => {
                         <View style={{flexDirection:'row',  justifyContent:'space-between'}}>
                             <CommonReadonlyBox 
                                 topLabel={'Bootcash (COD Limit)'}
-                                label={'5000'}
+                                label={item?.boot_cash_limit}
                                 width={width/2.25}
                             />
                             <CommonReadonlyBox 
