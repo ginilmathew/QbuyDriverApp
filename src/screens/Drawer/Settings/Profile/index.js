@@ -1,22 +1,34 @@
 import { StyleSheet, Text, Image, ScrollView, View, useWindowDimensions } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import HeaderWithTitle from '../../../../Components/HeaderWithTitle'
 import CommonTexts from '../../../../Components/CommonTexts'
 import CommonReadonlyBox from '../../../../Components/CommonReadonlyBox'
 import reactotron from 'reactotron-react-native'
 import { IMG_URL } from '../../../../config/constants'
+import { useQuery } from '@tanstack/react-query'
+import customAxios from '../../../../CustomeAxios'
 
+
+const getFranchisis = async () => {
+    return customAxios.get('admin/franchise/list');
+}
 
 const Profile = ({ navigation, route }) => {
 
-    const { item } = route?.params
+    const { item } = route?.params;
+    const [franchiseList, setFranchiseList] = useState([]); 
 
-    reactotron.log(item, "PIT")
+    const { data } = useQuery('franchises', getFranchisis);
+
+    useEffect(() => {
+        if(data) {
+            // setFranchiseList(() => data?.filter)
+        }
+    }, [data])
 
     const {width} = useWindowDimensions();
 
-    console.log(item);
     return (
         <>
             <HeaderWithTitle title={'Profile'} backAction />
@@ -39,7 +51,7 @@ const Profile = ({ navigation, route }) => {
                         />
                         <CommonReadonlyBox 
                             topLabel={'Secondary Franchisee'}
-                            label={'Qbuy Trivandrum'}
+                            label={item?.secondary_franchise}
                         />
                         <CommonReadonlyBox 
                             topLabel={'Phone Number'}

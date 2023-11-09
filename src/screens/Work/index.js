@@ -164,7 +164,6 @@ const Work = ({ navigation }) => {
                 </View>)}
             />
 
-
             
         </>
     )
