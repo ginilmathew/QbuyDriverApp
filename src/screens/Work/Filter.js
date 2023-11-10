@@ -31,63 +31,62 @@ const Filter = ({ item, closeFilter, onSubmit }) => {
 
     return (
 
-        <View style={[styles.filterView, { top: -50 }]}>
-            <TouchableOpacity onPress={closeFilter} style={{ alignSelf: 'flex-end', padding: 5, zIndex: 1 }}>
-                <Ionicons name={'close-circle'} size={28} color={'#000'} />
-            </TouchableOpacity>
-            <CommonTexts textAlign={'center'} label={'Filter'} fontSize={22} mt={-30} mb={-5} />
-            {item && item?.map((res, i) =>
-            (<View style={styles.filters} key={i}>
-                <TouchableOpacity
-                    onPress={() => setSelected(res?.name)}
-                    style={{ flexDirection: 'row', alignItems: 'center' }}
-                >
-                    <Ionicons name={selected === res?.name ? 'ios-radio-button-on' : 'ios-radio-button-off'} color={'#58D36E'} size={17} />
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={styles.textRegular}>{res?.name}</Text>
-                    </View>
-
+            <View style={{ backgroundColor: '#fff', borderRadius: 13, marginTop: 15 }}>
+                <TouchableOpacity onPress={closeFilter} style={{ alignSelf: 'flex-end', padding: 5, zIndex: 1 }}>
+                    <Ionicons name={'close-circle'} size={28} color={'#000'} />
                 </TouchableOpacity>
-            </View>)
-            )}
-
-            {
-                selected === 'Date Picker' && (
-                    <View style={styles.datePicker}>
-                        <View style={{ zIndex: 132, height: height / 3, width: '100%' }} >
-                            <Calendar
-                                onChange={onCaledarChange}
-                                // disabledBeforeToday={true}
-                                futureYearRange={1}
-                                style={{
-                                    monthNameText: { color: '#057EC1', fontWeight: '700' },
-                                    container: { width: '100%', height: '100%' },
-                                    // dayNameText: {},
-                                    // dayText: {},
-                                    // dayTextColor: '#f7f7f7',
-                                    // holidayColor: 'rgba(0,0,0,0.5)',
-                                    todayColor: 'blue',
-                                    // disabledTextColor: '#Hex',
-                                    // selectedDayTextColor: '#Hex',
-                                    // selectedDayBackgroundColor: '#Hex',
-                                    // selectedBetweenDayTextColor: '#Hex',
-                                    // selectedBetweenDayBackgroundTextColor: '#Hex',
-                                }}
-                            />
+                <CommonTexts textAlign={'center'} label={'Filter'} fontSize={22} mt={-30} mb={-5} />
+                {item && item?.map((res, i) =>
+                (<View style={styles.filters} key={i}>
+                    <TouchableOpacity
+                        onPress={() => setSelected(res?.name)}
+                        style={{ flexDirection: 'row', alignItems: 'center' }}
+                    >
+                        <Ionicons name={selected === res?.name ? 'ios-radio-button-on' : 'ios-radio-button-off'} color={'#58D36E'} size={17} />
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textRegular}>{res?.name}</Text>
                         </View>
-                    </View>
-                )
-            }
 
-            <CustomButton
-                onPress={onSubmit({ startDate, endDate, selected })}
-                label={'Apply'} bg='#58D36E'
-                width={170}
-                alignSelf='center'
-                my={10}
-            />
-        </View>
+                    </TouchableOpacity>
+                </View>)
+                )}
 
+                {
+                    selected === 'Date Picker' && (
+                        <View style={styles.datePicker}>
+                            <View style={{ zIndex: 132, height: height / 3, width: '100%' }} >
+                                <Calendar
+                                    onChange={onCaledarChange}
+                                    // disabledBeforeToday={true}
+                                    futureYearRange={1}
+                                    style={{
+                                        monthNameText: { color: '#057EC1', fontWeight: '700' },
+                                        container: { width: '100%', height: '100%' },
+                                        // dayNameText: {},
+                                        // dayText: {},
+                                        // dayTextColor: '#f7f7f7',
+                                        // holidayColor: 'rgba(0,0,0,0.5)',
+                                        todayColor: 'blue',
+                                        // disabledTextColor: '#Hex',
+                                        // selectedDayTextColor: '#Hex',
+                                        // selectedDayBackgroundColor: '#Hex',
+                                        // selectedBetweenDayTextColor: '#Hex',
+                                        // selectedBetweenDayBackgroundTextColor: '#Hex',
+                                    }}
+                                />
+                            </View>
+                        </View>
+                    )
+                }
+
+                <CustomButton
+                    onPress={onSubmit({ startDate, endDate, selected })}
+                    label={'Apply'} bg='#58D36E'
+                    width={170}
+                    alignSelf='center'
+                    my={10}
+                />
+            </View>
 
     )
 }

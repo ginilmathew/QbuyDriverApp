@@ -10,22 +10,38 @@ import { useQuery } from '@tanstack/react-query'
 import customAxios from '../../../../CustomeAxios'
 
 
+
 const getFranchisis = async () => {
-    return customAxios.get('admin/franchise/list');
+    const data = await customAxios.get('admin/franchise/list');
+    return data?.data?.data;
 }
 
 const Profile = ({ navigation, route }) => {
 
+    
     const { item } = route?.params;
+    const { data } = useQuery({
+        queryKey: ['franchise-query'],
+        queryFn: getFranchisis
+    })
     const [franchiseList, setFranchiseList] = useState([]); 
-
-    const { data } = useQuery('franchises', getFranchisis);
 
     useEffect(() => {
         if(data) {
-            // setFranchiseList(() => data?.filter)
+
+            let filteredList = [];
+            for (let i = 0; i < data.length; i++) {
+                for (let j = 0; j < item?.secondary_franchise?.length; j++) {
+                    if (data[i]?._id === item?.secondary_franchise[j]?.franchise_id) {
+                        filteredList.push(data[i]?.franchise_name)
+                    }
+               }
+            }
+
+            setFranchiseList(filteredList);
         }
     }, [data])
+
 
     const {width} = useWindowDimensions();
 
@@ -51,7 +67,7 @@ const Profile = ({ navigation, route }) => {
                         />
                         <CommonReadonlyBox 
                             topLabel={'Secondary Franchisee'}
-                            label={item?.secondary_franchise}
+                            label={franchiseList?.join(', ')}
                         />
                         <CommonReadonlyBox 
                             topLabel={'Phone Number'}
@@ -69,7 +85,7 @@ const Profile = ({ navigation, route }) => {
                             />
                             <CommonReadonlyBox 
                                 topLabel={'Age in Days (From Joining)'}
-                                label={'25'}
+                                label={item?.age_in_days}
                                 width={width/2.25}
                             />
                         </View>

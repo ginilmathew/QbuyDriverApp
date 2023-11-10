@@ -25,13 +25,8 @@ const CommonReadonlyBox = ({topLabel,label, mb, mt, width}) => {
                     paddingLeft:8,
                 }}
             >
-                {
-                    Array.isArray(label) ? 
-                    label.push("kalsjdf;as")?.map(item => (
-                        <Text style={{ fontFamily: 'Poppins-Regular', color: '#23233C', fontSize: 11, flex: 0.95 }} >{item}</Text>
-                    )) : 
-                        <Text style={{ fontFamily: 'Poppins-Regular', color: '#23233C', fontSize: 11, flex: 0.95 }} >{label}</Text>
-                }
+            
+              <Text style={{ fontFamily: 'Poppins-Regular', color: '#23233C', fontSize: 11, flex: 0.95 }} >{label}</Text>
             </View>
         </View>
     )

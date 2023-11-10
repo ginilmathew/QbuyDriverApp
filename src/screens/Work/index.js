@@ -18,7 +18,7 @@ const Work = ({ navigation }) => {
 
     const openDrawer = useCallback(() => {
         navigation.openDrawer()
-    }, [])
+    }, []);
 
     const [showFilter, setShowFilter] = useState(false);
 
@@ -35,6 +35,8 @@ const Work = ({ navigation }) => {
 
     useRefreshOnFocus(refetch);
 
+
+    const { width, height } = useWindowDimensions();
 
     useEffect(() => {
         refetch();
@@ -102,6 +104,7 @@ const Work = ({ navigation }) => {
     return (
         <>
             <HeaderWithTitle title={'Work'} drawerOpen={openDrawer} />
+
             <View style={{ width: '100%', paddingHorizontal: 15, backgroundColor: '#F3F3F3' }}>
                 <CustomButton
                     onPress={openFilter}
@@ -122,6 +125,7 @@ const Work = ({ navigation }) => {
                         onSubmit={onSubmit}
                     />
                 }
+
             </View>
             <FlatList
                 style={{ flex: 1, backgroundColor: '#F3F3F3', paddingHorizontal: 15 }}
