@@ -41,7 +41,6 @@ const App = () => {
     
     useEffect(() => {
         const subscription = AppState.addEventListener('change', onAppStateChange)
-
         return () => subscription.remove()
     }, []);
 
