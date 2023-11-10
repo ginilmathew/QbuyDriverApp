@@ -16,8 +16,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		19E887195C19417F87D78D35 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BBA0E98C0464FBBBE20834D /* Poppins-ExtraBold.ttf */; };
-		1AF9C6F40F53792E87918AA0 /* libPods-QbuyPandaDriverApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43565DF20F26B10F7238ABBB /* libPods-QbuyPandaDriverApp.a */; };
 		31A1D7ED282F46E3BEF49E8C /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F697EA2B8DD423883748C99 /* Quicksand-Medium.ttf */; };
+		32FCBE87EB08AD0BBFA56EBD /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D69033873785E91AEC09D2B5 /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a */; };
 		3A21B262B29248F8A83CE51E /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 224BE23D5C3F4D0B95C42369 /* Montserrat-Bold.ttf */; };
 		41A9E08E723B482184815599 /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB5C9E1C6CCB4D67A5512BE8 /* Quicksand-Light.ttf */; };
 		4965A0DB093E4D949620D52A /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B186B89878B4F5AA346827A /* Poppins-BoldItalic.ttf */; };
@@ -35,9 +35,9 @@
 		924ACA6F030141AC96E287CC /* Nunito-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEE2E00E39404C5790D89834 /* Nunito-Medium.ttf */; };
 		9A12AE6853D74EEEA8E73B00 /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F2A287D94BA45CFA8AFF0EF /* Nunito-ExtraLight.ttf */; };
 		A0DD5252B770454CA01906CD /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BAAA24D65244B8AACF5E1AE /* Quicksand-SemiBold.ttf */; };
-		A18532B15EF9AD2C9848A95C /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1205A20C05535A9AE20B3BD /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a */; };
 		B5F9E1A13F2945619277DBCD /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4867A82EE35F4D84BE772C06 /* Poppins-BlackItalic.ttf */; };
 		B982237B0F9C492DBD518393 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 419D5D51EEF14236A1FC073E /* Nunito-SemiBold.ttf */; };
+		CA8AB9C92CC97182B1F0304C /* libPods-QbuyPandaDriverApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAEF46237342A0961E46A9D2 /* libPods-QbuyPandaDriverApp.a */; };
 		CDABAD51B90F472FA410197B /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F93BBABC43CE49E9A5F3FFE5 /* Montserrat-ExtraBold.ttf */; };
 		D055391709584C5F949C3477 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AC94A02E3114143A33D87B4 /* Poppins-LightItalic.ttf */; };
 		D795A2E16F20456F96588590 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 383CF1B50DD948E3AB07C336 /* Poppins-Thin.ttf */; };
@@ -62,7 +62,6 @@
 		00E356EE1AD99517003FC87E /* QbuyPandaDriverAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QbuyPandaDriverAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* QbuyPandaDriverAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QbuyPandaDriverAppTests.m; sourceTree = "<group>"; };
-		08DB192C6F206D01F04891C5 /* Pods-QbuyPandaDriverApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp.debug.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp.debug.xcconfig"; sourceTree = "<group>"; };
 		0AC94A02E3114143A33D87B4 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-LightItalic.ttf"; path = "../assets/fonts/Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
 		0E2D280536164BB78E481BE0 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-MediumItalic.ttf"; path = "../assets/fonts/Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
 		115D643DF5644E00A170A1EE /* Nunito-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Bold.ttf"; path = "../assets/fonts/Nunito-Bold.ttf"; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		1A0FE17DC9E740DDA71C5E65 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		1B186B89878B4F5AA346827A /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BoldItalic.ttf"; path = "../assets/fonts/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
 		1F056778C2CA40418851502F /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		2052D7D41C07FA6E1E04FFCF /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		224BE23D5C3F4D0B95C42369 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		22D23F0739BB4C31BCD182AC /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		2323D5C2F7C54A2C8CC58354 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Bold.ttf"; path = "../assets/fonts/Quicksand-Bold.ttf"; sourceTree = "<group>"; };
@@ -84,7 +84,6 @@
 		2FD7D78A3348417F9647DE27 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		383CF1B50DD948E3AB07C336 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; };
 		419D5D51EEF14236A1FC073E /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-SemiBold.ttf"; path = "../assets/fonts/Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
-		43565DF20F26B10F7238ABBB /* libPods-QbuyPandaDriverApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QbuyPandaDriverApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4867A82EE35F4D84BE772C06 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BlackItalic.ttf"; path = "../assets/fonts/Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
 		4BAAA24D65244B8AACF5E1AE /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-SemiBold.ttf"; path = "../assets/fonts/Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
 		4BBA0E98C0464FBBBE20834D /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -97,17 +96,18 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = QbuyPandaDriverApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		826098DAF64947A3818F83A7 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.ttf"; path = "../assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		8E01864AD2084AE99D481FE1 /* Nunito-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Light.ttf"; path = "../assets/fonts/Nunito-Light.ttf"; sourceTree = "<group>"; };
-		9E44F6E5216F075BB29D6EA7 /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C1205A20C05535A9AE20B3BD /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAEF46237342A0961E46A9D2 /* libPods-QbuyPandaDriverApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QbuyPandaDriverApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB5D1082A07283D463A50D35 /* Pods-QbuyPandaDriverApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp.debug.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp.debug.xcconfig"; sourceTree = "<group>"; };
 		CBD04102FCA6453C88AAFAC4 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		CC7C734A5B6C40CA9873E4CB /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLight.ttf"; path = "../assets/fonts/Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
-		CE0ABA9FA1BDE151C40FDB4E /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		DD2FBABD1789E08D70E8D331 /* Pods-QbuyPandaDriverApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp.release.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp.release.xcconfig"; sourceTree = "<group>"; };
+		D69033873785E91AEC09D2B5 /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEE2E00E39404C5790D89834 /* Nunito-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Medium.ttf"; path = "../assets/fonts/Nunito-Medium.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ED6FA3C5AC2FE583E57649F1 /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EE33587EA4F345ECB5BC6F14 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Regular.ttf"; path = "../assets/fonts/Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 		F93BBABC43CE49E9A5F3FFE5 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBold.ttf"; path = "../assets/fonts/Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		FB5C9E1C6CCB4D67A5512BE8 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Light.ttf"; path = "../assets/fonts/Quicksand-Light.ttf"; sourceTree = "<group>"; };
+		FD8851CC4D3EA5239C6CE9D5 /* Pods-QbuyPandaDriverApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QbuyPandaDriverApp.release.xcconfig"; path = "Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A18532B15EF9AD2C9848A95C /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a in Frameworks */,
+				32FCBE87EB08AD0BBFA56EBD /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AF9C6F40F53792E87918AA0 /* libPods-QbuyPandaDriverApp.a in Frameworks */,
+				CA8AB9C92CC97182B1F0304C /* libPods-QbuyPandaDriverApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,8 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				43565DF20F26B10F7238ABBB /* libPods-QbuyPandaDriverApp.a */,
-				C1205A20C05535A9AE20B3BD /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a */,
+				BAEF46237342A0961E46A9D2 /* libPods-QbuyPandaDriverApp.a */,
+				D69033873785E91AEC09D2B5 /* libPods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -205,10 +205,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				08DB192C6F206D01F04891C5 /* Pods-QbuyPandaDriverApp.debug.xcconfig */,
-				DD2FBABD1789E08D70E8D331 /* Pods-QbuyPandaDriverApp.release.xcconfig */,
-				9E44F6E5216F075BB29D6EA7 /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig */,
-				CE0ABA9FA1BDE151C40FDB4E /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig */,
+				CB5D1082A07283D463A50D35 /* Pods-QbuyPandaDriverApp.debug.xcconfig */,
+				FD8851CC4D3EA5239C6CE9D5 /* Pods-QbuyPandaDriverApp.release.xcconfig */,
+				ED6FA3C5AC2FE583E57649F1 /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig */,
+				2052D7D41C07FA6E1E04FFCF /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -259,12 +259,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "QbuyPandaDriverAppTests" */;
 			buildPhases = (
-				F5B1E37AD07DF56848F61964 /* [CP] Check Pods Manifest.lock */,
+				F41ED356FDAF9569FB3F3A6F /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				7205D403A47B188F0F214A55 /* [CP] Embed Pods Frameworks */,
-				032A6914DD67FFBD347294EE /* [CP] Copy Pods Resources */,
+				51A46F94854CDE55D05652E9 /* [CP] Embed Pods Frameworks */,
+				84B287CC5CE1FE7B966C854E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -280,14 +280,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "QbuyPandaDriverApp" */;
 			buildPhases = (
-				6F462B7882943249ED4AD2C9 /* [CP] Check Pods Manifest.lock */,
+				3409E2C9FC6AC5106FDA9E73 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				4AF43137A0CD0A270A7BE128 /* [CP] Embed Pods Frameworks */,
-				F0A3399FE1C793D155DDCF96 /* [CP] Copy Pods Resources */,
+				2508CFBCEDECE9BF1048AF6D /* [CP] Embed Pods Frameworks */,
+				904B10BD08EB525FB65B8548 /* [CP] Copy Pods Resources */,
+				53C9C7EC66144BBC7F15DF0B /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
 			);
@@ -402,24 +403,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		032A6914DD67FFBD347294EE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4AF43137A0CD0A270A7BE128 /* [CP] Embed Pods Frameworks */ = {
+		2508CFBCEDECE9BF1048AF6D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -436,7 +420,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6F462B7882943249ED4AD2C9 /* [CP] Check Pods Manifest.lock */ = {
+		3409E2C9FC6AC5106FDA9E73 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -458,7 +442,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7205D403A47B188F0F214A55 /* [CP] Embed Pods Frameworks */ = {
+		51A46F94854CDE55D05652E9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -475,7 +459,37 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F0A3399FE1C793D155DDCF96 /* [CP] Copy Pods Resources */ = {
+		53C9C7EC66144BBC7F15DF0B /* [CP-User] [RNFB] Core Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "[CP-User] [RNFB] Core Configuration";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\nset -e\n\n_MAX_LOOKUPS=2;\n_SEARCH_RESULT=''\n_RN_ROOT_EXISTS=''\n_CURRENT_LOOKUPS=1\n_JSON_ROOT=\"'react-native'\"\n_JSON_FILE_NAME='firebase.json'\n_JSON_OUTPUT_BASE64='e30=' # { }\n_CURRENT_SEARCH_DIR=${PROJECT_DIR}\n_PLIST_BUDDY=/usr/libexec/PlistBuddy\n_TARGET_PLIST=\"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n_DSYM_PLIST=\"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist\"\n\n# plist arrays\n_PLIST_ENTRY_KEYS=()\n_PLIST_ENTRY_TYPES=()\n_PLIST_ENTRY_VALUES=()\n\nfunction setPlistValue {\n  echo \"info:      setting plist entry '$1' of type '$2' in file '$4'\"\n  ${_PLIST_BUDDY} -c \"Add :$1 $2 '$3'\" $4 || echo \"info:      '$1' already exists\"\n}\n\nfunction getFirebaseJsonKeyValue () {\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    ruby -Ku -e \"require 'rubygems';require 'json'; output=JSON.parse('$1'); puts output[$_JSON_ROOT]['$2']\"\n  else\n    echo \"\"\n  fi;\n}\n\nfunction jsonBoolToYesNo () {\n  if [[ $1 == \"false\" ]]; then\n    echo \"NO\"\n  elif [[ $1 == \"true\" ]]; then\n    echo \"YES\"\n  else echo \"NO\"\n  fi\n}\n\necho \"info: -> RNFB build script started\"\necho \"info: 1) Locating ${_JSON_FILE_NAME} file:\"\n\nif [[ -z ${_CURRENT_SEARCH_DIR} ]]; then\n  _CURRENT_SEARCH_DIR=$(pwd)\nfi;\n\nwhile true; do\n  _CURRENT_SEARCH_DIR=$(dirname \"$_CURRENT_SEARCH_DIR\")\n  if [[ \"$_CURRENT_SEARCH_DIR\" == \"/\" ]] || [[ ${_CURRENT_LOOKUPS} -gt ${_MAX_LOOKUPS} ]]; then break; fi;\n  echo \"info:      ($_CURRENT_LOOKUPS of $_MAX_LOOKUPS) Searching in '$_CURRENT_SEARCH_DIR' for a ${_JSON_FILE_NAME} file.\"\n  _SEARCH_RESULT=$(find \"$_CURRENT_SEARCH_DIR\" -maxdepth 2 -name ${_JSON_FILE_NAME} -print | /usr/bin/head -n 1)\n  if [[ ${_SEARCH_RESULT} ]]; then\n    echo \"info:      ${_JSON_FILE_NAME} found at $_SEARCH_RESULT\"\n    break;\n  fi;\n  _CURRENT_LOOKUPS=$((_CURRENT_LOOKUPS+1))\ndone\n\nif [[ ${_SEARCH_RESULT} ]]; then\n  _JSON_OUTPUT_RAW=$(cat \"${_SEARCH_RESULT}\")\n  _RN_ROOT_EXISTS=$(ruby -Ku -e \"require 'rubygems';require 'json'; output=JSON.parse('$_JSON_OUTPUT_RAW'); puts output[$_JSON_ROOT]\" || echo '')\n\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    if ! python3 --version >/dev/null 2>&1; then echo \"python3 not found, firebase.json file processing error.\" && exit 1; fi\n    _JSON_OUTPUT_BASE64=$(python3 -c 'import json,sys,base64;print(base64.b64encode(bytes(json.dumps(json.loads(open('\"'${_SEARCH_RESULT}'\"', '\"'rb'\"').read())['${_JSON_ROOT}']), '\"'utf-8'\"')).decode())' || echo \"e30=\")\n  fi\n\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n\n  # config.app_data_collection_default_enabled\n  _APP_DATA_COLLECTION_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"app_data_collection_default_enabled\")\n  if [[ $_APP_DATA_COLLECTION_ENABLED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseDataCollectionDefaultEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_APP_DATA_COLLECTION_ENABLED\")\")\n  fi\n\n  # config.analytics_auto_collection_enabled\n  _ANALYTICS_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_auto_collection_enabled\")\n  if [[ $_ANALYTICS_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_COLLECTION\")\")\n  fi\n\n  # config.analytics_collection_deactivated\n  _ANALYTICS_DEACTIVATED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_collection_deactivated\")\n  if [[ $_ANALYTICS_DEACTIVATED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_DEACTIVATED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_DEACTIVATED\")\")\n  fi\n\n  # config.analytics_idfv_collection_enabled\n  _ANALYTICS_IDFV_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_idfv_collection_enabled\")\n  if [[ $_ANALYTICS_IDFV_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_IDFV_COLLECTION\")\")\n  fi\n\n  # config.analytics_default_allow_ad_personalization_signals\n  _ANALYTICS_PERSONALIZATION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_ad_personalization_signals\")\n  if [[ $_ANALYTICS_PERSONALIZATION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_PERSONALIZATION\")\")\n  fi\n\n  # config.analytics_registration_with_ad_network_enabled\n  _ANALYTICS_REGISTRATION_WITH_AD_NETWORK=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"google_analytics_registration_with_ad_network_enabled\")\n  if [[ $_ANALYTICS_REGISTRATION_WITH_AD_NETWORK ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_REGISTRATION_WITH_AD_NETWORK_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_REGISTRATION_WITH_AD_NETWORK\")\")\n  fi\n\n  # config.google_analytics_automatic_screen_reporting_enabled\n  _ANALYTICS_AUTO_SCREEN_REPORTING=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"google_analytics_automatic_screen_reporting_enabled\")\n  if [[ $_ANALYTICS_AUTO_SCREEN_REPORTING ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseAutomaticScreenReportingEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_SCREEN_REPORTING\")\")\n  fi\n\n  # config.perf_auto_collection_enabled\n  _PERF_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_auto_collection_enabled\")\n  if [[ $_PERF_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_enabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_AUTO_COLLECTION\")\")\n  fi\n\n  # config.perf_collection_deactivated\n  _PERF_DEACTIVATED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_collection_deactivated\")\n  if [[ $_PERF_DEACTIVATED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_deactivated\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_DEACTIVATED\")\")\n  fi\n\n  # config.messaging_auto_init_enabled\n  _MESSAGING_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"messaging_auto_init_enabled\")\n  if [[ $_MESSAGING_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseMessagingAutoInitEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_MESSAGING_AUTO_INIT\")\")\n  fi\n\n  # config.in_app_messaging_auto_colllection_enabled\n  _FIAM_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"in_app_messaging_auto_collection_enabled\")\n  if [[ $_FIAM_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseInAppMessagingAutomaticDataCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_FIAM_AUTO_INIT\")\")\n  fi\n\n  # config.app_check_token_auto_refresh\n  _APP_CHECK_TOKEN_AUTO_REFRESH=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"app_check_token_auto_refresh\")\n  if [[ $_APP_CHECK_TOKEN_AUTO_REFRESH ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseAppCheckTokenAutoRefreshEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_APP_CHECK_TOKEN_AUTO_REFRESH\")\")\n  fi\n\n  # config.crashlytics_disable_auto_disabler - undocumented for now - mainly for debugging, document if becomes useful\n  _CRASHLYTICS_AUTO_DISABLE_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"crashlytics_disable_auto_disabler\")\n  if [[ $_CRASHLYTICS_AUTO_DISABLE_ENABLED == \"true\" ]]; then\n    echo \"Disabled Crashlytics auto disabler.\" # do nothing\n  else\n    _PLIST_ENTRY_KEYS+=(\"FirebaseCrashlyticsCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"NO\")\n  fi\nelse\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n  echo \"warning:   A firebase.json file was not found, whilst this file is optional it is recommended to include it to configure firebase services in React Native Firebase.\"\nfi;\n\necho \"info: 2) Injecting Info.plist entries: \"\n\n# Log out the keys we're adding\nfor i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n  echo \"    ->  $i) ${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\"\ndone\n\nfor plist in \"${_TARGET_PLIST}\" \"${_DSYM_PLIST}\" ; do\n  if [[ -f \"${plist}\" ]]; then\n\n    # paths with spaces break the call to setPlistValue. temporarily modify\n    # the shell internal field separator variable (IFS), which normally\n    # includes spaces, to consist only of line breaks\n    oldifs=$IFS\n    IFS=\"\n\"\n\n    for i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n      setPlistValue \"${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\" \"${plist}\"\n    done\n\n    # restore the original internal field separator value\n    IFS=$oldifs\n  else\n    echo \"warning:   A Info.plist build output file was not found (${plist})\"\n  fi\ndone\n\necho \"info: <- RNFB build script finished\"\n";
+		};
+		84B287CC5CE1FE7B966C854E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests/Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		904B10BD08EB525FB65B8548 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -492,7 +506,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QbuyPandaDriverApp/Pods-QbuyPandaDriverApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F5B1E37AD07DF56848F61964 /* [CP] Check Pods Manifest.lock */ = {
+		F41ED356FDAF9569FB3F3A6F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -566,7 +580,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E44F6E5216F075BB29D6EA7 /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig */;
+			baseConfigurationReference = ED6FA3C5AC2FE583E57649F1 /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -593,7 +607,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE0ABA9FA1BDE151C40FDB4E /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig */;
+			baseConfigurationReference = 2052D7D41C07FA6E1E04FFCF /* Pods-QbuyPandaDriverApp-QbuyPandaDriverAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -617,7 +631,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08DB192C6F206D01F04891C5 /* Pods-QbuyPandaDriverApp.debug.xcconfig */;
+			baseConfigurationReference = CB5D1082A07283D463A50D35 /* Pods-QbuyPandaDriverApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -645,7 +659,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD2FBABD1789E08D70E8D331 /* Pods-QbuyPandaDriverApp.release.xcconfig */;
+			baseConfigurationReference = FD8851CC4D3EA5239C6CE9D5 /* Pods-QbuyPandaDriverApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
