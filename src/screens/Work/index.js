@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, useWindowDimensions, TouchableOpacity, FlatList, ActivityIndicator, PixelRatio } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, useWindowDimensions, TouchableOpacity, FlatList, ActivityIndicator, PixelRatio, RefreshControl } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import HeaderWithTitle from '../../Components/HeaderWithTitle'
 import CustomButton from '../../Components/CustomButton'
@@ -8,8 +8,9 @@ import Filter from './Filter'
 import customAxios from '../../CustomeAxios'
 import { workList, filterList } from '../../Api/work'
 import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, QueryClient, useQueryClient, QueryCache } from '@tanstack/react-query'
 import Toast from 'react-native-toast-message'
+import { useFocusEffect } from '@react-navigation/native'
 
 
 const getFontSize = size => size / PixelRatio.getFontScale();
@@ -20,38 +21,92 @@ const Work = ({ navigation }) => {
         navigation.openDrawer()
     }, []);
 
+
     const [showFilter, setShowFilter] = useState(false);
 
-    const { refetch, isError, data, error, isLoading, isFetching } = useQuery({
-        queryKey: ['work-query'],
-        queryFn: workList,
-        enabled: false
-    });
 
-    const mutation = useMutation({
-        mutationKey: ['work-query'],
-        mutationFn: filterList
-    });
+    const [workState, setWorkState] = useState();
+    const [loading, setLoading] = useState(false);
 
-    useRefreshOnFocus(refetch);
+    const workList = async () => {
+       try {
+           setLoading(true);
+           const listData = await customAxios.get('rider/work/list');
+           setWorkState(listData?.data?.data);
+       } catch (error) {
+            Toast.show({
+                type: 'error',
+                text1: error
+            })
+       } finally {
+        setLoading(false);
+       }
+    }
 
+    const filterList = async (data) => {
+        try {
+            setLoading(true);
+            const filterList = await customAxios.post('rider/work/list-filter', {
+                "from_date": data?.startDate,
+                "to_date": data?.endDate
+            });
+            setWorkState(filterList?.data?.data);
+        } catch (error) {
+            Toast.show({
+                type: 'error',
+                text1: error
+            })
+        }
+        finally {
+            setLoading(false);
+        }
+    }
+
+
+
+    // const { refetch, error, isError, isFetching, data, isLoading } = useQuery({
+    //     queryKey: ['work-list'],
+    //     queryFn: workList
+    // });
+
+
+    // if(isError) {
+    //     console.log(error);
+    // }
+
+    // const mutation = useMutation({
+    //     mutationFn: filterList,
+    //     onSuccess: (lists, values) => {
+    //         setWorkState(lists);
+    //     }
+    // });
+
+    // useRefreshOnFocus(refetch);
+
+
+    useFocusEffect(useCallback(() => {
+        workList();
+    }, []))
+
+    // { refetch, isError, workList, error, isLoading, isFetching }
+   
 
     const { width, height } = useWindowDimensions();
 
-    useEffect(() => {
-        refetch();
-    }, [])
+    // useEffect(() => {
+    //     refetch();
+    // }, [])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (isError || mutation?.isError) {
-            Toast.show({
-                type: 'error',
-                text1: error || mutation?.error
-            })
-        }
+    //     if (isError || mutation?.isError) {
+    //         Toast.show({
+    //             type: 'error',
+    //             text1: error || mutation?.error
+    //         })
+    //     }
 
-    }, [isError, mutation?.isError]);
+    // }, [isError, mutation?.isError]);
 
 
     let datas = [
@@ -67,6 +122,7 @@ const Work = ({ navigation }) => {
         }
     ]
 
+
     const closeFilter = useCallback(() => setShowFilter(false), []);
 
     const openFilter = useCallback(() => {
@@ -81,18 +137,13 @@ const Work = ({ navigation }) => {
         closeFilter();
 
         if (selected === 'Daily Report') {
-            refetch();
+            workList();
         }
         else if (selected === 'Date Picker') {
 
             if (!endDate) return;
 
-            mutation.mutate(
-                {
-                    "from_date": startDate,
-                    "to_date": endDate
-                }
-            )
+            filterList({ startDate, endDate });
         }
     }
 
@@ -113,7 +164,7 @@ const Work = ({ navigation }) => {
                 />
 
                 {
-                    (isLoading || isFetching) && (
+                    (loading) && (
                         <ActivityIndicator />
                     )
                 }
@@ -129,33 +180,34 @@ const Work = ({ navigation }) => {
             </View>
             <FlatList
                 style={{ flex: 1, backgroundColor: '#F3F3F3', paddingHorizontal: 15 }}
-                data={data?.work_list}
+                data={workState?.work_list}
+                refreshControl={<RefreshControl refreshing={loading} onRefresh={workList}  />}
                 ListHeaderComponent={
                     <View style={styles.summary}>
                         <View style={[styles.container, { borderBottomWidth: 1 }]}>
                             <View style={styles.box}>
                                 <Text style={styles.containerText}>Total Orders</Text>
-                                <Text style={[styles.BoxText, { color: '#1675C8' }]}>{data?.total_order}</Text>
+                                <Text style={[styles.BoxText, { color: '#1675C8' }]}>{workState?.total_order}</Text>
                             </View>
                             <View style={styles.box}>
                                 <Text style={styles.containerText}>Total Earnings</Text>
-                                <Text style={[styles.BoxText, { color: '#2EA10C' }]}>{data?.total_earnings}</Text>
+                                <Text style={[styles.BoxText, { color: '#2EA10C' }]}>{workState?.total_earnings}</Text>
                             </View>
                             <View style={[styles.box, { borderRightWidth: 0 }]}>
                                 <Text style={styles.containerText}>Total Login Hrs</Text>
                                 <Text style={[styles.BoxText, { color: '#C311CA' }]}>{
-                                    data?.total_logged_in_time?.slice(0, data?.total_logged_in_time?.indexOf('hrs'))
+                                    workState?.total_logged_in_time?.slice(0, workState?.total_logged_in_time?.indexOf('hrs'))
                                 }</Text>
                             </View>
                         </View>
                         <View style={styles.container}>
                             <View style={styles.box}>
                                 <Text style={styles.containerText}>Total Denials</Text>
-                                <Text style={[styles.BoxText, { color: '#FC2020' }]}>{data?.total_denial}</Text>
+                                <Text style={[styles.BoxText, { color: '#FC2020' }]}>{workState?.total_denial}</Text>
                             </View>
                             <View style={[styles.box, { borderRightWidth: 0 }]}>
                                 <Text style={styles.containerText}>Total Cancellations</Text>
-                                <Text style={[styles.BoxText, { color: '#A10C0C' }]}>{data?.total_cancelled}</Text>
+                                <Text style={[styles.BoxText, { color: '#A10C0C' }]}>{workState?.total_cancelled}</Text>
                             </View>
                         </View>
                     </View>
@@ -168,7 +220,7 @@ const Work = ({ navigation }) => {
                 </View>)}
             />
 
-            
+
         </>
     )
 }
