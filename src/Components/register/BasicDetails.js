@@ -99,7 +99,7 @@ const BasicDetails = ({ tabChange, onsubmit, data }) => {
                 error={errors.name}
                 fieldName="name"
                 placeholder='Name'
-                inputMode={'numeric'}
+                inputMode={'text'}
                 mt={20}
                 icon={<Ionicons name='person' color='#58D36E' size={25} />}
             />
