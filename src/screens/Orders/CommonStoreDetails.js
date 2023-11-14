@@ -42,17 +42,17 @@ const CommonStoreDetails = memo(({ item, currentTab }) => {
             </View>
             <View style={styles.itemBox}>
                 <View style={styles.itemHeader}>
-                    <View style={{ flex: (item?.account_type === "Ready Cash") ? 0.55 : 0.68 }}>
+                    <View style={{ flex: 0.70 }}>
                         <Text style={styles.boldText}>{'Product'}</Text>
                     </View>
-                    <View style={{ flex: (item?.account_type === "Ready Cash") ? 0.15 : 0.25 }}>
+                    <View style={{ flex: 0.30 }}>
                         <Text style={styles.boldText}>{'Qty'}</Text>
                     </View>
-                    {item?.account_type === "Ready Cash" ? (<View style={{ flex: 0.38 }}>
+                    {/* {item?.account_type === "Ready Cash" ? (<View style={{ flex: 0.38 }}>
                         <Text style={styles.boldText}>{'Seller Price'}</Text>
-                    </View>) : null}
-                    <View style={{ flex: (item?.account_type === "Ready Cash") ? 0.32 : 0.14 }}>
-                        <Text style={styles.boldText}>{item?.account_type === "Ready Cash" ? 'Regular Price' : 'Price'}</Text>
+                    </View>) : null} */}
+                    <View style={{ flex: 0.15 }}>
+                        <Text style={styles.boldText}>{'Price'}</Text>
                     </View>
                 </View>
                 {item?.product_details?.map((items, index) => (<CommonItems item={items} key={index} type={item?.account_type}/>))}

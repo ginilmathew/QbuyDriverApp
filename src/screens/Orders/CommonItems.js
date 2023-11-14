@@ -7,16 +7,16 @@ const CommonItems = memo(({item, type}) => {
     reactotron.log(type, "TYPE")
     return (
         <View style={{ flexDirection: 'row', paddingTop: 5, paddingBottom: 5, paddingLeft: 10,}}>
-            <View style={{ flex: (type === "Ready Cash") ? 0.55 : 0.76 }}>
+            <View style={{ flex: 0.76 }}>
                 <Text style={styles.mediumText}>{item?.name}</Text>
             </View>
-            <View style={{ flex: (type === "Ready Cash") ? 0.22 : 0.26 }}>
+            <View style={{ flex:  0.28 }}>
                 <Text style={styles.mediumText}>{item?.quantity}</Text>
             </View>
-            {type === "Ready Cash" ? (<View style={{ flex: 0.40 }}>
+            {/* {type === "Ready Cash" ? (<View style={{ flex: 0.40 }}>
                 <Text style={styles.mediumText}>{item?.seller_price}</Text>
-            </View>) : null}
-            <View style={{ flex: (type === "Ready Cash") ? 0.14 : 0.12 }}>
+            </View>) : null} */}
+            <View style={{ flex: 0.15 }}>
                 <Text style={styles.mediumText}>{item?.regular_price}</Text>
             </View>
         </View>

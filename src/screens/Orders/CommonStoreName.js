@@ -45,7 +45,7 @@ const CommonStoreName = memo(({ item, currentTab, orderPicked, orderReturned, st
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5, marginHorizontal: 10 }}>
                 <Image style={{ width: 20, height: 20 }} source={(require('../../Images/price.png'))} alt='img' />
-                <Text style={styles.total}>{`₹ ${item?.grandtotal_for_regular_price_for_each_store}`}</Text>
+                <Text style={styles.total}>{`₹ ${item?.grand_total_details}`}</Text>
                 {item?.account_type === "Ready Cash" ? (<Text style={styles.type}>{'Ready Cash'}</Text>) : null}
             </View>
             {showItems &&

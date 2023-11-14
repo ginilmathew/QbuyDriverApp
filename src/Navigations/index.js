@@ -144,7 +144,7 @@ const Navigation = () => {
     // }
 
     const checkLogin = async() => {
-        // await AsyncStorage.clear()
+        //await AsyncStorage.clear()
         const token = await AsyncStorage.getItem("token");
         // reactotron.log({token})
         if(token){
