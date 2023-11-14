@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions, Modal, Alert, } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, useWindowDimensions, Modal, Alert, Platform, Linking, } from 'react-native'
 import React, { useState, memo, useCallback } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native';
@@ -19,7 +19,7 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
 
     reactotron.log(item, "Card")
 
-    const { width } = useWindowDimensions()
+    const { width } = useWindowDimensions();
 
     const navigation = useNavigation();
     //const [showItems, setShowItems] = useState(false)
@@ -64,14 +64,25 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
     }
 
 
-    const orderPicked = (key) => {
+    const orderPicked = (id) => {
         Alert.alert('Warning?', 'Are you sure you want to change this order to pickup?', [
             {
                 text: 'Cancel',
                 //onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
             },
-            { text: 'OK', onPress: () => confirmPickup(key) },
+            { text: 'OK', onPress: () => confirmPickup(id) },
+        ]);
+    }
+
+    const orderReturned = (id) => {
+        Alert.alert('Warning?', 'Are you sure you want to return this order?', [
+            {
+                text: 'Cancel',
+                //onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            { text: 'OK', onPress: () => confirmReturn(id) },
         ]);
     }
 
@@ -80,13 +91,50 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
         onAccept("pickup", item, storeId)
     }
 
+    const confirmReturn = (storeId) => {
+        onAccept("return", item, storeId)
+    }
+
     const updateOnlocation = () => {
-        onAccept("onlocation", item)
+        Alert.alert('Warning?', 'Are you sure you want to change this order to onlocation?', [
+            {
+                text: 'Cancel',
+                //onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            { text: 'OK', onPress: () => onAccept("onlocation", item) },
+        ]);
+
     }
 
     const updateCompleted = () => {
-        onAccept("completed", item)
+        Alert.alert('Warning?', 'Are you sure you want to change this order to Completed?', [
+            {
+                text: 'Cancel',
+                //onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            { text: 'OK', onPress: () => onAccept("completed", item) },
+        ]);
+
     }
+
+
+    let customerLocation = item?.customer_details?.customer_address?.area;
+
+
+
+    const openGpsCustomer = () => {
+        const url = `https://www.google.com/maps/dir/?api=1&destination=${customerLocation?.latitude},${customerLocation?.longitude}`;
+        Linking.openURL(url);
+    }
+
+    const dialCall = () => {
+        let phoneNumber = '';
+        if (Platform.OS === 'android') { phoneNumber = `tel:${item?.customer_details?.mobile}`; }
+        else { phoneNumber = `telprompt:${item?.customer_details?.mobile}`; }
+        Linking.openURL(phoneNumber);
+    };
 
     return (
         <>
@@ -108,7 +156,7 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
                         <CommonStoreName item={items} key={items?._id} />
                     ))}
                     {currentTab === 1 && item?.store?.map((items) => (
-                        <CommonStoreName item={items} key={items?._id} status={item?.status} cusStatus={item?.customer_status} currentTab={currentTab} orderPicked={orderPicked} />
+                        <CommonStoreName item={items} key={items?._id} status={item?.status} cusStatus={item?.customer_status} currentTab={currentTab} orderPicked={orderPicked} orderReturned={orderReturned} />
                     ))}
                     {currentTab === 2 && item?.store?.map((items) => (
                         <CommonStoreName item={items} key={items?._id} />
@@ -117,8 +165,14 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
                         <CustomerNameLocation
                             customerName={item?.customer_details?.customer_name}
                             customerLocation={item?.customer_details?.customer_address?.area?.address}
+                            customerNumber={item?.customer_details?.mobile}
+                            customerComments={
+                                item?.customer_details?.customer_address?.comments ? item?.customer_details?.customer_address?.comments : "No Comments"
+                            }
+                            onpress={dialCall}
+                            currentTab={currentTab}
                         /> : null}
-                    {item?.customer_status === "cancelled" ?(<View style={{ flexDirection: 'row', marginVertical: 3, marginHorizontal: 10 }}>
+                    {item?.customer_status === "cancelled" ? (<View style={{ flexDirection: 'row', marginVertical: 3, marginHorizontal: 10 }}>
                         <Text style={styles.regularText}>{'Status: '}</Text>
                         <Text style={styles.semiBoldText}>{"Cancelled"}</Text>
                     </View>) : null
@@ -138,7 +192,7 @@ const CommonOrderCard = memo(({ item, currentTab, onAccept }) => {
                         {item?.hotel?.map((item, index) => <CommonStoreDetails item={item} key={index} />)}
                     </>} */}
 
-                    {currentTab === 1 ? (<TouchableOpacity style={styles.customerLoc}>
+                    {currentTab === 1 ? (<TouchableOpacity style={styles.customerLoc} onPress={openGpsCustomer}>
                         <Text style={{ marginRight: 8, fontFamily: 'Poppins-Medium', color: '#2EA10C', fontSize: 12 }}>Customer Location</Text>
                         <Image style={{ width: 15, height: 15 }} source={(require('../../Images/arrow.png'))} alt='img' />
                     </TouchableOpacity>) : null}

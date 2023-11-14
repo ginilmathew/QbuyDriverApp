@@ -1,176 +1,226 @@
-import { StyleSheet, Text, View, ScrollView, useWindowDimensions, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, useWindowDimensions, TouchableOpacity, FlatList, ActivityIndicator, PixelRatio, RefreshControl } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import HeaderWithTitle from '../../Components/HeaderWithTitle'
 import CustomButton from '../../Components/CustomButton'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import WorkCard from './WorkCard'
-import CommonModal from '../../Components/CommonModal'
-import CommonTexts from '../../Components/CommonTexts'
-import WeeklyBox from './WeeklyBox'
-import Calendar from "react-native-calendar-range-picker";
-import moment from 'moment'
 import Filter from './Filter'
+import customAxios from '../../CustomeAxios'
+import { workList, filterList } from '../../Api/work'
+import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus'
+import { useMutation, useQuery, QueryClient, useQueryClient, QueryCache } from '@tanstack/react-query'
+import Toast from 'react-native-toast-message'
+import { useFocusEffect } from '@react-navigation/native'
+
+
+const getFontSize = size => size / PixelRatio.getFontScale();
 
 const Work = ({ navigation }) => {
 
-    const { width } = useWindowDimensions()
+    const openDrawer = useCallback(() => {
+        navigation.openDrawer()
+    }, []);
+
 
     const [showFilter, setShowFilter] = useState(false);
 
-    const [filterType, setFilterType] = useState(false);
 
-    const [dates, setDates] = useState('');
+    const [workState, setWorkState] = useState();
+    const [loading, setLoading] = useState(false);
 
-    // console.log({dates})
+    const workList = async () => {
+       try {
+           setLoading(true);
+           const listData = await customAxios.get('rider/work/list');
+           setWorkState(listData?.data?.data);
+       } catch (error) {
+            Toast.show({
+                type: 'error',
+                text1: error
+            })
+       } finally {
+        setLoading(false);
+       }
+    }
+
+    const filterList = async (data) => {
+        try {
+            setLoading(true);
+            const filterList = await customAxios.post('rider/work/list-filter', {
+                "from_date": data?.startDate,
+                "to_date": data?.endDate
+            });
+            setWorkState(filterList?.data?.data);
+        } catch (error) {
+            Toast.show({
+                type: 'error',
+                text1: error
+            })
+        }
+        finally {
+            setLoading(false);
+        }
+    }
+
+
+
+    // const { refetch, error, isError, isFetching, data, isLoading } = useQuery({
+    //     queryKey: ['work-list'],
+    //     queryFn: workList
+    // });
+
+
+    // if(isError) {
+    //     console.log(error);
+    // }
+
+    // const mutation = useMutation({
+    //     mutationFn: filterList,
+    //     onSuccess: (lists, values) => {
+    //         setWorkState(lists);
+    //     }
+    // });
+
+    // useRefreshOnFocus(refetch);
+
+
+    useFocusEffect(useCallback(() => {
+        workList();
+    }, []))
+
+    // { refetch, isError, workList, error, isLoading, isFetching }
+   
+
+    const { width, height } = useWindowDimensions();
+
+    // useEffect(() => {
+    //     refetch();
+    // }, [])
 
     // useEffect(() => {
 
-    //     if(dates){
-    //         let datefiltered = works?.filter((da)=>(da?.date === dates))
-    //         console.log({datefiltered})
-
+    //     if (isError || mutation?.isError) {
+    //         Toast.show({
+    //             type: 'error',
+    //             text1: error || mutation?.error
+    //         })
     //     }
 
-    // }, [dates])
+    // }, [isError, mutation?.isError]);
 
-
-
-    let works = [
-        {
-            id: '1',
-            status: 'Completed',
-            date: '24/03/2023',
-            amount: 10
-        },
-        {
-            id: '2',
-            status: 'Completed',
-            date: '21/03/2023',
-            amount: 450
-        },
-        {
-            id: '3',
-            status: 'Pending',
-            date: '12/11/2022',
-            amount: 1000
-        },
-        {
-            id: '4',
-            status: 'Completed',
-            date: '02/03/2023',
-            amount: 670
-        },
-        {
-            id: '5',
-            status: 'Pending',
-            date: '01/02/2023',
-            amount: 810
-        },
-        {
-            id: '6',
-            status: 'Pending',
-            date: '01/02/2023',
-            amount: 1000
-        },
-        {
-            id: '7',
-            status: 'Pending',
-            date: '25/03/2023',
-            amount: 1000
-        },
-    ]
 
     let datas = [
         {
             id: '1',
             name: 'Daily Report',
-            month: false
+            picker: false
         },
         {
             id: '2',
-            name: 'Weekly Report',
-            month: false
-        },
-        {
-            id: '3',
-            name: 'Monthly Report',
-            month: true
-        },
-
+            name: 'Date Picker',
+            picker: true
+        }
     ]
 
 
+    const closeFilter = useCallback(() => setShowFilter(false), []);
+
     const openFilter = useCallback(() => {
         setShowFilter(true)
-    }, [])
+    }, []);
 
-    const openDrawer = useCallback(() => {
-        navigation.openDrawer()
-    }, [])
 
-    const applyFilter = useCallback((data) => {
-        // console.log({data})
-        setFilterType(data)
-        setShowFilter(false)
-        setDates(data)
-    }, [])
+    const onSubmit = ({ startDate, endDate, selected }) => async () => {
+
+        if (selected === 'Date Picker' && !endDate) return;
+
+        closeFilter();
+
+        if (selected === 'Daily Report') {
+            workList();
+        }
+        else if (selected === 'Date Picker') {
+
+            if (!endDate) return;
+
+            filterList({ startDate, endDate });
+        }
+    }
+
+
+    const renderItem = ({ item }) => (
+        <WorkCard item={item} key={item?.id} />
+    )
 
     return (
         <>
             <HeaderWithTitle title={'Work'} drawerOpen={openDrawer} />
-            <View style={{ flex: 1, backgroundColor: '#F3F3F3', paddingHorizontal: 15 }}>
 
+            <View style={{ width: '100%', paddingHorizontal: 15, backgroundColor: '#F3F3F3' }}>
                 <CustomButton
                     onPress={openFilter}
                     label={'Filter'} bg='#5261E0' mt={15}
                     rightIconName='filter'
                 />
 
+                {
+                    (loading) && (
+                        <ActivityIndicator />
+                    )
+                }
+
                 {showFilter &&
                     <Filter
                         item={datas}
-                        closeFilter={() => setShowFilter(false)}
-                        filterAction={applyFilter}
+                        closeFilter={closeFilter}
+                        onSubmit={onSubmit}
                     />
                 }
-                <ScrollView
-                    style={{ backgroundColor: '#F3F3F3', marginBottom: 80, paddingTop: 15 }}
-                    showsVerticalScrollIndicator={false}
-                >
 
-                    {/* DATABOX IS HERE */}
-
-                    {/* <View style={styles.dataBox}>
-                        <View style={styles.rowStyle}>
-                            <View style={styles.verticalStyle}>
-                                <Text style={styles.headingStyle}>Total Orders</Text>
-                                <Text style={styles.numberStyle}>5000</Text>
+            </View>
+            <FlatList
+                style={{ flex: 1, backgroundColor: '#F3F3F3', paddingHorizontal: 15 }}
+                data={workState?.work_list}
+                refreshControl={<RefreshControl refreshing={loading} onRefresh={workList}  />}
+                ListHeaderComponent={
+                    <View style={styles.summary}>
+                        <View style={[styles.container, { borderBottomWidth: 1 }]}>
+                            <View style={styles.box}>
+                                <Text style={styles.containerText}>Total Orders</Text>
+                                <Text style={[styles.BoxText, { color: '#1675C8' }]}>{workState?.total_order}</Text>
+                            </View>
+                            <View style={styles.box}>
+                                <Text style={styles.containerText}>Total Earnings</Text>
+                                <Text style={[styles.BoxText, { color: '#2EA10C' }]}>{workState?.total_earnings}</Text>
+                            </View>
+                            <View style={[styles.box, { borderRightWidth: 0 }]}>
+                                <Text style={styles.containerText}>Total Login Hrs</Text>
+                                <Text style={[styles.BoxText, { color: '#C311CA' }]}>{
+                                    workState?.total_logged_in_time?.slice(0, workState?.total_logged_in_time?.indexOf('hrs'))
+                                }</Text>
                             </View>
                         </View>
-                    </View> */}
+                        <View style={styles.container}>
+                            <View style={styles.box}>
+                                <Text style={styles.containerText}>Total Denials</Text>
+                                <Text style={[styles.BoxText, { color: '#FC2020' }]}>{workState?.total_denial}</Text>
+                            </View>
+                            <View style={[styles.box, { borderRightWidth: 0 }]}>
+                                <Text style={styles.containerText}>Total Cancellations</Text>
+                                <Text style={[styles.BoxText, { color: '#A10C0C' }]}>{workState?.total_cancelled}</Text>
+                            </View>
+                        </View>
+                    </View>
+                }
+                showsVerticalScrollIndicator={false}
+                renderItem={renderItem}
+                ListFooterComponent={<View style={{ backgroundColor: '#F3F3F3', marginBottom: 80, paddingTop: 15 }} />}
+                ListEmptyComponent={(<View style={{ flex: 1 }}>
+                    <Text style={{ textAlign: 'center' }}>No Data found!</Text>
+                </View>)}
+            />
 
-                    {filterType === 'Weekly Report' && <WeeklyBox />}
 
-                    {works?.map((item) => (
-                        <WorkCard item={item} key={item?.id} />
-                    ))}
-                </ScrollView>
-            </View>
-            {/* <CommonModal
-                visible={modalVisible}
-                onClose={closeModal}
-                mt={168}
-            >
-                <CommonTexts textAlign={'center'} label={'Filter'} fontSize={22} mt={-25}/>
-                
-                <CustomButton
-                    onPress={onSubmit}
-                    label={'Apply'} bg='#58D36E'
-                    width={width / 3.5}
-                    alignSelf='center'
-                    my={20}
-                />
-            </CommonModal> */}
         </>
     )
 }
@@ -190,6 +240,39 @@ const styles = StyleSheet.create({
         zIndex: 1,
         top: 70
     },
+    summary: {
+        borderRadius: 15,
+        marginTop: 20,
+        backgroundColor: '#fff',
+        shadowOpacity: 0.2,
+        shadowOffset: { height: 1, width: 1 },
+        marginBottom: 17,
+        elevation: 1,
+        marginHorizontal: 1,
+        padding: 12
+    },
+    container: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderColor: 'rgba(0,0,0,.03)'
+    },
+    box: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexGrow: 1,
+        padding: 10,
+        borderRightWidth: 1,
+        borderColor: 'rgba(0,0,0,.03)'
+    },
+    containerText: {
+        color: '#000',
+        fontSize: getFontSize(13)
+    },
+    BoxText: {
+        fontWeight: '700',
+        fontSize: getFontSize(18),
+        marginTop: 2
+    }
     // dataBox: {
     //     backgroundColor: "#fff",
     //     padding: 50,

@@ -5,7 +5,7 @@ import CommonStoreDetails from './CommonStoreDetails'
 import reactotron from 'reactotron-react-native'
 import CustomButton from '../../Components/CustomButton'
 
-const CommonStoreName = memo(({ item, currentTab, orderPicked, status, cusStatus }) => {
+const CommonStoreName = memo(({ item, currentTab, orderPicked, orderReturned, status, cusStatus }) => {
 
     reactotron.log(item, "Name")
 
@@ -18,6 +18,11 @@ const CommonStoreName = memo(({ item, currentTab, orderPicked, status, cusStatus
     const onPress = () => {
         console.log({ key: item?._id })
         orderPicked(item?._id)
+    }
+
+    const onPressTwo = () => {
+        //console.log({ key: item?._id })
+        orderReturned(item?._id)
     }
 
     return (
@@ -40,7 +45,7 @@ const CommonStoreName = memo(({ item, currentTab, orderPicked, status, cusStatus
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5, marginHorizontal: 10 }}>
                 <Image style={{ width: 20, height: 20 }} source={(require('../../Images/price.png'))} alt='img' />
-                <Text style={styles.total}>{`₹ ${item?.grand_total_details}`}</Text>
+                <Text style={styles.total}>{`₹ ${item?.grandtotal_for_regular_price_for_each_store}`}</Text>
                 {item?.account_type === "Ready Cash" ? (<Text style={styles.type}>{'Ready Cash'}</Text>) : null}
             </View>
             {showItems &&
@@ -48,13 +53,13 @@ const CommonStoreName = memo(({ item, currentTab, orderPicked, status, cusStatus
                     <CommonStoreDetails item={item} currentTab={currentTab}/>
                 </>
             }
-            {(currentTab === 1 && status === "ready") && <CustomButton
+            {(currentTab === 1 && item?.vendor_status === "ready") && <CustomButton
                 onPress={onPress}
                 label={'Pickup Order'} bg='#CEBB37' mt={8} mx={8}
             />}
 
             {(currentTab === 1 && cusStatus === "cancelled") && <CustomButton
-                onPress={onPress}
+                onPress={onPressTwo}
                 label={'Return Order'} bg='#FF7B7B' mt={8} mx={8}
             />}
 

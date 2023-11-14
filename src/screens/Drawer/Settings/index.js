@@ -61,7 +61,7 @@ const Settings = ({ navigation }) => {
                 <ProfileDp 
                 name={profileItems?.name}
                 rider_id={profileItems?.rider_id} 
-                franchise={"TEST"} 
+                franchise={profileItems?.primary_franchise?.franchise_name} 
                 days={28}
                 src={profileItems?.image ? ({ uri: IMG_URL + profileItems?.image }) : (require('../../../Images/drawerLogo.png'))}
                 />

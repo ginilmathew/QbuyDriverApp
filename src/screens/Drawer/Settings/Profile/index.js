@@ -1,20 +1,50 @@
 import { StyleSheet, Text, Image, ScrollView, View, useWindowDimensions } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import HeaderWithTitle from '../../../../Components/HeaderWithTitle'
 import CommonTexts from '../../../../Components/CommonTexts'
 import CommonReadonlyBox from '../../../../Components/CommonReadonlyBox'
 import reactotron from 'reactotron-react-native'
 import { IMG_URL } from '../../../../config/constants'
+import { useQuery } from '@tanstack/react-query'
+import customAxios from '../../../../CustomeAxios'
 
+
+
+const getFranchisis = async () => {
+    const data = await customAxios.get('admin/franchise/list');
+    return data?.data?.data;
+}
 
 const Profile = ({ navigation, route }) => {
 
-    const { item } = route?.params
+    
+    const { item } = route?.params;
+    const { data } = useQuery({
+        queryKey: ['franchise-query'],
+        queryFn: getFranchisis
+    })
+    const [franchiseList, setFranchiseList] = useState([]); 
 
-    reactotron.log(item, "PIT")
+    useEffect(() => {
+        if(data) {
 
-    const {width} = useWindowDimensions()
+            let filteredList = [];
+            for (let i = 0; i < data.length; i++) {
+                for (let j = 0; j < item?.secondary_franchise?.length; j++) {
+                    if (data[i]?._id === item?.secondary_franchise[j]?.franchise_id) {
+                        filteredList.push(data[i]?.franchise_name)
+                    }
+               }
+            }
+
+            setFranchiseList(filteredList);
+        }
+    }, [data])
+
+
+    const {width} = useWindowDimensions();
+
     return (
         <>
             <HeaderWithTitle title={'Profile'} backAction />
@@ -33,11 +63,11 @@ const Profile = ({ navigation, route }) => {
 
                         <CommonReadonlyBox 
                             topLabel={'Primary Franchisee'}
-                            label={'Qbuy Kollam'}
+                            label={item?.primary_franchise?.franchise_name}
                         />
                         <CommonReadonlyBox 
                             topLabel={'Secondary Franchisee'}
-                            label={'Qbuy Trivandrum'}
+                            label={franchiseList?.join(', ')}
                         />
                         <CommonReadonlyBox 
                             topLabel={'Phone Number'}
@@ -55,14 +85,14 @@ const Profile = ({ navigation, route }) => {
                             />
                             <CommonReadonlyBox 
                                 topLabel={'Age in Days (From Joining)'}
-                                label={'25'}
+                                label={item?.age_in_days}
                                 width={width/2.25}
                             />
                         </View>
                         <View style={{flexDirection:'row',  justifyContent:'space-between'}}>
                             <CommonReadonlyBox 
                                 topLabel={'Bootcash (COD Limit)'}
-                                label={'5000'}
+                                label={item?.boot_cash_limit}
                                 width={width/2.25}
                             />
                             <CommonReadonlyBox 

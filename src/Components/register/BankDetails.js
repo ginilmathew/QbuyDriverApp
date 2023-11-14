@@ -77,7 +77,7 @@ const BankDetails = ({ reg, tabChangeBack, data, loading }) => {
                 error={errors.ifsc}
                 fieldName="ifsc"
                 placeholder='IFSC Code'
-                inputMode={'numeric'}
+                inputMode={'text'}
                 mt={20}
                 icon={<Entypo name='v-card' color='#58D36E' size={25} marginTop={1.5} />}
             />
@@ -97,7 +97,7 @@ const BankDetails = ({ reg, tabChangeBack, data, loading }) => {
                 error={errors.account_name}
                 fieldName="account_name"
                 placeholder='Account Name'
-                inputMode={'numeric'}
+                inputMode={'text'}
                 mt={20}
                 icon={<Entypo name='v-card' color='#58D36E' size={25} marginTop={1.5} />}
             />

@@ -205,13 +205,13 @@ const Attendance = ({ navigation }) => {
                         label='Total Attendance'
                         alignSelf={'center'}
                     />
-                    <DetailsBox
+                    {/* <DetailsBox
                         bg={'#fae1e1'}
                         bgBox={'#FF6565'}
                         count={newData?.total_absent}
                         label='Total Days Absent'
                         alignSelf={'center'}
-                    />
+                    /> */}
                 </View>
                 <View style={styles.border} />
                 <Text style={styles.attndHistory}>{'Attendance History'}</Text>
