@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useContext } from 'react'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 const CommonSquareButton = ({position, bottom, mt, onPress, iconName}) => {
 
@@ -17,7 +17,7 @@ const CommonSquareButton = ({position, bottom, mt, onPress, iconName}) => {
             }}
             onPress={onPress}
         >
-            <Ionicons name={iconName} color='#fff' size={25} />
+            <FontAwesome5 name={iconName} color='#fff' size={25} />
 
         </TouchableOpacity>
     )

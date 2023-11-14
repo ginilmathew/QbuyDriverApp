@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import moment from 'moment';
 import HeaderWithTitle from '../../../../Components/HeaderWithTitle';
 import Lottie from 'lottie-react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import CommonPicker from '../../../../Components/CommonPicker';
 import CommonSquareButton from '../../../../Components/CommonSquareButton';
 
@@ -28,14 +28,14 @@ const ReferFriend = ({ navigation }) => {
                 <View style={{ flexDirection: 'row', marginTop: 15, alignItems: 'flex-end' }}>
                     <CommonPicker
                         // onPress={()=>setOpenCalendar(true)}
-                        icon={<Ionicons name={'ios-copy'} size={25} color={"#58D36E"} />}
+                        icon={<FontAwesome5 name={'copy'} size={25} color={"#58D36E"} />}
                         w={width - 90}
                         label='QBUY8654652'
                         topLabel='Your Referral Code'
                     />
                     <View style={{ flex: 1, alignItems: 'flex-end' }}>
                         <CommonSquareButton
-                            iconName={'share-social'}
+                            iconName={'share-alt'}
                         />
                     </View>
                 </View>
