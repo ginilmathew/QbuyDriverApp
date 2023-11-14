@@ -2,7 +2,7 @@ import { StyleSheet, View, SafeAreaView, StatusBar, Image, Text, TouchableOpacit
 import React, { useContext, useEffect } from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 import { useNavigation } from '@react-navigation/native'
 
@@ -29,7 +29,7 @@ const Header = ({  onPress, openAddress, goCart}) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={()=>navigation.navigate('Notifications')} style={{marginRight:12}}>
-                <Ionicons name={"notifications"} color="#23233C" size={25} />
+                <MaterialIcons name={"notifications"} color="#23233C" size={25} />
             </TouchableOpacity> 
                               
         </SafeAreaView>

@@ -48,7 +48,7 @@ const TabNavigator = ({navigation}) => {
                             <TouchableOpacity 
                                 onPress={onPressHome}
                                 style={{ width:'100%',alignItems:'center', borderRightWidth:1, borderColor:'#00000014'}}>
-                                <Ionicons name={'home'} size={focused ? 27 : 26} color={color} />
+                                <FontAwesome5 name={'home'} size={focused ? 27 : 26} color={color} />
                             </TouchableOpacity>
                         )
                     } 

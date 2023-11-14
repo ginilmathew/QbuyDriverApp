@@ -1,6 +1,6 @@
 import { StyleSheet, Text, Image, ScrollView, View, TouchableOpacity } from 'react-native'
 import React from 'react'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 const SettingsCard = ({label, leftElement, onPress}) => {
     return (
@@ -15,7 +15,7 @@ const SettingsCard = ({label, leftElement, onPress}) => {
                 <Text style={styles.mediumText}>{label}</Text>
             </View>
             <View>
-                <Ionicons name='md-arrow-forward' color='#58D36E' size={20}/>
+                <AntDesign name='arrowright' color='#58D36E' size={20}/>
             </View>
         </TouchableOpacity>
     )

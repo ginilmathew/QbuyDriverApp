@@ -1,6 +1,7 @@
 import { StyleSheet, Text, Image, ScrollView, View } from 'react-native'
 import React, { useCallback, useState, useEffect } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6'
 import SettingsCard from './SettingsCard'
 import HeaderWithTitle from '../../../Components/HeaderWithTitle'
 import ProfileDp from './ProfileDp'
@@ -68,7 +69,7 @@ const Settings = ({ navigation }) => {
                 <SettingsCard 
                     onPress={goProfile}
                     label={'Profile'} 
-                    leftElement={<Ionicons name='person' color='#586DD3' size={20}/>}
+                    leftElement={<FontAwesome6 name='person' color='#586DD3' size={20}/>}
                 />
                 <SettingsCard 
                     onPress={goRateCard}
@@ -82,7 +83,7 @@ const Settings = ({ navigation }) => {
                 <SettingsCard 
                     onPress={goSupport}
                     label={'Support'} 
-                    leftElement={<Ionicons name='headset' color='#586DD3' size={18}/>}
+                    leftElement={<FontAwesome6 name='headset' color='#586DD3' size={18}/>}
                 />
                 <SettingsCard
                     onPress={goReferFriend}
