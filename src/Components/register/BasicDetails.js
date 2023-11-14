@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import reactotron from 'reactotron-react-native'
+import Toast from 'react-native-toast-message'
 
 const phoneRegExp = /^(0|[1-9]\d*)(\.\d+)?$/
 
@@ -48,7 +49,7 @@ const BasicDetails = ({ tabChange, onsubmit, data }) => {
 
         launchImageLibrary(options, (response) => {
             reactotron.log(response, "res1")
-            if (response.assets?.[0].fileSize > 2000000) {
+            if (response.assets?.[0]?.fileSize > 2000000) {
                 Toast.show({
                     backgroundColor: 'error.500',
                     description: 'Please upload image below 2MB',
