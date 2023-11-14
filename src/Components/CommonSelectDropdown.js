@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View, ScrollView } from 'react-native'
 import React, { useContext, useState } from 'react'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Dropdown } from 'react-native-element-dropdown';
 import { Controller } from 'react-hook-form';
 
@@ -54,7 +54,7 @@ const CommonSelectDropdown = ({ topLabel, mb, placeholder, error, data, fieldNam
                             setIsFocus(false);
                         }}
                         renderRightIcon={() => (
-                            <Ionicons name={isFocus ? 'chevron-up-circle' : 'chevron-down-circle'} size={25} color={"#58D36E"} />
+                            <MaterialCommunityIcons name={isFocus ? 'arrow-up-drop-circle-outline' : 'arrow-down-drop-circle-outline'} size={25} color={"#58D36E"} />
                         )}
                         itemTextStyle={styles.dropdownText}
                     />

@@ -6,12 +6,15 @@ import CommonPicker from '../CommonPicker'
 import CustomButton from '../CustomButton'
 import { launchImageLibrary } from 'react-native-image-picker';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome6'
 import Entypo from 'react-native-vector-icons/Entypo'
 import Fontisto from 'react-native-vector-icons/Fontisto'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import reactotron from 'reactotron-react-native'
+import Toast from 'react-native-toast-message'
 
 const phoneRegExp = /^(0|[1-9]\d*)(\.\d+)?$/
 
@@ -49,9 +52,11 @@ const BasicDetails = ({ tabChange, onsubmit, data }) => {
         launchImageLibrary(options, (response) => {
             reactotron.log(response, "res1")
             if (response.assets?.[0].fileSize > 2000000) {
+                setSelectedImage(null);
+                setValue("image", null)
                 Toast.show({
+                    text1: 'Please upload image below 2MB',
                     backgroundColor: 'error.500',
-                    description: 'Please upload image below 2MB',
                     duration: 1500
                 })
                 return
@@ -101,7 +106,7 @@ const BasicDetails = ({ tabChange, onsubmit, data }) => {
                 placeholder='Name'
                 inputMode={'text'}
                 mt={20}
-                icon={<Ionicons name='person' color='#58D36E' size={25} />}
+                icon={<FontAwesome name='person' color='#58D36E' size={25} />}
             />
             <CommonInput
                 leftElement
@@ -160,15 +165,15 @@ const BasicDetails = ({ tabChange, onsubmit, data }) => {
     /> */}
             <CommonPicker
                 onPress={ImagePicker}
-                label={(getValues("image") || selectedImage) ? (
+                label={(selectedImage) ? (
                     <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <Text style={{ fontSize: 13, fontFamily: "Poppins-SemiBold", marginRight: 10, marginLeft: 10 }}>
+                        <Text style={{ fontSize: 13, fontFamily: "Poppins-SemiBold", marginRight: 10, marginLeft: 10, color: 'black' }}>
                             Image Uploaded
                         </Text>
-                        <Ionicons name="checkmark-circle" size={20} color={"#58D36E"} />
+                        <AntDesign name="checkcircle" size={20} color={"#58D36E"} />
                     </View>
                 ) : 'Upload Photo'}
-                icon={<Ionicons name={'cloud-upload'} size={20} color={"#5E59FF"} />}
+                icon={<AntDesign name={'cloudupload'} size={20} color={"#5E59FF"} />}
                 mt={5}
                 leftIcon={<Entypo name='camera' color='#58D36E' size={23} marginLeft={5} />}
             />

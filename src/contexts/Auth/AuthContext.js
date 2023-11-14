@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Context from "./index";
 import customAxios from "../../CustomeAxios";
+import Toast from "react-native-toast-message";
 
 const AuthProvider = (props) => {
     const [user, setUser] = useState(null);
