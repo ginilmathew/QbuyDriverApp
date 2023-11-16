@@ -9,8 +9,11 @@ const PayoutCard = memo(({item}) => {
     const [showItems, setShowItems] = useState(false)
 
     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
+        <View 
+        // style={styles.container}
+        style={{flex:1,justifyContent:'center',alignItems:'center'}}
+        >
+            {/* <View style={styles.header}>
                 <Text style={styles.dateText}>{item?.date}</Text>
                 <CommonStatusCard
                     bg={item?.status === 'Completed' ? '#BCFFC8' : '#FFF297'}
@@ -55,7 +58,8 @@ const PayoutCard = memo(({item}) => {
                         <Text style={styles.semiboldText}>₹ {'80'}</Text>
                     </View>
                 </View>
-            </>}
+            </>} */}
+            <Text>Coming Soon!.. </Text>
         </View>
     )
 })
@@ -65,8 +69,8 @@ export default PayoutCard
 const styles = StyleSheet.create({
     container: { 
         borderRadius: 15, 
-        backgroundColor: '#fff',
-        shadowColor: "#f2f2f2",
+        // backgroundColor: '#fff',
+        // shadowColor: "#f2f2f2",
         shadowRadius: 5, 
         shadowOpacity: 1, 
         shadowOffset: { height: 10, width: 1 }, 

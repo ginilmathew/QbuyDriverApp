@@ -32,31 +32,31 @@ const Payout = ({ navigation }) => {
 
 
     let payouts = [
-        {
-            id: '1',
-            status: 'Completed',
-            date : '22/05/2022'
-        },
-        {
-            id: '2',
-            status: 'Completed',
-            date : '28/03/2022'
-        },
-        {
-            id: '3',
-            status: 'Pending',
-            date : '12/11/2022'
-        },
-        {
-            id: '4',
-            status: 'Completed',
-            date : '02/03/2023'
-        },
-        {
-            id: '5',
-            status: 'Pending',
-            date : '01/02/2023'
-        },
+        // {
+        //     id: '1',
+        //     status: 'Completed',
+        //     date : '22/05/2022'
+        // },
+        // {
+        //     id: '2',
+        //     status: 'Completed',
+        //     date : '28/03/2022'
+        // },
+        // {
+        //     id: '3',
+        //     status: 'Pending',
+        //     date : '12/11/2022'
+        // },
+        // {
+        //     id: '4',
+        //     status: 'Completed',
+        //     date : '02/03/2023'
+        // },
+        // {
+        //     id: '5',
+        //     status: 'Pending',
+        //     date : '01/02/2023'
+        // },
     ]
 
     const calendarOpen = useCallback(() => {
@@ -112,12 +112,12 @@ const Payout = ({ navigation }) => {
 
                 <View style={styles.border}/>
 
-                {currentTab === 0 && completeList?.map((item) => (
-                    <PayoutCard item={item} key={item?.id} />
-                ))}
-                {currentTab === 1 && pendingList?.map((item) => (
-                    <PayoutCard item={item} key={item?.id} />
-                ))}
+                {currentTab === 0 && 
+                    <PayoutCard />
+                }
+                {currentTab === 1 &&
+                    <PayoutCard />
+                }
             </ScrollView>
             </View>
         </>

@@ -6,9 +6,12 @@ import * as Progress from 'react-native-progress';
 import { useNavigation } from '@react-navigation/native'
 import CodCollectProgress from './CodCollectProgress';
 import moment from 'moment';
+import reactotron from 'reactotron-react-native';
 
 
-const WorkCard = memo(({item}) => {
+const WorkCard = memo(({item,res}) => {
+
+    reactotron.log({res},'vendor')
 
     const [date, setDate] = useState(new Date())
 
@@ -61,7 +64,7 @@ const WorkCard = memo(({item}) => {
 
             <View style={{flexDirection:'row', position:'absolute', alignSelf:'center', alignItems:'center', bottom:4}}>
                 <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 9, color: amount === 1000 ? '#fff' : '#23233C' }}>{'COD Collected : '}</Text>
-                <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 10, color: amount === 1000 ? '#fff' : '#23233C' }}>{item?.cod_count} / 1000</Text>
+                <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 10, color: amount === 1000 ? '#fff' : '#23233C' }}> {res?.total_cash_in_hand} / {res?.bootcash_limit} </Text>
             </View>
 
         </TouchableOpacity>

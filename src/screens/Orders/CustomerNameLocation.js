@@ -22,7 +22,7 @@ const CustomerNameLocation = ({ customerName, customerLocation, customerNumber, 
                     <Text style={styles.addressText}>{customerComments}</Text>
                 </View>
             </View>
-            {currentTab === 1 ? (<View style={{ paddingHorizontal: 10, marginTop: 10, marginBottom: 3, alignSelf: "center" }}>
+            {currentTab === 1 ? (<View style={{ paddingHorizontal: 10, marginTop: 10, marginBottom: 3, alignSelf: "center",position:'absolute' ,right:10}}>
                 <TouchableOpacity onPress={onpress}>
                 <Image style={styles.call} source={require('../../Images/phone.png')} resizeMode='contain' />
                 </TouchableOpacity>

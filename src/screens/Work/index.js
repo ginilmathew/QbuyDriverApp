@@ -149,7 +149,7 @@ const Work = ({ navigation }) => {
 
 
     const renderItem = ({ item }) => (
-        <WorkCard item={item} key={item?.id} />
+        <WorkCard item={item} res={workState} key={item?.id} />
     )
 
     return (
